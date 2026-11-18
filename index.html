@@ -13,25 +13,19 @@
    ===================================================== */
 const DRIVE = {
   lastUpdated: "Friday, November 27",
-  goalPerPerson: 20,
+
+  // The company total so far, from the donation dashboard
+  raised: 0,      // dollars raised
+  gifts: 0,       // number of donations (employees, family and friends)
+
+  // The goal: everyone in the company x this amount (334 x $10 = $3,340)
+  people: 334,
+  goalPerPerson: 10,
 
   // Links: paste each full link (starting with https://) between the quotes
   donateUrl:    "PASTE-DONATION-LINK-HERE",
   drawFormUrl:  "PASTE-DRAW-FORM-LINK-HERE",
   photoFormUrl: "PASTE-PHOTO-FORM-LINK-HERE",
-
-  // One line per office, west to east
-  offices: [
-    { office: "Vancouver",  raised: 0, donors: 0, people: 20  },
-    { office: "Timmins",    raised: 0, donors: 0, people: 3   },
-    { office: "North Bay",  raised: 0, donors: 0, people: 6   },
-    { office: "Woodbridge", raised: 0, donors: 0, people: 260 },
-    { office: "Toronto",    raised: 0, donors: 0, people: 30  },  // Sterling Road (Pratus)
-    { office: "Ottawa",     raised: 0, donors: 0, people: 15  }
-  ],
-
-  // Gifts the dashboard doesn't link to an office. Leave at 0 if every gift has an office.
-  unassigned: { raised: 0, donors: 0 },
 
   // Journey stops. "at" is the % of the company goal. Change the reward text any time.
   // Stops unlock by themselves when the company total reaches them.
@@ -139,23 +133,22 @@ section{padding:4.5rem 0}
 .stop{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
 .stop::before{content:"";position:absolute;bottom:100%;left:50%;height:16px;border-left:3px dotted var(--road)}
 .badge{position:relative;flex:none;width:var(--badge);height:var(--badge);border-radius:50%;background:var(--card);padding:5px;box-shadow:0 0 0 3px var(--line),0 6px 14px rgba(16,40,92,.12);transition:box-shadow .4s}
-.badge svg{display:block;width:100%;height:100%;border-radius:50%;overflow:hidden;filter:grayscale(1) opacity(.5);transition:filter .6s}
+.badge svg{display:block;width:100%;height:100%;border-radius:50%;overflow:hidden;filter:saturate(.45) opacity(.75);transition:filter .6s}
 .stop.next .badge{box-shadow:0 0 0 4px var(--blue),0 6px 18px rgba(29,91,216,.3);animation:breathe 2.6s ease-in-out infinite}
-.stop.next .badge svg{filter:grayscale(.55) opacity(.8)}
+.stop.next .badge svg{filter:saturate(.8) opacity(.92)}
 .stop.lit .badge{box-shadow:0 0 0 5px var(--gold),0 6px 16px rgba(16,40,92,.18)}
 .stop.lit .badge svg{filter:none}
 .stop.pop .badge{animation:pop .55s cubic-bezier(.3,1.6,.5,1)}
 @keyframes pop{0%{transform:scale(.88)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
 @keyframes breathe{50%{transform:scale(1.045)}}
-.badge .icon{position:absolute;right:-3px;bottom:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#7b8597;color:#fff;border:3px solid var(--card)}
+.badge .icon{position:absolute;right:-3px;bottom:0;width:32px;height:32px;border-radius:50%;display:none;place-items:center;background:var(--gold);color:var(--navy);border:3px solid var(--card)}
 .badge .icon svg{width:15px;height:15px;filter:none;border-radius:0}
-.badge .icon .check,.stop.lit .badge .icon .lock{display:none}
-.stop.lit .badge .icon{background:var(--gold);color:var(--navy)}
-.stop.lit .badge .icon .check{display:block}
+.stop.lit .badge .icon{display:grid}
 .stop-text{margin-top:.8rem;display:flex;flex-direction:column;align-items:center}
 .stop-text b{font-size:1.15rem;line-height:1.2}
 .stop-text small{color:var(--ink-soft);font-size:.82rem;line-height:1.3}
 .at{display:inline-block;margin:.45rem 0 .3rem;font-weight:800;font-size:.8rem;background:var(--track);color:var(--ink-soft);padding:.1rem .65rem;border-radius:999px}
+.at span{font-weight:600;opacity:.8}
 .stop.reached .at{background:var(--gold);color:var(--navy)}
 .reward{font-size:.9rem;font-weight:600;line-height:1.3}
 .reward em{display:block;font-style:normal;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
@@ -171,15 +164,6 @@ section{padding:4.5rem 0}
 .stat b{font-size:clamp(2.1rem,4vw,2.7rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--num)}
 .stat small{color:var(--ink-soft);font-size:.92rem}
 .stat .track{margin:.5rem 0 .3rem}
-
-/* Every office counts */
-.offices{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:2rem}
-.oc{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1.1rem;display:flex;flex-direction:column;align-items:flex-start}
-.oc>svg{width:60px;height:60px;border-radius:50%;overflow:hidden;margin:0 0 .7rem;box-shadow:0 0 0 3px var(--card),0 0 0 5px var(--line)}
-.oc h3{margin:0;font-size:1.1rem;line-height:1.2}
-.oc .lbl{font-size:.82rem;color:var(--ink-soft);line-height:1.3;margin:0 0 .6rem}
-.oc .amt{font-size:1.6rem;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
-.oc small{color:var(--ink-soft);font-size:.85rem;line-height:1.35}
 
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:2rem 0 0;padding:0;list-style:none;counter-reset:s}
@@ -258,7 +242,6 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
 @media (max-width:1000px){
   .route{--badge:92px}
   .stop-text small{font-size:.78rem}
-  .offices{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:900px){
   .steps{grid-template-columns:1fr 1fr}
@@ -281,7 +264,6 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
   .stop-text{margin:0;align-items:flex-start;min-width:0;overflow-wrap:anywhere}
   .stats{grid-template-columns:1fr}
   .enter{grid-template-columns:1fr}
-  .offices{grid-template-columns:1fr 1fr}
 }
 @media (max-width:640px){
   section{padding:3.25rem 0}
@@ -305,7 +287,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
   <div class="wrap">
     <p class="eyebrow">Giving back together</p>
     <h1>Holiday Food Drive 2026</h1>
-    <p><strong>The whole company, one goal.</strong> Every person counts the same, and every dollar moves our delivery truck from Vancouver to Ottawa. Let’s get there together.</p>
+    <p><strong>The whole company, one goal.</strong> Every dollar moves our delivery truck from Vancouver to Ottawa, and family and friends are welcome to chip in too. Let’s get there together.</p>
     <div class="actions">
       <span data-link="donateUrl" data-text="Donate now" data-cls="gold" data-soon="Donation link coming soon"></span>
       <a class="btn outline" href="#journey">Follow the journey</a>
@@ -347,18 +329,8 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <div class="stats">
       <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$6,680</span> goal</small></div>
       <div class="stat"><span class="lbl">Of our goal</span><b id="statPct">0%</b><span class="track"><span class="fill" id="statBar"></span></span></div>
-      <div class="stat"><span class="lbl">Participation</span><b id="statPart">0%</b><small id="statPartText"></small></div>
+      <div class="stat"><span class="lbl">Gifts so far</span><b id="statGifts">0</b><small>from our people, family and friends</small></div>
     </div>
-  </div>
-</section>
-
-<section id="offices">
-  <div class="wrap">
-    <p class="eyebrow">Every office counts</p>
-    <h2>What each office has added</h2>
-    <p class="lede">Big office or small, every gift moves the same truck.</p>
-    <div class="offices" id="officeCards"></div>
-    <p class="note" id="unassignedNote" hidden></p>
   </div>
 </section>
 
@@ -371,7 +343,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
       <li><h3>Enter the draw</h3><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></li>
       <li><h3>Watch the truck move</h3><p>Totals update every Friday. Each stop we reach unlocks something fun for everyone.</p></li>
     </ol>
-    <p class="rulebox"><strong>The goal:</strong> <span id="perPerson">$20</span> for every person in the company, <span id="goalText2">$6,680</span> in all. Every dollar from every office counts toward the same goal.</p>
+    <p class="rulebox"><strong>The goal:</strong> <span id="perPerson">$20</span> for every person in the company, <span id="goalText2">$6,680</span> in all. Every gift counts toward the same goal, whether it comes from you, your family or your friends.</p>
   </div>
 </section>
 
@@ -429,6 +401,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <details><summary>Do I get a tax receipt?</summary><p>Yes. Receipts come straight from our food bank partner, usually by email right after you give.</p></details>
     <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: November 27, December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
     <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
+    <details><summary>Can my family and friends donate?</summary><p>Yes, please share the donation link with them. Every gift moves the truck. The raffle is just for our people, so only you can enter the draw.</p></details>
     <details><summary>Can I enter the draw without donating?</summary><p>Yes. Send a photo of your favourite holiday sweater and you get one entry, no donation needed.</p></details>
     <details><summary>Who can see the sweater photos?</summary><p>The photo book is part of this page, so anyone with the link can see it. Only send a photo you’re happy to share, and we’ll only show your first name and office.</p></details>
     <details><summary>Can I donate food instead of money?</summary><p>This year the drive is online donations only. Food banks can stretch every dollar further than a grocery donation, and it keeps the total simple.</p></details>
@@ -528,22 +501,19 @@ const PLACES={
     <path d="M50 15V7.5" stroke="#555" stroke-width=".8"/><path d="M50 7.5h7v4h-7z" fill="#d52b1e"/>`}
 };
 const stamp=p=>`<svg viewBox="0 0 100 100" role="img" aria-label="${p.alt}">${p.art}${RING}</svg>`;
-const LOCK='<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="8" rx="1.5" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
 const CHECK='<svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-const PER=DRIVE.goalPerPerson, fmt=n=>"$"+Math.round(n).toLocaleString("en-CA"), pct=(a,b)=>b?a/b*100:0;
-const num=v=>Number(v)||0, sum=(list,k)=>list.reduce((s,o)=>s+num(o[k]),0);
+const num=v=>Number(v)||0, PER=num(DRIVE.goalPerPerson), fmt=n=>"$"+Math.round(n).toLocaleString("en-CA"), pct=(a,b)=>b?a/b*100:0;
 const isLink=u=>/^https?:\/\//i.test(u||"");
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const list=a=>a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1];
 const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $=id=>document.getElementById(id);
 
-const extra=DRIVE.unassigned||{};
-const people=sum(DRIVE.offices,"people"), goal=people*PER;
-const raised=sum(DRIVE.offices,"raised")+num(extra.raised), donors=sum(DRIVE.offices,"donors")+num(extra.donors);
-const P=pct(raised,goal), partP=pct(donors,people);
-const stops=DRIVE.milestones.map(m=>({...m,...(PLACES[m.stop]||{label:"",alt:m.stop,art:""}),reached:raised*100>=m.at*goal}));
+const people=num(DRIVE.people), goal=people*PER;
+const raised=num(DRIVE.raised), gifts=num(DRIVE.gifts);
+const P=pct(raised,goal);
+const stops=DRIVE.milestones.map(m=>({...m,...(PLACES[m.stop]||{label:"",alt:m.stop,art:""}),target:m.at/100*goal,reached:raised*100>=m.at*goal}));
 const nextIdx=stops.findIndex(s=>!s.reached);
 
 // Links: a button when the link is set, a "coming soon" pill until then
@@ -557,21 +527,20 @@ document.querySelectorAll("[data-link]").forEach(el=>{
 ["goalText","goalText2","statGoal"].forEach(id=>$(id).textContent=fmt(goal));
 $("perPerson").textContent=fmt(PER);
 $("updated").textContent=raised>0?"Updated "+DRIVE.lastUpdated:"First update Friday, November 27";
-$("statPartText").textContent=`${donors} of ${people} people gave`;
 $("truckTag").textContent=`${fmt(raised)} raised, ${Math.round(P)}%`;
 const ns=$("nextStop");
 if(nextIdx<0){ns.classList.add("done");ns.innerHTML="🎉 <b>Goal reached!</b> We made it coast to coast. Thank you!";}
-else{const n=stops[nextIdx];ns.innerHTML=`Next stop: <b>${esc(n.stop)}</b>, ${fmt(Math.max(n.at/100*goal-raised,0))} to go`;}
+else{const n=stops[nextIdx];ns.innerHTML=`Next stop: <b>${esc(n.stop)}</b>, ${fmt(Math.max(n.target-raised,0))} to go`;}
 
 // Journey stops
 const stopsEl=$("stops");
 stopsEl.innerHTML=stops.map((s,i)=>`
   <li class="stop${s.reached?" reached":""}">
-    <div class="badge">${stamp(s)}<span class="icon">${LOCK}${CHECK}</span></div>
+    <div class="badge">${stamp(s)}<span class="icon">${CHECK}</span></div>
     <div class="stop-text">
       <b>${esc(s.stop)}</b><small>${esc(s.label)}</small>
-      <span class="at">${s.at===0?"Start":s.at+"%"}</span>
-      <span class="reward">${s.at===0?"":`<em>${s.reached?"Unlocked!":"Locked"}</em>`}${esc(s.reward)}</span>
+      <span class="at">${s.at===0?"Start":`${fmt(s.target)} <span>· ${s.at}%</span>`}</span>
+      <span class="reward">${s.at>0&&s.reached?"<em>Unlocked!</em>":""}${esc(s.reward)}</span>
     </div>
   </li>`).join("");
 const stopEls=[...stopsEl.children], route=$("route"), road=$("road"), roadFill=$("roadFill"), truck=$("truck");
@@ -620,7 +589,7 @@ function start(){
   if(started)return; started=true;
   countUp($("statRaised"),raised,fmt);
   countUp($("statPct"),P,n=>Math.round(n)+"%");
-  countUp($("statPart"),partP,n=>Math.round(n)+"%");
+  countUp($("statGifts"),gifts,n=>Math.round(n).toLocaleString("en-CA"));
   $("statBar").style.width=Math.min(P,100)+"%";
   const finish=()=>{if(nextIdx>=0)stopEls[nextIdx].classList.add("next");celebrate();};
   if(reduce){cur=goalU;light(cur,false);place(cur);finish();return;}
@@ -639,24 +608,13 @@ if("IntersectionObserver" in window){
   io.observe(route);
 } else start();
 
-// Every office counts
-$("officeCards").innerHTML=DRIVE.offices.map(o=>{const p=PLACES[o.office]||{label:"",alt:o.office,art:""};return `
-  <article class="oc">
-    ${stamp(p)}
-    <h3>${esc(o.office)}</h3><p class="lbl">${esc(p.label)}</p>
-    <span class="amt">${fmt(num(o.raised))}</span>
-    <small>${num(o.donors)} of ${num(o.people)} ${num(o.people)===1?"person":"people"} gave</small>
-    <small>${Math.round(pct(num(o.raised),raised))}% of our total</small>
-  </article>`;}).join("");
-if(num(extra.raised)>0){const un=$("unassignedNote");un.hidden=false;un.textContent=`Plus ${fmt(extra.raised)} from donations not linked to an office.`;}
-
 // Raffle draws come from the milestones whose reward mentions a raffle
 const draws=stops.filter(s=>/raffle/i.test(s.reward));
 $("raffleIntro").textContent=draws.length
-  ?`We’ll hold a raffle draw each time we reach ${list(draws.map(d=>d.at+"%"))} of our goal. Every draw is for a $25 digital gift card.`
+  ?`We’ll hold a raffle draw each time our total reaches ${list(draws.map(d=>fmt(d.target)))}. Every draw is for a $25 digital gift card.`
   :"Raffle details coming soon.";
-$("draws").innerHTML=draws.map((d,i)=>`<li${d.reached?' class="open"':""}>Draw ${i+1}: ${d.at}% (${esc(d.stop)}) ${d.reached?"✓ Unlocked":"🔒 Locked"}</li>`).join("");
-if(draws.length)$("faqDraw").textContent=`When we reach ${list(draws.map(d=>d.at+"%"))} of our goal, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
+$("draws").innerHTML=draws.map((d,i)=>`<li${d.reached?' class="open"':""}>Draw ${i+1}: ${fmt(d.target)} (${esc(d.stop)}) ${d.reached?"✓ Unlocked":"Coming up"}</li>`).join("");
+if(draws.length)$("faqDraw").textContent=`When our total reaches ${list(draws.map(d=>fmt(d.target)))}, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
 
 // Sweater photo book
 const SWEATER='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 8h20l14 8 6 20-10 3-3-9v28H15V30l-3 9-10-3 6-20z" fill="#e0402f"/><path d="M22 8q10 10 20 0" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M15 34h34M15 42h34" stroke="#fff" stroke-width="2.5" stroke-dasharray="3 3"/><path d="M32 18l2.5 4.5-2.5 4.5-2.5-4.5z" fill="#ffc21a"/></svg>';

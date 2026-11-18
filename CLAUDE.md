@@ -20,30 +20,34 @@ This year's theme is **one link, one number, one place**. Every design or conten
 
 There is **no competition**. No teams, no winners or losers, no rankings, no "matchup" or "underdog" language. (An earlier HQ vs. challengers version was dropped.)
 
-- Every person counts the same: the company goal is headcount × `goalPerPerson` ($20), so 334 × $20 = **$6,680**. The site calculates it from the numbers block; never hardcode it.
-- Official headcounts: Woodbridge 260, Sterling Road (Toronto, Pratus) 30, Vancouver 20, Ottawa 15, North Bay 6, Timmins 3.
-- Everyone donates through **one company donation link** (`donateUrl`).
-- Participation (donors out of 334) is shown next to the total.
+- **No per-office totals or per-office participation anywhere.** Not everyone belongs to one office, families donate too, and the drive must never feel like it's shaming offices. The site tracks one company total only.
+- The goal is headcount × `goalPerPerson`: 334 × **$10** = **$3,340** ("a $10 a person vibe"; last year had low participation, so it should feel reachable). The site calculates it from the numbers block; never hardcode it.
+- Everyone donates through **one company donation link** (`donateUrl`), and employees are encouraged to share it with family and friends.
+- The third stat tile shows the number of gifts ("from our people, family and friends"), not a participation %.
+- The raffle is for employees only (family and friends can donate but don't enter).
 
 ## The coast-to-coast journey (the centrepiece)
 
 A road-trip style route, not a real map. Six evenly spaced stops run west to east, each a round "postcard stamp" badge with a landmark:
 
-| Stop | Office label | % of goal | Reward | Landmark |
-|---|---|---|---|---|
-| Vancouver | Vancouver office | 0% (start) | Starting line | North Shore mountains and Lions Gate Bridge |
-| Timmins | Timmins office | 20% | Raffle draw | Gold mine headframe with pines |
-| North Bay | North Bay office | 40% | Ugly sweater day on a company call | Canoe on Lake Nipissing, pines on shore |
-| Woodbridge | Woodbridge HQ | 60% | Raffle draw | HQ building with the Quasar chevron and an "HQ" flag |
-| Toronto | Toronto (Pratus, Sterling Road) | 80% | Raffle draw | CN Tower and skyline |
-| Ottawa | Ottawa office | 100% | Leadership dare (to be announced) | Peace Tower on Parliament Hill |
+| Stop | Office label | % of goal | At $3,340 goal | Reward | Landmark |
+|---|---|---|---|---|---|
+| Vancouver | Vancouver office | 0% (start) | $0 | Starting line | North Shore mountains and Lions Gate Bridge |
+| Timmins | Timmins office | 20% | $668 | Raffle draw | Gold mine headframe with pines |
+| North Bay | North Bay office | 40% | $1,336 | Ugly sweater day on a company call | Canoe on Lake Nipissing, pines on shore |
+| Woodbridge | Woodbridge HQ | 60% | $2,004 | Raffle draw | HQ building with the Quasar chevron and an "HQ" flag |
+| Toronto | Toronto (Pratus, Sterling Road) | 80% | $2,672 | Raffle draw | CN Tower and skyline |
+| Ottawa | Ottawa office | 100% | $3,340 | Leadership dare (to be announced) | Peace Tower on Parliament Hill |
+
+The offices are only places on the route; they don't have their own totals.
 
 - Landmarks are inline SVG in index.html (the `PLACES` object): flat, 2 to 3 colours each, same style, respectful hometown pride, never caricatures. Each has alt text naming the landmark and office.
-- Locked stops are greyscale with a lock. Unlocked stops are full colour with a gold ring and a check. The next stop gets a gentle blue highlight, and a "Next stop: X, $Y to go" line sits above the route.
+- Each stop's pill shows its dollar target first, then the %: "$668 · 20%" (calculated from the goal).
+- **No lock icons and no "Locked" labels** (Nate didn't like them). Stops ahead are softly faded but still in colour. Reached stops are full colour with a gold ring, a gold check and "Unlocked!". The next stop gets a gentle blue highlight, and a "Next stop: X, $Y to go" line sits above the route. Raffle chips say "Coming up" until reached.
 - Stops unlock **automatically** when the company total reaches their %. Rewards are editable in the numbers block.
 - A delivery truck loaded with grocery bags sits on the road at the company's % of goal with a "$X raised, Y%" tag. On load it drives from Vancouver, the road fills in gold behind it and badges pop as it passes them. Past 100% it parks at Ottawa with confetti and a "Goal reached!" banner. Reduced motion: no animation, final state only.
 - Desktop: the route runs left to right. Phones (760px and narrower): top to bottom like a trip itinerary.
-- Below the route: stat tiles (total raised, % of goal, participation), then an "Every office counts" section showing what each office added, in route order, with no ranking.
+- Below the route: stat tiles (total raised, % of goal, gifts so far). The "Every office counts" section was removed on purpose; don't bring back per-office numbers.
 
 ## Raffle
 
@@ -82,22 +86,23 @@ A road-trip style route, not a real map. Six evenly spaced stops run west to eas
 ### The numbers block
 
 At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY." It holds:
-- `lastUpdated` (date text), `goalPerPerson`, and the links `donateUrl`, `drawFormUrl`, `photoFormUrl`. A link that doesn't start with `https://` shows as a "coming soon" pill.
-- `offices`: one line per office, west to east, with `raised`, `donors` and `people`.
-- `unassigned`: money and donors the dashboard doesn't link to an office (used when there's only a company total). Usually 0.
+- `lastUpdated` (date text).
+- `raised` (company total in dollars) and `gifts` (number of donations). These are the only two numbers that change each week.
+- `people` (334) and `goalPerPerson` (10), which set the goal.
+- The links `donateUrl`, `drawFormUrl`, `photoFormUrl`. A link that doesn't start with `https://` shows as a "coming soon" pill.
 - `milestones`: one line per stop with its `at` % and `reward` text.
 
 Rules:
-- Everything else (company total, goal, % of goal, participation, unlocked stops, next stop, truck position, office breakdown, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
+- Everything else (goal, % of goal, stop dollar targets, unlocked stops, next stop, truck position, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
 - Nate sometimes edits this block directly on github.com with the pencil icon. Keep it simple and clearly labelled: plain numbers, no dollar signs or commas.
 - Before editing, pull the latest version from GitHub so web edits aren't overwritten.
-- Before kickoff, every office's `raised` and `donors` is 0, and the page shows "First update Friday, November 27".
+- Before kickoff, `raised` and `gifts` are 0, and the page shows "First update Friday, November 27".
 
 ## Project commands
 
 These live in `.claude/commands/` and work when Claude Code is opened in this repo folder.
 
-- **`/weekly-update`**: each Friday Nate pastes screenshots of the donation dashboards. Claude pulls, reads the totals (per office if there are office team pages, otherwise the company total via `unassigned`), shows a table against last week and flags anything odd, never guesses a number, waits for Nate's OK, updates the block and `lastUpdated`, reports newly unlocked stops (raffle draw or reward to announce), writes a 2 to 3 sentence Teams message, then commits "Week N totals" and pushes. Screenshots are never saved in the repo.
+- **`/weekly-update`**: each Friday Nate pastes screenshots of the donation dashboards. Claude pulls, reads the company total and number of gifts, shows a table against last week and flags anything odd, never guesses a number, waits for Nate's OK, updates the block and `lastUpdated`, reports newly unlocked stops (raffle draw or reward to announce), writes a 2 to 3 sentence Teams message, then commits "Week N totals" and pushes. Screenshots are never saved in the repo.
 - **`/add-photos`**: Nate gives photo files with first names and offices. Claude resizes them (about 1000px wide, JPG, under 300 KB, rotation fixed, metadata stripped), saves them in `photos/`, adds lines to the photo block, previews, and commits and pushes after Nate confirms.
 
 ## Brand and design
