@@ -1,0 +1,9 @@
+# This repo is public. Keep dashboard screenshots and other stray images out of it.
+# Only resized sweater photos in the photos folder can be committed.
+*.png
+*.jpg
+*.jpeg
+*.heic
+*.webp
+*.gif
+!photos/*.jpg

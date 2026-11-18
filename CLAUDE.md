@@ -16,85 +16,100 @@ Last year's drive missed its goals mainly because it was confusing:
 
 This year's theme is **one link, one number, one place**. Every design or content decision should make the drive simpler to understand and easier to give to.
 
-## The new format: HQ vs. everyone else
+## The format: the whole company, one goal
 
-The competition has changed from six offices competing against each other to **two teams**:
+There is **no competition**. No teams, no winners or losers, no rankings, no "matchup" or "underdog" language. (An earlier HQ vs. challengers version was dropped.)
 
-| Team | Offices | Headcount |
-|---|---|---|
-| Team HQ | Woodbridge | 260 |
-| The challengers (working name: Team Coast to Coast) | Sterling Road (Pratus) 30, Vancouver 20, Ottawa 15, North Bay 6, Timmins 3 | 74 |
-| **Company total** | | **334** |
+- Every person counts the same: the company goal is headcount × `goalPerPerson` ($20), so 334 × $20 = **$6,680**. The site calculates it from the numbers block; never hardcode it.
+- Official headcounts: Woodbridge 260, Sterling Road (Toronto, Pratus) 30, Vancouver 20, Ottawa 15, North Bay 6, Timmins 3.
+- Everyone donates through **one company donation link** (`donateUrl`).
+- Participation (donors out of 334) is shown next to the total.
 
-HQ is about 78% of the company, so total dollars can never be the main score. The scoring has to be per person so the challengers have a real shot. Lean into the **underdog story**: a scrappy cross-country team taking on headquarters.
+## The coast-to-coast journey (the centrepiece)
 
-### Scoring (current direction, some details still being decided)
+A road-trip style route, not a real map. Six evenly spaced stops run west to east, each a round "postcard stamp" badge with a landmark:
 
-- Every person counts the same: each team's goal = headcount × $20 per person ($10 fallback still possible). No adjustments.
-  - Team HQ goal: $5,200. Challengers goal: $1,480. Company goal: $6,680.
-- **Main score: % of goal.** Whichever team gets furthest past its goal wins.
-- **Participation:** the share of each team's people who donated any amount. This is the big equalizer and should be shown prominently.
-- **Ideas still under discussion** (don't build unless Nate confirms):
-  - A weekly "series," where each week is a game with its own winner and the overall winner takes the most weeks.
-  - A shared company milestone (for example, a leadership match unlocked when the whole company hits its goal), so everyone has something to win together.
-  - A friendly sector or department mini-leaderboard inside Woodbridge.
+| Stop | Office label | % of goal | Reward | Landmark |
+|---|---|---|---|---|
+| Vancouver | Vancouver office | 0% (start) | Starting line | North Shore mountains and Lions Gate Bridge |
+| Timmins | Timmins office | 20% | Raffle draw | Gold mine headframe with pines |
+| North Bay | North Bay office | 40% | Ugly sweater day on a company call | Canoe on Lake Nipissing, pines on shore |
+| Woodbridge | Woodbridge HQ | 60% | Raffle draw | HQ building with the Quasar chevron and an "HQ" flag |
+| Toronto | Toronto (Pratus, Sterling Road) | 80% | Raffle draw | CN Tower and skyline |
+| Ottawa | Ottawa office | 100% | Leadership dare (to be announced) | Peace Tower on Parliament Hill |
 
-### Prizes (still being confirmed)
+- Landmarks are inline SVG in index.html (the `PLACES` object): flat, 2 to 3 colours each, same style, respectful hometown pride, never caricatures. Each has alt text naming the landmark and office.
+- Locked stops are greyscale with a lock. Unlocked stops are full colour with a gold ring and a check. The next stop gets a gentle blue highlight, and a "Next stop: X, $Y to go" line sits above the route.
+- Stops unlock **automatically** when the company total reaches their %. Rewards are editable in the numbers block.
+- A delivery truck loaded with grocery bags sits on the road at the company's % of goal with a "$X raised, Y%" tag. On load it drives from Vancouver, the road fills in gold behind it and badges pop as it passes them. Past 100% it parks at Ottawa with confetti and a "Goal reached!" banner. Reduced motion: no animation, final state only.
+- Desktop: the route runs left to right. Phones (760px and narrower): top to bottom like a trip itinerary.
+- Below the route: stat tiles (total raised, % of goal, participation), then an "Every office counts" section showing what each office added, in route order, with no ranking.
 
-- If the challengers win: pizza or treats sent to every regional office, possibly an HQ leadership dare on a company-wide call.
-- If HQ wins: office party plus the travelling Pulse Cup.
+## Raffle
+
+- A draw happens at each stop whose reward mentions "raffle" (currently 20%, 60% and 80%). Each draw is for a $25 digital gift card. The site works out which % values to list from the milestones.
+- Two equal ways to enter: "Donated? Enter the draw" (`drawFormUrl`, a Microsoft Form) and "Share your holiday sweater" (`photoFormUrl`, a Microsoft Form; one entry, no donation needed).
+- One entry per person per way to enter. The FAQ says each draw picks from everyone who has entered so far (entries carry over). Confirm with Nate if that changes.
+
+## Sweater photo book
+
+- Polaroid-style cards with washi tape and handwritten-style captions (first name and office) on a soft festive background. Clicking a photo opens a simple lightbox (close button, Esc or clicking outside).
+- Photos live in the `photos` folder. Each photo gets a line in the second editable block, "SWEATER PHOTOS: ADD ONE LINE PER PHOTO": `{ file: "jordan-ottawa.jpg", name: "Jordan", office: "Ottawa" },`
+- The last card is always "Add yours!" linking to `photoFormUrl`. With no photos, three "Your sweater here" placeholder cards show.
+- Save photos at about **1000px wide, JPG, under 300 KB**, with location data removed. First names only. The site is public, so the FAQ tells people anyone with the link can see the photo book.
+- To add photos, use the `/add-photos` command (see below).
 
 ## Where donations go
 
-- Moving from local food banks to a **Canada-wide food bank partner**, likely Food Banks Canada (to be confirmed).
-- The partner can set up **separate team pages**, one for each team, so totals are tracked on their platform. Nate copies the totals into the site each Friday.
+- A **Canada-wide food bank partner**, likely Food Banks Canada (to be confirmed). Don't name it on the site until confirmed.
 - Messaging: "supporting food banks in every community where we live and work." Don't say donations go to one specific local food bank.
-- Real donation links are still to come. Use clear placeholders until then.
+- Tax receipts come from the partner.
 
 ## Timeline
 
 - Kickoff: Monday, November 23, 2026
-- Weekly Friday updates: Nov 27, Dec 4, Dec 11, Dec 18 (last before holiday closure)
-- Donations close: January 1, 2027 (possibly 11:59 pm Dec 31 instead, so all donations fall in the 2026 tax year)
-- Winners announced: first week back in January
+- Friday updates: Nov 27 (Week 1), Dec 4 (Week 2), Dec 11 (Week 3), Dec 18 (Week 4, last before holiday closure)
+- Donations close: Friday, January 1, 2027
+- Wrap-up: first week back in January
 
 ## How the site is built
 
-- Everything is in **one file: index.html** (HTML, CSS and JavaScript together). Keep it that way. No build tools, frameworks or extra files unless Nate asks.
+- The site is **one file: index.html** (HTML, CSS and JavaScript together), plus sweater photos in `photos/`. Keep it that way. No build tools or frameworks unless Nate asks.
 - Hosted free on **GitHub Pages** from the main branch, root folder. Live at https://nathanielmarketing.github.io/Quasar-2026-Food-Drive-Competition/
 - Pushing to main redeploys the site in about a minute.
-- The repo is **public**. Never add passwords, logins, personal contact details, surnames of champions, or anything sensitive.
+- The repo is **public**. Never add passwords, logins, personal contact details, surnames, donor names, dashboard screenshots, or anything sensitive. `.gitignore` blocks image files everywhere except `photos/*.jpg` as a safety net.
 
 ### The numbers block
 
-At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY."
+At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY." It holds:
+- `lastUpdated` (date text), `goalPerPerson`, and the links `donateUrl`, `drawFormUrl`, `photoFormUrl`. A link that doesn't start with `https://` shows as a "coming soon" pill.
+- `offices`: one line per office, west to east, with `raised`, `donors` and `people`.
+- `unassigned`: money and donors the dashboard doesn't link to an office (used when there's only a company total). Usually 0.
+- `milestones`: one line per stop with its `at` % and `reward` text.
 
-- Everything else (team totals, % of goal, participation, progress bars, company total, "last updated" date) must be calculated from this block. Never hardcode those numbers elsewhere.
-- Nate sometimes edits this block directly on github.com with the pencil icon. Keep it simple, clearly labelled and easy to edit by hand: plain numbers, no dollar signs or commas, one line per office.
-- Recommended structure for the new format: keep one line per office with `raised`, `donors` and `people`, plus a `team` field ("HQ" or "Challengers"). The site adds up each team from its offices. This keeps the office breakdown and the team totals in sync automatically.
+Rules:
+- Everything else (company total, goal, % of goal, participation, unlocked stops, next stop, truck position, office breakdown, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
+- Nate sometimes edits this block directly on github.com with the pencil icon. Keep it simple and clearly labelled: plain numbers, no dollar signs or commas.
 - Before editing, pull the latest version from GitHub so web edits aren't overwritten.
+- Before kickoff, every office's `raised` and `donors` is 0, and the page shows "First update Friday, November 27".
 
-## Site changes needed for the new format
+## Project commands
 
-The current index.html was built for the old six-office competition. It needs updating to:
+These live in `.claude/commands/` and work when Claude Code is opened in this repo folder.
 
-1. **Head-to-head scoreboard** as the centrepiece: Team HQ vs. the challengers, side by side, with % of goal, dollars raised vs goal, and participation for each. Make it feel like a sports matchup.
-2. **Office breakdown for the challengers** underneath, so each small office (especially Timmins and North Bay) can see its contribution.
-3. **Donation links:** two clear buttons, one per team, replacing the six office cards. Keep a short "which team am I on?" line.
-4. **Update the rules, FAQ, hero copy and timeline** to the new format and dates.
-5. Keep the participation toggle or show participation alongside % of goal.
+- **`/weekly-update`**: each Friday Nate pastes screenshots of the donation dashboards. Claude pulls, reads the totals (per office if there are office team pages, otherwise the company total via `unassigned`), shows a table against last week and flags anything odd, never guesses a number, waits for Nate's OK, updates the block and `lastUpdated`, reports newly unlocked stops (raffle draw or reward to announce), writes a 2 to 3 sentence Teams message, then commits "Week N totals" and pushes. Screenshots are never saved in the repo.
+- **`/add-photos`**: Nate gives photo files with first names and offices. Claude resizes them (about 1000px wide, JPG, under 300 KB, rotation fixed, metadata stripped), saves them in `photos/`, adds lines to the photo block, previews, and commits and pushes after Nate confirms.
 
 ## Brand and design
 
 The site should feel like part of **The Pulse**, Quasar's internal SharePoint hub, but brighter and more festive.
 
-- Fonts: Segoe UI first, with system fallbacks.
+- Fonts: Segoe UI first, with system fallbacks. Photo captions use a handwritten-style system font (Segoe Print and fallbacks).
 - Colours: brand blue `#1d5bd8`, deep blue `#123f9e`, navy `#10285c`, gold `#ffc21a`, light sky `#eaf2ff`.
 - Section pattern from The Pulse: a gold eyebrow line above a large heading.
-- The Quasar chevron shapes appear as decoration in the hero.
-- Give each of the two teams a strong, distinct colour used consistently everywhere they appear. Individual office colours can stay for the challengers' office breakdown.
-- Rounded cards, pill buttons, gold highlight on whichever team is leading.
-- One moment of motion: totals count up and bars fill on load. Respect reduced-motion settings.
+- The Quasar chevron shapes appear as decoration in the hero and on the Woodbridge landmark.
+- Rounded cards, pill buttons, gold for anything reached or unlocked.
+- One moment of motion: the truck drives, the road fills and numbers count up when the journey scrolls into view. Respect reduced-motion settings.
 - Must work well on phones, and in both light and dark mode.
 
 ## Writing rules
@@ -104,14 +119,20 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 - Tone: friendly, casual, upbeat, clear. Short sentences. Canadian spelling (colour, centre, cheque).
 - Keep explanations of the rules short. If something needs a paragraph to explain, simplify the rule.
 
+## Still to confirm
+
+- Food bank partner name and the real `donateUrl`.
+- The two Microsoft Form links (`drawFormUrl`, `photoFormUrl`).
+- The leadership dare at 100%.
+
 ## Planned additions
 
 - Champion spotlights: headshots and trading-card style or Quick Q's style mini profiles for each office's champion.
-- Final team names, prizes, food bank partner and donation links once confirmed.
 
 ## Working with Nate
 
 - Show him what changed before pushing, and preview the page when possible.
+- If a push needs a GitHub sign-in that can't appear in Claude's shell, ask him to run `git push origin main` in a terminal opened in this folder.
 - After pushing, remind him the site takes about a minute to update and to hard refresh (Ctrl + F5).
 - If something might break the weekly update process, flag it before doing it.
 - When a decision changes, update this file too.

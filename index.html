@@ -7,52 +7,79 @@
 <script>
 /* =====================================================
    FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY
-   Only change the numbers, the date text and the links.
+   Only change the numbers, the text between quotes and the links.
    Keep the quotes, commas and brackets as they are.
    Numbers: no dollar signs, no commas (write 3640, not $3,640).
-   team: "HQ" or "Challengers"
    ===================================================== */
 const DRIVE = {
   lastUpdated: "Friday, November 27",
   goalPerPerson: 20,
-  sampleNumbers: true,   // change to false once real totals are in
 
-  teams: {
-    HQ:          { name: "Team HQ",             link: "" },
-    Challengers: { name: "Team Coast to Coast", link: "" }
-  },
+  // Links: paste each full link (starting with https://) between the quotes
+  donateUrl:    "PASTE-DONATION-LINK-HERE",
+  drawFormUrl:  "PASTE-DRAW-FORM-LINK-HERE",
+  photoFormUrl: "PASTE-PHOTO-FORM-LINK-HERE",
 
+  // One line per office, west to east
   offices: [
-    { name: "Woodbridge",    team: "HQ",          raised: 3640, donors: 86, people: 260 },
-    { name: "Sterling Road", team: "Challengers", raised: 420,  donors: 12, people: 30  },
-    { name: "Vancouver",     team: "Challengers", raised: 270,  donors: 8,  people: 20  },
-    { name: "Ottawa",        team: "Challengers", raised: 230,  donors: 7,  people: 15  },
-    { name: "North Bay",     team: "Challengers", raised: 120,  donors: 4,  people: 6   },
-    { name: "Timmins",       team: "Challengers", raised: 70,   donors: 3,  people: 3   }
+    { office: "Vancouver",  raised: 0, donors: 0, people: 20  },
+    { office: "Timmins",    raised: 0, donors: 0, people: 3   },
+    { office: "North Bay",  raised: 0, donors: 0, people: 6   },
+    { office: "Woodbridge", raised: 0, donors: 0, people: 260 },
+    { office: "Toronto",    raised: 0, donors: 0, people: 30  },  // Sterling Road (Pratus)
+    { office: "Ottawa",     raised: 0, donors: 0, people: 15  }
+  ],
+
+  // Gifts the dashboard doesn't link to an office. Leave at 0 if every gift has an office.
+  unassigned: { raised: 0, donors: 0 },
+
+  // Journey stops. "at" is the % of the company goal. Change the reward text any time.
+  // Stops unlock by themselves when the company total reaches them.
+  milestones: [
+    { stop: "Vancouver",  at: 0,   reward: "Starting line" },
+    { stop: "Timmins",    at: 20,  reward: "Raffle draw" },
+    { stop: "North Bay",  at: 40,  reward: "Ugly sweater day on a company call" },
+    { stop: "Woodbridge", at: 60,  reward: "Raffle draw" },
+    { stop: "Toronto",    at: 80,  reward: "Raffle draw" },
+    { stop: "Ottawa",     at: 100, reward: "Leadership dare (to be announced)" }
   ]
 };
-/* ===== END OF EDITABLE BLOCK ===== */
+/* ===== END OF NUMBERS BLOCK ===== */
+
+/* =====================================================
+   SWEATER PHOTOS: ADD ONE LINE PER PHOTO
+   1. Save the photo in the "photos" folder
+      (about 1000px wide, JPG, under 300 KB).
+   2. Add a line below with the file name, first name only, and office.
+   Example line:
+   { file: "jordan-ottawa.jpg", name: "Jordan", office: "Ottawa" },
+   ===================================================== */
+const PHOTOS = [
+
+];
+/* ===== END OF PHOTOS BLOCK ===== */
 </script>
 <style>
 :root{
   --blue:#1d5bd8; --blue-deep:#123f9e; --navy:#10285c; --gold:#ffc21a; --gold-soft:#fff3cc;
   --sky:#eaf2ff; --bg:#ffffff; --ink:#1c2333; --ink-soft:#4a5468; --line:#d8e0ee; --track:#e4eaf5; --card:#ffffff;
-  --hq:#1d5bd8; --ch:#e0402f;
-  --o-sterling:#7a5af8; --o-vancouver:#0fa397; --o-ottawa:#f07d00; --o-northbay:#2b9e48; --o-timmins:#d6409f;
+  --num:#123f9e; --road:#cfd8e6; --road-line:#ffffff;
+  --festive:#fff6ea; --dot-a:rgba(224,64,47,.13); --dot-b:rgba(47,138,87,.13);
+  --hand:"Segoe Print","Bradley Hand","Noteworthy","Chalkboard SE",cursive;
   color-scheme:light; box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --blue:#2f6be6; --blue-deep:#163d8f; --navy:#10285c; --gold:#ffc933; --gold-soft:#3a3010;
   --sky:#161d2b; --bg:#10141c; --ink:#ebeff6; --ink-soft:#aeb7c7; --line:#2a3344; --track:#263042; --card:#1a2130;
-  --hq:#5b8ff2; --ch:#ff6a59;
-  --o-sterling:#9b82fb; --o-vancouver:#2fc4b6; --o-ottawa:#ff9a2e; --o-northbay:#4cc46a; --o-timmins:#ef6bbd;
+  --num:#9dbcff; --road:#2c3649; --road-line:#46536b;
+  --festive:#17191f; --dot-a:rgba(255,106,89,.12); --dot-b:rgba(76,196,106,.12);
   color-scheme:dark;}}
 :root[data-theme="dark"]{
   --blue:#2f6be6; --blue-deep:#163d8f; --navy:#10285c; --gold:#ffc933; --gold-soft:#3a3010;
   --sky:#161d2b; --bg:#10141c; --ink:#ebeff6; --ink-soft:#aeb7c7; --line:#2a3344; --track:#263042; --card:#1a2130;
-  --hq:#5b8ff2; --ch:#ff6a59;
-  --o-sterling:#9b82fb; --o-vancouver:#2fc4b6; --o-ottawa:#ff9a2e; --o-northbay:#4cc46a; --o-timmins:#ef6bbd;
+  --num:#9dbcff; --road:#2c3649; --road-line:#46536b;
+  --festive:#17191f; --dot-a:rgba(255,106,89,.12); --dot-b:rgba(76,196,106,.12);
   color-scheme:dark;}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -66,91 +93,93 @@ h2{font-size:clamp(2rem,3.6vw,2.8rem);font-weight:600;line-height:1.12;margin:0 
 p{max-width:62ch}
 a{color:var(--blue)}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:.8rem 1.4rem;border-radius:999px;border:2px solid var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:.8rem 1.4rem;border-radius:999px;border:2px solid var(--blue);text-align:center}
 .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy)}
 .btn.white{background:#fff;border-color:#fff;color:var(--blue-deep)}
 .btn.outline{background:transparent;border-color:#fff;color:#fff}
+.btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.soon{background:transparent;border:2px dashed currentColor;color:inherit;opacity:.75;cursor:default}
 section{padding:4.5rem 0}
 .sky{background:var(--sky)}
-.tag{display:inline-block;background:var(--gold);color:var(--navy);font-size:.72rem;font-weight:800;padding:.15rem .6rem;border-radius:999px;letter-spacing:.02em;white-space:nowrap}
-.note{display:inline-block;margin-top:1rem;font-size:.85rem;color:var(--ink-soft)}
+.lede{color:var(--ink-soft);margin:0}
+.note{display:inline-block;margin-top:1rem;font-size:.9rem;color:var(--ink-soft)}
+.track{position:relative;display:block;height:12px;background:var(--track);border-radius:999px;overflow:hidden}
+.fill{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#ffd451,#ffad14);transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
 
 /* Hero */
 .hero{background:var(--blue);color:#fff;position:relative;overflow:hidden}
 .hero .deco{position:absolute;inset:0;pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;padding-top:4rem;padding-bottom:4.5rem;align-items:center}
+.hero .wrap{position:relative;padding-top:4.5rem;padding-bottom:5rem}
 .hero .eyebrow{color:var(--gold);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600}
-.hero h1{font-size:clamp(3rem,7.5vw,5.6rem);font-weight:700;line-height:.98;margin:0 0 1.25rem;letter-spacing:-.02em}
-.hero p{font-size:1.2rem;color:#e3ecff;margin:0 0 1.5rem}
+.hero h1{font-size:clamp(3rem,7.5vw,5.6rem);font-weight:700;line-height:.98;margin:0 0 1.25rem;letter-spacing:-.02em;max-width:11ch}
+.hero p{font-size:1.25rem;color:#e3ecff;margin:0 0 1.75rem;max-width:44ch}
+.hero p strong{color:#fff}
 .hero .actions{display:flex;flex-wrap:wrap;gap:.75rem}
-.chips{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0 0 1.75rem;padding:0;list-style:none}
-.chips li{background:rgba(255,255,255,.14);border-radius:999px;padding:.3rem .9rem .3rem .5rem;font-weight:700;display:flex;align-items:center;gap:.45rem}
-.chips li.vs{background:none;padding:0 .1rem;color:var(--gold);font-weight:800}
-.chips i{width:.85rem;height:.85rem;border-radius:50%;display:inline-block;border:2px solid #fff}
-.tally{background:var(--gold);color:var(--navy);border-radius:18px;padding:2rem 2rem 1.6rem;box-shadow:0 18px 0 -6px var(--blue-deep);transform:rotate(-1.5deg)}
-.tally .label{font-weight:700;font-size:1rem;margin:0 0 .25rem}
-.tally .raised{font-size:clamp(3rem,6vw,4.4rem);font-weight:800;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.tally .of{margin:.4rem 0 1.1rem;font-weight:600}
-.tally .bar{height:20px;background:rgba(16,40,92,.16);border-radius:999px;overflow:hidden}
-.tally .bar span{display:block;height:100%;width:0;background:var(--navy);border-radius:999px;transition:width 1.6s cubic-bezier(.2,.7,.2,1)}
-.tally .meta{display:flex;justify-content:space-between;font-size:.95rem;font-weight:600;margin-top:.7rem}
 
-/* Scoreboard */
-.arena{background:var(--navy);color:#fff}
-.arena .eyebrow{color:var(--gold)}
-.arena-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:.5rem 2rem}
-.updated{color:#c9d6f2;margin:0;font-weight:600}
-.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:1.25rem;margin-top:2rem;align-items:stretch}
-.vs-badge{align-self:center;display:grid;place-items:center;width:4.5rem;height:4.5rem;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:900;font-size:1.5rem;letter-spacing:-.02em;box-shadow:0 0 0 6px rgba(255,194,26,.25)}
-.team{background:var(--card);color:var(--ink);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;border:3px solid transparent}
-.team.lead{border-color:var(--gold);box-shadow:0 0 0 8px rgba(255,194,26,.22)}
-.team-top{background:var(--c);color:#fff;padding:1.1rem 1.5rem 1rem;position:relative}
-.team-top h3{margin:0;font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.15;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
-.team-top small{font-weight:600;opacity:.92;font-size:.95rem}
-.team-body{padding:1.4rem 1.5rem 1.5rem;display:flex;flex-direction:column;gap:1.1rem;flex:1}
-.score{display:flex;align-items:baseline;gap:.6rem}
-.score b{font-size:clamp(3.2rem,7vw,4.6rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--c);font-variant-numeric:tabular-nums}
-.score span{font-weight:700;color:var(--ink-soft)}
-.track{position:relative;display:block;height:22px;background:var(--track);border-radius:999px}
-.track.slim{height:12px}
-.fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:999px;background:var(--c);transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
-.goal{position:absolute;top:-6px;bottom:-6px;width:3px;border-radius:2px;background:var(--ink)}
-.goal-label{position:absolute;top:-1.5rem;transform:translateX(-50%);font-size:.75rem;font-weight:700;color:var(--ink-soft);white-space:nowrap}
-.money{margin:0;font-weight:600}
-.money b{font-size:1.15rem}
-.part{border-top:2px solid var(--line);padding-top:1rem;margin-top:auto}
-.part-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.45rem}
-.part-head span{font-weight:700}
-.part-head b{font-size:1.5rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
-.part small{display:block;color:var(--ink-soft);font-size:.9rem;margin-top:.4rem}
-.verdict{text-align:center;margin:1.75rem auto 0;font-size:1.25rem;font-weight:700;max-width:none}
-.verdict em{font-style:normal;color:var(--gold)}
-.arena .note{color:#c9d6f2;display:block;text-align:center}
+/* Journey */
+.journey-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:.5rem 2rem}
+.updated{color:var(--ink-soft);margin:0;font-weight:600}
+.nextstop{display:inline-block;margin:1.5rem 0 0;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:.55rem 1.2rem;font-weight:700;font-size:1.1rem;max-width:none}
+.nextstop b{color:var(--num)}
+.nextstop.done{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.nextstop.done b{color:var(--navy)}
+.route{position:relative;margin-top:1.75rem;padding-top:108px;--badge:104px}
+.road{position:absolute;top:72px;left:0;width:0;height:18px;border-radius:999px;background:var(--road)}
+.road-fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#ffd451,#ffad14) no-repeat}
+.road::after{content:"";position:absolute;left:10px;right:10px;top:50%;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,var(--road-line) 0 10px,transparent 10px 22px)}
+.pin{position:absolute;top:81px;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--card);border:4px solid var(--road);z-index:1;transition:border-color .3s}
+.pin.lit{border-color:var(--gold)}
+.truck{position:absolute;top:44px;left:0;width:64px;height:40px;margin-left:-32px;z-index:3;pointer-events:none}
+.truck svg{display:block;width:100%;height:100%}
+.truck.driving svg{animation:bob .35s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-1.5px)}}
+.truck-tag{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--navy);color:#fff;font-weight:700;font-size:.82rem;line-height:1.25;padding:.25rem .7rem;border-radius:999px;white-space:nowrap;box-shadow:0 0 0 2px var(--gold)}
+.truck-tag::after{content:"";position:absolute;top:100%;left:50%;margin-left:-5px;border:5px solid transparent;border-top-color:var(--navy)}
+.stops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;position:relative;z-index:2}
+.stop{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.stop::before{content:"";position:absolute;bottom:100%;left:50%;height:16px;border-left:3px dotted var(--road)}
+.badge{position:relative;flex:none;width:var(--badge);height:var(--badge);border-radius:50%;background:var(--card);padding:5px;box-shadow:0 0 0 3px var(--line),0 6px 14px rgba(16,40,92,.12);transition:box-shadow .4s}
+.badge svg{display:block;width:100%;height:100%;border-radius:50%;overflow:hidden;filter:grayscale(1) opacity(.5);transition:filter .6s}
+.stop.next .badge{box-shadow:0 0 0 4px var(--blue),0 6px 18px rgba(29,91,216,.3);animation:breathe 2.6s ease-in-out infinite}
+.stop.next .badge svg{filter:grayscale(.55) opacity(.8)}
+.stop.lit .badge{box-shadow:0 0 0 5px var(--gold),0 6px 16px rgba(16,40,92,.18)}
+.stop.lit .badge svg{filter:none}
+.stop.pop .badge{animation:pop .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.88)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes breathe{50%{transform:scale(1.045)}}
+.badge .icon{position:absolute;right:-3px;bottom:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#7b8597;color:#fff;border:3px solid var(--card)}
+.badge .icon svg{width:15px;height:15px;filter:none;border-radius:0}
+.badge .icon .check,.stop.lit .badge .icon .lock{display:none}
+.stop.lit .badge .icon{background:var(--gold);color:var(--navy)}
+.stop.lit .badge .icon .check{display:block}
+.stop-text{margin-top:.8rem;display:flex;flex-direction:column;align-items:center}
+.stop-text b{font-size:1.15rem;line-height:1.2}
+.stop-text small{color:var(--ink-soft);font-size:.82rem;line-height:1.3}
+.at{display:inline-block;margin:.45rem 0 .3rem;font-weight:800;font-size:.8rem;background:var(--track);color:var(--ink-soft);padding:.1rem .65rem;border-radius:999px}
+.stop.reached .at{background:var(--gold);color:var(--navy)}
+.reward{font-size:.9rem;font-weight:600;line-height:1.3}
+.reward em{display:block;font-style:normal;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+.stop.reached .reward em{color:#b07c00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stop.reached .reward em{color:var(--gold)}}
+:root[data-theme="dark"] .stop.reached .reward em{color:var(--gold)}
+.confetti{position:absolute;left:50%;top:50%;width:0;height:0}
+.confetti i{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);animation:burst 1.6s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes burst{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.75rem}
+.stat{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:.15rem}
+.stat .lbl{font-weight:700;color:var(--ink-soft)}
+.stat b{font-size:clamp(2.1rem,4vw,2.7rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--num)}
+.stat small{color:var(--ink-soft);font-size:.92rem}
+.stat .track{margin:.5rem 0 .3rem}
 
-/* Office breakdown */
-.stack{display:flex;height:28px;border-radius:999px;overflow:hidden;background:var(--track);margin:1.75rem 0 0}
-.stack span{display:block;height:100%;width:0;background:var(--c);transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
-.stack span+span{box-shadow:inset 2px 0 0 var(--sky)}
-.breakdown{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:1.5rem}
-.oc{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--c);border-radius:16px;padding:1.25rem;display:flex;flex-direction:column;gap:.15rem}
-.oc h3{margin:0;font-size:1.25rem;color:var(--c);line-height:1.2}
-.oc .city{font-weight:600;font-size:.88rem;color:var(--ink-soft);margin:0 0 .75rem}
-.oc .amt{font-size:1.8rem;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
-.oc .share{font-size:.9rem;color:var(--ink-soft);margin:0 0 .9rem}
-.oc .track{margin-bottom:.4rem}
-.oc small{font-size:.88rem;color:var(--ink-soft)}
-.oc .tag{align-self:flex-start;margin-top:.6rem}
-.hqline{margin:1.5rem 0 0;color:var(--ink-soft);font-weight:600}
-
-/* Donate */
-.give-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
-.give{background:var(--card);border:2px solid var(--line);border-left:10px solid var(--c);border-radius:18px;padding:1.6rem 1.75rem;display:flex;flex-direction:column;gap:.35rem}
-.give h3{margin:0;font-size:1.6rem;color:var(--c)}
-.give p{margin:0;color:var(--ink-soft)}
-.give .goalline{font-weight:700;color:var(--ink);margin-bottom:1rem}
-.give .btn{margin-top:auto;align-self:flex-start;background:var(--c);border-color:var(--c)}
-.give .btn.soon{background:transparent;color:var(--ink-soft);border:2px dashed var(--line);cursor:default}
-.whichteam{margin-top:1.5rem;padding:1.2rem 1.5rem;background:var(--gold-soft);border-radius:16px;border:2px dashed #e5ae00;font-size:1.05rem;max-width:none}
+/* Every office counts */
+.offices{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:2rem}
+.oc{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1.1rem;display:flex;flex-direction:column;align-items:flex-start}
+.oc>svg{width:60px;height:60px;border-radius:50%;overflow:hidden;margin:0 0 .7rem;box-shadow:0 0 0 3px var(--card),0 0 0 5px var(--line)}
+.oc h3{margin:0;font-size:1.1rem;line-height:1.2}
+.oc .lbl{font-size:.82rem;color:var(--ink-soft);line-height:1.3;margin:0 0 .6rem}
+.oc .amt{font-size:1.6rem;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.oc small{color:var(--ink-soft);font-size:.85rem;line-height:1.35}
 
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:2rem 0 0;padding:0;list-style:none;counter-reset:s}
@@ -159,8 +188,49 @@ section{padding:4.5rem 0}
 .steps h3{font-size:1.3rem;margin:0 0 .35rem}
 .steps p{margin:0;color:var(--ink-soft)}
 .rulebox{margin-top:2rem;padding:1.4rem 1.6rem;background:var(--gold-soft);border-radius:16px;font-size:1.15rem;border:2px dashed #e5ae00;max-width:none}
-.rulebox p{margin:0 0 .5rem;max-width:none}
-.rulebox p:last-child{margin:0}
+
+/* Raffle */
+.raffle{background:var(--gold);color:var(--navy)}
+.raffle .eyebrow{color:var(--navy)}
+.raffle p{font-size:1.1rem}
+.draws{list-style:none;padding:0;margin:1.25rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem}
+.draws li{background:rgba(255,255,255,.55);border-radius:999px;padding:.35rem .95rem;font-weight:700;font-size:.95rem}
+.draws li.open{background:var(--navy);color:#fff}
+.enter{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.75rem}
+.enter>div{background:#fff;color:var(--navy);border-radius:18px;padding:1.4rem 1.5rem;display:flex;flex-direction:column}
+.enter h3{margin:0 0 .3rem;font-size:1.3rem}
+.enter p{margin:0 0 1.1rem;font-size:1rem;color:#4a5468}
+.enter .btn{margin-top:auto;width:100%}
+.raffle .note{color:var(--navy);opacity:.85}
+
+/* Photo book */
+.festive{background-color:var(--festive);background-image:radial-gradient(circle at 18px 18px,var(--dot-a) 2.5px,transparent 3.5px),radial-gradient(circle at 58px 52px,var(--dot-b) 2.5px,transparent 3.5px);background-size:80px 72px}
+.book{display:flex;flex-wrap:wrap;justify-content:center;gap:2.25rem 1.75rem;margin-top:2.75rem}
+.polaroid{position:relative;margin:0;width:min(210px,calc(50% - 1rem));background:#fff;padding:10px 10px 0;box-shadow:0 10px 24px rgba(40,30,10,.18),0 2px 4px rgba(40,30,10,.12);transform:rotate(var(--r,0deg));transition:transform .25s}
+.polaroid::before{content:"";position:absolute;top:-13px;left:50%;width:86px;height:26px;margin-left:-43px;transform:rotate(var(--tr,-4deg));background:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px),var(--tape,rgba(255,194,26,.8));z-index:1}
+.polaroid:nth-child(6n+1){--r:-3deg;--tr:-5deg}
+.polaroid:nth-child(6n+2){--r:2.5deg;--tr:4deg;--tape:rgba(224,64,47,.6)}
+.polaroid:nth-child(6n+3){--r:-1.5deg;--tr:-2deg;--tape:rgba(47,160,140,.6)}
+.polaroid:nth-child(6n+4){--r:3deg;--tr:3deg}
+.polaroid:nth-child(6n+5){--r:-2.5deg;--tr:-6deg;--tape:rgba(47,160,140,.6)}
+.polaroid:nth-child(6n){--r:1.5deg;--tr:5deg;--tape:rgba(224,64,47,.6)}
+.polaroid:hover,.polaroid:focus-within{transform:rotate(0) scale(1.03)}
+.ph-btn{display:block;width:100%;aspect-ratio:1;padding:0;border:0;background:#eef0f4;cursor:zoom-in}
+.ph-btn img{display:block;width:100%;height:100%;object-fit:cover}
+.polaroid figcaption{font-family:var(--hand);color:#2a2a2a;text-align:center;padding:.6rem .25rem .85rem;font-size:1.05rem;line-height:1.25}
+.ph-empty{aspect-ratio:1;border:2px dashed #c9cfda;background:#f6f7fa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:#6b7486;font-weight:700;text-align:center;padding:.5rem}
+.ph-empty svg{width:56px;height:56px}
+.polaroid.add .ph-empty{background:#fff3cc;border-color:#e5ae00;color:#10285c}
+.polaroid.add a{text-decoration:none;display:block}
+.polaroid.add a .ph-empty{transition:background .2s}
+.polaroid.add a:hover .ph-empty{background:#ffe48a}
+.plus{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:2rem;font-weight:800;line-height:1}
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(92vw,900px);max-height:94vh;overflow:visible}
+dialog.lightbox::backdrop{background:rgba(10,16,30,.85)}
+.lightbox figure{margin:0;background:#fff;padding:12px 12px 4px;border-radius:4px}
+.lightbox img{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;margin:0 auto}
+.lightbox figcaption{font-family:var(--hand);color:#2a2a2a;text-align:center;font-size:1.3rem;padding:.5rem 0 .6rem}
+.lb-close{position:absolute;top:-16px;right:-12px;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--navy);border:3px solid #fff;font:800 1.5rem/1 "Segoe UI",Arial,sans-serif;cursor:pointer}
 
 /* Timeline */
 .timeline{list-style:none;padding:0;margin:2.25rem 0 0;display:grid;grid-template-columns:repeat(6,1fr);position:relative}
@@ -171,18 +241,6 @@ section{padding:4.5rem 0}
 .timeline .date{font-weight:800}
 .timeline h3{font-size:1.1rem;margin:.1rem 0 .3rem;color:var(--blue)}
 .timeline p{margin:0;font-size:.93rem;color:var(--ink-soft)}
-
-/* Prize */
-.prize{background:var(--gold);color:var(--navy)}
-.prize .eyebrow{color:var(--navy)}
-.prize .wrap{display:grid;grid-template-columns:1.6fr 1fr;gap:3rem;align-items:center}
-.prize p{font-size:1.1rem;font-weight:500}
-.stakes{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0 0}
-.stakes div{background:rgba(255,255,255,.55);border-radius:16px;padding:1.1rem 1.3rem;border-top:6px solid var(--c)}
-.stakes h3{margin:0 0 .25rem;font-size:1.15rem}
-.stakes p{margin:0;font-size:1rem}
-.prize .note{color:var(--navy);opacity:.8}
-.trophy{justify-self:center}
 
 /* FAQ */
 details{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:1rem 1.25rem;margin-bottom:.6rem}
@@ -195,35 +253,45 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
 /* Closing */
 .closing{background:var(--blue);color:#fff;text-align:center}
 .closing p{margin:0 auto 1.5rem;color:#e3ecff;font-size:1.1rem}
+.closing .actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
 
 @media (max-width:1000px){
-  .breakdown{grid-template-columns:repeat(3,1fr)}
+  .route{--badge:92px}
+  .stop-text small{font-size:.78rem}
+  .offices{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:900px){
-  .hero .wrap,.prize .wrap{grid-template-columns:1fr}
-  .tally{transform:none}
   .steps{grid-template-columns:1fr 1fr}
   .timeline{grid-template-columns:1fr;gap:1.25rem}
   .timeline::before{left:10px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--blue),var(--gold))}
   .timeline li{padding:0 0 0 2.5rem}
-  .trophy{display:none}
 }
+/* Phones: the route turns into a top-to-bottom itinerary */
 @media (max-width:760px){
-  .matchup{grid-template-columns:1fr;gap:0}
-  .vs-badge{justify-self:center;margin:-.9rem 0;position:relative;z-index:1;width:3.6rem;height:3.6rem;font-size:1.2rem}
-  .give-grid,.stakes{grid-template-columns:1fr}
-  .breakdown{grid-template-columns:1fr 1fr}
+  .route{padding:44px 0 0 88px;--badge:92px}
+  .road{top:0;left:35px;width:18px;height:0}
+  .road::after{left:50%;right:auto;top:10px;bottom:10px;width:2px;height:auto;margin:0 0 0 -1px;background:repeating-linear-gradient(180deg,var(--road-line) 0 10px,transparent 10px 22px)}
+  .road-fill{width:100%;height:0;background-image:linear-gradient(180deg,#ffd451,#ffad14)}
+  .pin{top:0;left:44px}
+  .truck{top:0;left:44px;width:52px;height:33px;margin:-17px 0 0 -26px}
+  .truck-tag{white-space:normal;width:max-content;max-width:84px;text-align:center;font-size:.72rem;border-radius:10px;padding:.2rem .45rem}
+  .stops{grid-template-columns:1fr;gap:1.5rem}
+  .stop{flex-direction:row;align-items:center;text-align:left;gap:1rem}
+  .stop::before{bottom:auto;top:50%;left:-44px;height:0;width:44px;border-left:0;border-top:3px dotted var(--road)}
+  .stop-text{margin:0;align-items:flex-start;min-width:0;overflow-wrap:anywhere}
+  .stats{grid-template-columns:1fr}
+  .enter{grid-template-columns:1fr}
+  .offices{grid-template-columns:1fr 1fr}
 }
 @media (max-width:640px){
   section{padding:3.25rem 0}
   .steps{grid-template-columns:1fr}
-  .team-body{padding:1.2rem}
-  .team-top{padding:1rem 1.2rem .9rem}
+  .nextstop{border-radius:16px;font-size:1rem}
 }
-@media (max-width:400px){
-  .breakdown{grid-template-columns:1fr}
+@media (prefers-reduced-motion:reduce){
+  .fill,.badge,.badge svg,.pin,.polaroid{transition:none}
+  .stop.next .badge,.stop.pop .badge,.truck.driving svg{animation:none}
 }
-@media (prefers-reduced-motion:reduce){.fill,.stack span,.tally .bar span{transition:none}}
 </style>
 </head>
 <body>
@@ -235,59 +303,62 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <g fill="#ffffff" opacity=".5"><circle cx="640" cy="70" r="4"/><circle cx="760" cy="200" r="3"/><circle cx="1160" cy="300" r="5"/><circle cx="820" cy="560" r="4"/><circle cx="560" cy="540" r="3"/><circle cx="1050" cy="470" r="3"/></g>
   </svg>
   <div class="wrap">
-    <div>
-      <p class="eyebrow">Giving back together</p>
-      <h1>Holiday Food Drive 2026</h1>
-      <p>This year it’s headquarters against the rest of the country. Woodbridge takes on five offices from Vancouver to Timmins, and every person counts the same, so the underdogs have a real shot.</p>
-      <ul class="chips" id="teamChips"></ul>
-      <div class="actions">
-        <a class="btn gold" href="#donate">Donate to your team</a>
-        <a class="btn outline" href="#score">See the score</a>
-      </div>
-    </div>
-    <div class="tally" aria-label="Company total">
-      <p class="label">Raised together so far</p>
-      <div class="raised" id="totalRaised">$0</div>
-      <div class="of">of our <span id="totalGoal">$6,680</span> company goal</div>
-      <div class="bar"><span id="totalBar"></span></div>
-      <div class="meta"><span id="totalPct">0% there</span><span>Closes Jan 1</span></div>
+    <p class="eyebrow">Giving back together</p>
+    <h1>Holiday Food Drive 2026</h1>
+    <p><strong>The whole company, one goal.</strong> Every person counts the same, and every dollar moves our delivery truck from Vancouver to Ottawa. Let’s get there together.</p>
+    <div class="actions">
+      <span data-link="donateUrl" data-text="Donate now" data-cls="gold" data-soon="Donation link coming soon"></span>
+      <a class="btn outline" href="#journey">Follow the journey</a>
     </div>
   </div>
 </header>
 
-<section class="arena" id="score">
+<section class="sky" id="journey">
   <div class="wrap">
-    <div class="arena-head">
+    <div class="journey-head">
       <div>
-        <p class="eyebrow">The matchup</p>
-        <h2 style="margin-bottom:0">HQ vs. the challengers</h2>
+        <p class="eyebrow">Coast to coast</p>
+        <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$6,680</span></h2>
       </div>
       <p class="updated" id="updated"></p>
     </div>
-    <div class="matchup" id="matchup"></div>
-    <p class="verdict" id="verdict"></p>
-    <span class="note" id="sampleNote" hidden>Sample numbers shown for design purposes.</span>
+    <p class="nextstop" id="nextStop" aria-live="polite"></p>
+    <div class="route" id="route">
+      <div class="road" id="road"><div class="road-fill" id="roadFill"></div></div>
+      <div class="truck" id="truck" aria-hidden="true">
+        <span class="truck-tag" id="truckTag"></span>
+        <svg viewBox="0 0 64 40">
+          <ellipse cx="32" cy="38" rx="28" ry="1.8" fill="rgba(0,0,0,.2)"/>
+          <path d="M5 11h12v12H5z" fill="#c8955a"/><path d="M18 8h11v15H18z" fill="#dcab6e"/><path d="M30 12h10v11H30z" fill="#c8955a"/>
+          <circle cx="8" cy="10" r="3" fill="#3fa34d"/><circle cx="12.5" cy="8.6" r="3" fill="#4cb85a"/>
+          <rect x="21" y="1" width="3.6" height="10" rx="1.8" fill="#e8c27a" transform="rotate(14 22.8 6)"/>
+          <circle cx="35" cy="10.5" r="2.8" fill="#ff9a2e"/>
+          <rect x="2" y="20" width="40" height="11" rx="2" fill="#1d5bd8"/>
+          <path d="M42 12h11q2 0 3 2l5 7q1 1 1 3v7H42z" fill="#1d5bd8"/>
+          <path d="M45 15h7.5l4.5 6.5H45z" fill="#eaf2ff"/>
+          <rect x="2" y="25" width="60" height="2.4" fill="#ffc21a"/>
+          <rect x="59.5" y="23" width="2.5" height="1.8" fill="#fff3cc"/>
+          <circle cx="14" cy="32" r="5.5" fill="#1c2333"/><circle cx="14" cy="32" r="2" fill="#c9d2de"/>
+          <circle cx="51" cy="32" r="5.5" fill="#1c2333"/><circle cx="51" cy="32" r="2" fill="#c9d2de"/>
+        </svg>
+      </div>
+      <ol class="stops" id="stops"></ol>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$6,680</span> goal</small></div>
+      <div class="stat"><span class="lbl">Of our goal</span><b id="statPct">0%</b><span class="track"><span class="fill" id="statBar"></span></span></div>
+      <div class="stat"><span class="lbl">Participation</span><b id="statPart">0%</b><small id="statPartText"></small></div>
+    </div>
   </div>
 </section>
 
-<section class="sky" id="offices">
+<section id="offices">
   <div class="wrap">
     <p class="eyebrow">Every office counts</p>
-    <h2><span data-team="Challengers"></span>, office by office</h2>
-    <p style="color:var(--ink-soft);margin:0">Five offices, one team. Here’s how much each one has added to the challengers’ total.</p>
-    <div class="stack" id="stack" role="img"></div>
-    <div class="breakdown" id="breakdown"></div>
-    <p class="hqline" id="hqLine"></p>
-  </div>
-</section>
-
-<section id="donate">
-  <div class="wrap">
-    <p class="eyebrow">Give now</p>
-    <h2>Pick your team, make a donation</h2>
-    <p style="color:var(--ink-soft)">Every dollar supports food banks in every community where we live and work, and counts toward your team’s score.</p>
-    <div class="give-grid" id="giveCards"></div>
-    <p class="whichteam" id="whichTeam"></p>
+    <h2>What each office has added</h2>
+    <p class="lede">Big office or small, every gift moves the same truck.</p>
+    <div class="offices" id="officeCards"></div>
+    <p class="note" id="unassignedNote" hidden></p>
   </div>
 </section>
 
@@ -296,14 +367,42 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <p class="eyebrow">How it works</p>
     <h2>Three steps, about two minutes</h2>
     <ol class="steps">
-      <li><h3>Find your team</h3><p>Woodbridge is <span data-team="HQ"></span>. Every other office is <span data-team="Challengers"></span>.</p></li>
-      <li><h3>Donate online</h3><p>Give any amount through your team’s link. Your tax receipt comes straight from our food bank partner.</p></li>
-      <li><h3>Check back Fridays</h3><p>The scoreboard updates every Friday afternoon with the latest totals.</p></li>
+      <li><h3>Donate online</h3><p>Give any amount through our company donation link. Your tax receipt comes straight from our food bank partner.</p></li>
+      <li><h3>Enter the draw</h3><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></li>
+      <li><h3>Watch the truck move</h3><p>Totals update every Friday. Each stop we reach unlocks something fun for everyone.</p></li>
     </ol>
-    <div class="rulebox">
-      <p><strong>The one rule:</strong> every person counts the same. Each team’s goal is <span id="perPerson">$20</span> per person, and the team that gets furthest past its goal wins.</p>
-      <p><strong>Watch participation too:</strong> it’s the share of each team who gave any amount. A $5 donation counts just as much here as a $500 one.</p>
+    <p class="rulebox"><strong>The goal:</strong> <span id="perPerson">$20</span> for every person in the company, <span id="goalText2">$6,680</span> in all. Every dollar from every office counts toward the same goal.</p>
+  </div>
+</section>
+
+<section class="raffle" id="raffle">
+  <div class="wrap">
+    <p class="eyebrow">Holiday raffle</p>
+    <h2>Win a $25 digital gift card</h2>
+    <p id="raffleIntro"></p>
+    <ul class="draws" id="draws"></ul>
+    <div class="enter">
+      <div>
+        <h3>Already donated?</h3>
+        <p>Let us know with a quick form and you’re in the draw.</p>
+        <span data-link="drawFormUrl" data-text="Donated? Enter the draw" data-cls="navy" data-soon="Draw form coming soon"></span>
+      </div>
+      <div>
+        <h3>Love a holiday sweater?</h3>
+        <p>Send a photo of your favourite holiday sweater for one entry. No donation needed.</p>
+        <span data-link="photoFormUrl" data-text="Share your holiday sweater" data-cls="navy" data-soon="Photo form coming soon"></span>
+      </div>
     </div>
+    <span class="note">One entry per person for each way to enter.</span>
+  </div>
+</section>
+
+<section class="festive" id="sweaters">
+  <div class="wrap">
+    <p class="eyebrow">The sweater photo book</p>
+    <h2>Show us your holiday sweater</h2>
+    <p class="lede">Festive, sparkly, gloriously ugly: we want to see it. Every photo you send lands here and gets you a raffle entry.</p>
+    <div class="book" id="book"></div>
   </div>
 </section>
 
@@ -312,165 +411,273 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <p class="eyebrow">Mark your calendar</p>
     <h2>Six weeks, start to finish</h2>
     <ol class="timeline">
-      <li class="big"><span class="date">Mon, Nov 23</span><h3>Kickoff</h3><p>Donation links go live and the matchup begins.</p></li>
-      <li><span class="date">Fri, Nov 27</span><h3>First score</h3><p>Week one totals posted here and in Teams.</p></li>
+      <li class="big"><span class="date">Mon, Nov 23</span><h3>Kickoff</h3><p>The donation link goes live and the truck leaves Vancouver.</p></li>
+      <li><span class="date">Fri, Nov 27</span><h3>First update</h3><p>Week one totals posted here and in Teams.</p></li>
       <li><span class="date">Fri, Dec 4 and 11</span><h3>Weekly updates</h3><p>Fresh totals every Friday afternoon.</p></li>
-      <li><span class="date">Fri, Dec 18</span><h3>Last update of 2026</h3><p>Final scoreboard before the holiday closure.</p></li>
-      <li><span class="date">Fri, Jan 1</span><h3>Donations close</h3><p>Last chance to give and move your team’s score.</p></li>
-      <li class="big"><span class="date">Early January</span><h3>Winner announced</h3><p>Revealed in our first week back.</p></li>
+      <li><span class="date">Fri, Dec 18</span><h3>Last update of 2026</h3><p>Final totals before the holiday closure.</p></li>
+      <li><span class="date">Fri, Jan 1</span><h3>Donations close</h3><p>Last chance to give and move the truck.</p></li>
+      <li class="big"><span class="date">Early January</span><h3>Wrap-up</h3><p>Final total and a big thank you in our first week back.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="prize">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">What’s at stake</p>
-      <h2>Bragging rights, and then some</h2>
-      <p>Whichever team gets furthest past its goal takes it all.</p>
-      <div class="stakes">
-        <div style="--c:var(--ch)"><h3>If <span data-team="Challengers"></span> wins</h3><p>Pizza or treats sent to every regional office.</p></div>
-        <div style="--c:var(--hq)"><h3>If <span data-team="HQ"></span> wins</h3><p>An office party, plus the travelling Pulse Cup.</p></div>
-      </div>
-      <span class="note">Prizes are still being finalized.</span>
-    </div>
-    <svg class="trophy" width="190" height="220" viewBox="0 0 170 200" aria-hidden="true">
-      <path d="M45 20h80v50a40 40 0 0 1-80 0z" fill="#10285c"/>
-      <path d="M45 32H22a22 22 0 0 0 26 34M125 32h23a22 22 0 0 1-26 34" fill="none" stroke="#10285c" stroke-width="8"/>
-      <rect x="77" y="108" width="16" height="34" fill="#10285c"/>
-      <rect x="50" y="142" width="70" height="14" rx="2" fill="#10285c"/>
-      <rect x="40" y="156" width="90" height="30" rx="3" fill="#ffffff"/>
-      <text x="85" y="176" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="800" fill="#1d5bd8">2026</text>
-      <polygon points="85,38 90,50 103,50 93,58 97,71 85,63 73,71 77,58 67,50 80,50" fill="#ffc21a"/>
-    </svg>
-  </div>
-</section>
-
-<section>
+<section class="sky">
   <div class="wrap" style="max-width:900px">
     <p class="eyebrow">Good to know</p>
     <h2>Questions</h2>
-    <details><summary>Which team am I on?</summary><p>If you work at Woodbridge, you’re <span data-team="HQ"></span>. Everyone at Sterling Road (Pratus), Vancouver, Ottawa, North Bay and Timmins is <span data-team="Challengers"></span>. If you work remotely, join the team of the office you’re closest to.</p></details>
-    <details><summary>How can a smaller team win?</summary><p>Goals are $20 per person, so a 74-person team has a smaller goal than a 260-person one. The winner is whoever gets furthest past their own goal, not whoever raises the most dollars.</p></details>
-    <details><summary>What’s participation?</summary><p>It’s the share of each team’s people who donated any amount. Every gift counts, so even a few dollars helps your team’s number.</p></details>
     <details><summary>Where does my donation go?</summary><p>Donations go through our Canada-wide food bank partner, supporting food banks in every community where we live and work.</p></details>
     <details><summary>Do I get a tax receipt?</summary><p>Yes. Receipts come straight from our food bank partner, usually by email right after you give.</p></details>
-    <details><summary>How often is the scoreboard updated?</summary><p>Every Friday afternoon. Our partner tracks each team’s total on its own page, and we copy those totals here.</p></details>
-    <details><summary>Can I donate food instead of money?</summary><p>This year the drive is online donations only. Food banks can stretch every dollar further than a grocery donation, and it keeps the scoring simple.</p></details>
+    <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: November 27, December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
+    <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
+    <details><summary>Can I enter the draw without donating?</summary><p>Yes. Send a photo of your favourite holiday sweater and you get one entry, no donation needed.</p></details>
+    <details><summary>Who can see the sweater photos?</summary><p>The photo book is part of this page, so anyone with the link can see it. Only send a photo you’re happy to share, and we’ll only show your first name and office.</p></details>
+    <details><summary>Can I donate food instead of money?</summary><p>This year the drive is online donations only. Food banks can stretch every dollar further than a grocery donation, and it keeps the total simple.</p></details>
   </div>
 </section>
 
 <section class="closing">
   <div class="wrap">
-    <h2>Show us your team spirit</h2>
-    <p>Send in photos of your office, your champion in action, or your best holiday sweater, and we’ll feature them on the Pulse.</p>
-    <a class="btn white" href="#">Share a photo</a>
+    <h2>Every dollar moves the truck</h2>
+    <p>Give what you can, share your sweater, and let’s get to Ottawa together.</p>
+    <div class="actions">
+      <span data-link="donateUrl" data-text="Donate now" data-cls="gold" data-soon="Donation link coming soon"></span>
+      <span data-link="photoFormUrl" data-text="Share your holiday sweater" data-cls="white" data-soon="Photo form coming soon"></span>
+    </div>
   </div>
 </section>
 
+<dialog class="lightbox" id="lightbox" aria-label="Sweater photo">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Close photo">&times;</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+</dialog>
+
 <script>
-const cities={"Woodbridge":"Woodbridge, ON","Sterling Road":"Toronto, ON (Pratus)","Ottawa":"Ottawa, ON","Vancouver":"Vancouver, BC","North Bay":"North Bay, ON","Timmins":"Timmins, ON"};
-const colors={"Woodbridge":"--hq","Sterling Road":"--o-sterling","Vancouver":"--o-vancouver","Ottawa":"--o-ottawa","North Bay":"--o-northbay","Timmins":"--o-timmins"};
+const RING='<circle cx="50" cy="50" r="45.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".85"/>';
+const PLACES={
+  "Vancouver":{label:"Vancouver office",alt:"Lions Gate Bridge and the North Shore mountains, Vancouver office",art:`
+    <rect width="100" height="100" fill="#cfe6fb"/>
+    <path d="M-2 66 20 38 32 50 50 24 66 46 78 36 102 62V100H-2z" fill="#3e6b8a"/>
+    <path d="M50 24 43 34 48 32 51 35 56 32zM20 38 15 45 19 43 22 45 25 42zM78 36 74 41 78 40 82 42z" fill="#fff"/>
+    <rect y="70" width="100" height="30" fill="#4b93cf"/>
+    <g stroke="#2f8a57" fill="none" stroke-linecap="round">
+      <path d="M0 64Q18 52 31 44Q50 66 69 44Q82 52 100 64" stroke-width="1.8"/>
+      <path d="M40 70V52M50 70V55M60 70V52M18 70V52M82 70V52" stroke-width="1"/>
+      <path d="M0 70H100" stroke-width="3.5"/>
+      <path d="M31 73V40M69 73V40" stroke-width="4"/>
+    </g>
+    <path d="M10 81H24M60 87H78M34 93H46" stroke="#cfe6fb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>`},
+  "Timmins":{label:"Timmins office",alt:"Gold mine headframe, Timmins office",art:`
+    <rect width="100" height="100" fill="#fde7c0"/>
+    <circle cx="80" cy="25" r="9" fill="#f2a516"/>
+    <rect y="76" width="100" height="24" fill="#5b4632"/>
+    <g stroke="#a33a2c" stroke-width="3.2" stroke-linecap="round" fill="none">
+      <path d="M38 76 44 26M56 76 50 26M50 30 68 76"/>
+      <path d="M43 34H51M42 42H52M40 58H56M43 34 52 42M51 34 42 42M42 42 56 58M52 42 40 58" stroke-width="2"/>
+    </g>
+    <rect x="40" y="22" width="14" height="5" fill="#a33a2c"/>
+    <circle cx="47" cy="16" r="6" fill="none" stroke="#5b4632" stroke-width="2.4"/><circle cx="47" cy="16" r="1.6" fill="#5b4632"/>
+    <path d="M62 76V64H80V76z" fill="#a33a2c"/><path d="M60 64 71 57 82 64z" fill="#5b4632"/>
+    <g fill="#2e6b3c"><path d="M17 44 9 60H25zM17 52 7 72H27z"/><path d="M90 52 84 64H96zM90 58 82 76H98z"/></g>
+    <rect x="15.5" y="72" width="3" height="5" fill="#2e6b3c"/>`},
+  "North Bay":{label:"North Bay office",alt:"Canoe on Lake Nipissing, North Bay office",art:`
+    <rect width="100" height="100" fill="#ffe3c7"/>
+    <circle cx="68" cy="50" r="11" fill="#ffb347"/>
+    <path d="M-2 56Q20 47 40 54T102 51V60H-2z" fill="#3f7a52"/>
+    <rect y="58" width="100" height="42" fill="#3577b8"/>
+    <path d="M60 64H80M14 88H28M70 92H84" stroke="#9cc6ec" stroke-width="1.5" stroke-linecap="round"/>
+    <g fill="#245c38"><path d="M13 20 3 42H23zM13 32 1 58H25z"/><path d="M30 34 22 50H38zM30 42 20 62H40z"/></g>
+    <path d="M52 63 64 82" stroke="#5b4632" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="58" cy="69" r="2.8" fill="#2b2b2b"/><path d="M55.5 72h5.5v6h-5.5z" fill="#2b2b2b"/>
+    <path d="M36 76Q57 82 80 74L78 78Q57 87 38 80z" fill="#d4432f"/>`},
+  "Woodbridge":{label:"Woodbridge HQ",alt:"Quasar head office building, Woodbridge HQ",art:`
+    <rect width="100" height="100" fill="#dce9ff"/>
+    <rect y="80" width="100" height="20" fill="#6cb36f"/>
+    <rect x="24" y="30" width="52" height="52" rx="2" fill="#1d5bd8"/>
+    <rect x="22" y="27" width="56" height="5" rx="1.5" fill="#123f9e"/>
+    <g fill="#eaf2ff"><rect x="48" y="37" width="6" height="6"/><rect x="58" y="37" width="6" height="6"/><rect x="67" y="37" width="5" height="6"/>
+      <rect x="48" y="48" width="6" height="6"/><rect x="58" y="48" width="6" height="6"/><rect x="67" y="48" width="5" height="6"/>
+      <rect x="28" y="60" width="6" height="6"/><rect x="37" y="60" width="6" height="6"/><rect x="58" y="60" width="6" height="6"/><rect x="67" y="60" width="5" height="6"/>
+      <rect x="44" y="68" width="12" height="14"/></g>
+    <path d="M28 35h6l7 9.5h-6zM35 46.5h6l-7 9.5h-6z" fill="#ffc21a"/>
+    <path d="M70 27V10" stroke="#123f9e" stroke-width="1.6"/>
+    <path d="M70 10h16v10H70z" fill="#ffc21a"/>
+    <text x="78" y="17.6" text-anchor="middle" font-size="7" font-weight="800" fill="#10285c" font-family="Segoe UI,Arial,sans-serif">HQ</text>`},
+  "Toronto":{label:"Toronto (Pratus, Sterling Road)",alt:"CN Tower, Toronto office",art:`
+    <rect width="100" height="100" fill="#d4e6ff"/>
+    <g fill="#2a3f68"><rect x="6" y="58" width="12" height="27"/><rect x="18" y="50" width="10" height="35"/><rect x="28" y="63" width="10" height="22"/>
+      <rect x="61" y="55" width="10" height="30"/><rect x="71" y="45" width="10" height="40"/><rect x="81" y="61" width="13" height="24"/></g>
+    <g fill="#ffc21a"><rect x="21" y="55" width="2" height="2"/><rect x="24" y="61" width="2" height="2"/><rect x="9" y="64" width="2" height="2"/><rect x="74" y="50" width="2" height="2"/><rect x="77" y="58" width="2" height="2"/><rect x="64" y="62" width="2" height="2"/><rect x="85" y="67" width="2" height="2"/><rect x="31" y="69" width="2" height="2"/></g>
+    <g fill="#7d8aa0"><path d="M47.6 85 49 30h2l1.4 55z"/><path d="M43 85 48.6 64h2.8L57 85h-3.5L50 72l-3.5 13z"/>
+      <rect x="42" y="38" width="16" height="6" rx="3"/><path d="M44 44h12l-2 4h-8z"/><rect x="46.5" y="27" width="7" height="3" rx="1.5"/><rect x="49.4" y="7" width="1.2" height="21"/></g>
+    <rect y="85" width="100" height="15" fill="#4b93cf"/>`},
+  "Ottawa":{label:"Ottawa office",alt:"Peace Tower on Parliament Hill, Ottawa office",art:`
+    <rect width="100" height="100" fill="#d8ecff"/>
+    <rect y="82" width="100" height="18" fill="#6cb36f"/>
+    <g fill="#ddc9a0"><rect x="5" y="60" width="34" height="22"/><rect x="61" y="60" width="34" height="22"/></g>
+    <g fill="#4e9c86"><path d="M3 60l6-7h26l6 7z"/><path d="M59 60l6-7h26l6 7z"/></g>
+    <g fill="#8a7650"><rect x="9" y="65" width="3" height="5"/><rect x="16" y="65" width="3" height="5"/><rect x="23" y="65" width="3" height="5"/><rect x="30" y="65" width="3" height="5"/>
+      <rect x="67" y="65" width="3" height="5"/><rect x="74" y="65" width="3" height="5"/><rect x="81" y="65" width="3" height="5"/><rect x="88" y="65" width="3" height="5"/>
+      <rect x="9" y="74" width="3" height="5"/><rect x="16" y="74" width="3" height="5"/><rect x="23" y="74" width="3" height="5"/><rect x="30" y="74" width="3" height="5"/>
+      <rect x="67" y="74" width="3" height="5"/><rect x="74" y="74" width="3" height="5"/><rect x="81" y="74" width="3" height="5"/><rect x="88" y="74" width="3" height="5"/></g>
+    <rect x="41" y="36" width="18" height="46" fill="#e8d8b2"/>
+    <rect x="40" y="34" width="20" height="4" fill="#bfa978"/>
+    <path d="M40 35 50 14 60 35z" fill="#4e9c86"/>
+    <circle cx="50" cy="44" r="4.5" fill="#fff" stroke="#8a7650" stroke-width="1.2"/><path d="M50 44v-2.6M50 44h2" stroke="#3b2b20" stroke-width=".8"/>
+    <path d="M46 72V57a4 4 0 0 1 8 0v15z" fill="#8a7650"/>
+    <path d="M46.5 82v-5a3.5 3.5 0 0 1 7 0v5z" fill="#8a7650"/>
+    <path d="M50 15V7.5" stroke="#555" stroke-width=".8"/><path d="M50 7.5h7v4h-7z" fill="#d52b1e"/>`}
+};
+const stamp=p=>`<svg viewBox="0 0 100 100" role="img" aria-label="${p.alt}">${p.art}${RING}</svg>`;
+const LOCK='<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="8" rx="1.5" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+const CHECK='<svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 const PER=DRIVE.goalPerPerson, fmt=n=>"$"+Math.round(n).toLocaleString("en-CA"), pct=(a,b)=>b?a/b*100:0;
+const num=v=>Number(v)||0, sum=(list,k)=>list.reduce((s,o)=>s+num(o[k]),0);
+const isLink=u=>/^https?:\/\//i.test(u||"");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const list=a=>a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1];
 const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const sum=(list,k)=>list.reduce((s,o)=>s+(Number(o[k])||0),0);
+const $=id=>document.getElementById(id);
 
-const offices=DRIVE.offices.map(o=>({...o,goal:o.people*PER,c:`var(${colors[o.name]||"--ch"})`}));
-const teams=["HQ","Challengers"].map(key=>{
-  const list=offices.filter(o=>o.team===key);
-  const t={key,name:DRIVE.teams[key].name,link:DRIVE.teams[key].link,offices:list,
-    raised:sum(list,"raised"),donors:sum(list,"donors"),people:sum(list,"people"),c:key==="HQ"?"var(--hq)":"var(--ch)"};
-  t.goal=t.people*PER; t.pg=pct(t.raised,t.goal); t.pp=pct(t.donors,t.people);
-  return t;
+const extra=DRIVE.unassigned||{};
+const people=sum(DRIVE.offices,"people"), goal=people*PER;
+const raised=sum(DRIVE.offices,"raised")+num(extra.raised), donors=sum(DRIVE.offices,"donors")+num(extra.donors);
+const P=pct(raised,goal), partP=pct(donors,people);
+const stops=DRIVE.milestones.map(m=>({...m,...(PLACES[m.stop]||{label:"",alt:m.stop,art:""}),reached:raised*100>=m.at*goal}));
+const nextIdx=stops.findIndex(s=>!s.reached);
+
+// Links: a button when the link is set, a "coming soon" pill until then
+document.querySelectorAll("[data-link]").forEach(el=>{
+  const url=DRIVE[el.dataset.link];
+  el.outerHTML=isLink(url)
+    ?`<a class="btn ${el.dataset.cls}" href="${esc(url)}" target="_blank" rel="noopener">${el.dataset.text}</a>`
+    :`<span class="btn soon">${el.dataset.soon}</span>`;
 });
-const [hq,ch]=teams;
-const totalRaised=hq.raised+ch.raised, totalGoal=hq.goal+ch.goal, totalPct=Math.round(pct(totalRaised,totalGoal));
-const names=list=>list.map(o=>o.name).join(", ").replace(/, ([^,]*)$/," and $1");
 
-document.querySelectorAll("[data-team]").forEach(el=>el.textContent=DRIVE.teams[el.dataset.team].name);
-document.getElementById("perPerson").textContent=fmt(PER);
-document.getElementById("totalGoal").textContent=fmt(totalGoal);
-document.getElementById("totalPct").textContent=totalPct+"% there";
-document.getElementById("updated").textContent="Updated "+DRIVE.lastUpdated;
-document.getElementById("sampleNote").hidden=!DRIVE.sampleNumbers;
-document.getElementById("teamChips").innerHTML=`<li><i style="background:${hq.c}"></i>${hq.name}</li><li class="vs">vs.</li><li><i style="background:${ch.c}"></i>${ch.name}</li>`;
+["goalText","goalText2","statGoal"].forEach(id=>$(id).textContent=fmt(goal));
+$("perPerson").textContent=fmt(PER);
+$("updated").textContent=raised>0?"Updated "+DRIVE.lastUpdated:"First update Friday, November 27";
+$("statPartText").textContent=`${donors} of ${people} people gave`;
+$("truckTag").textContent=`${fmt(raised)} raised, ${Math.round(P)}%`;
+const ns=$("nextStop");
+if(nextIdx<0){ns.classList.add("done");ns.innerHTML="🎉 <b>Goal reached!</b> We made it coast to coast. Thank you!";}
+else{const n=stops[nextIdx];ns.innerHTML=`Next stop: <b>${esc(n.stop)}</b>, ${fmt(Math.max(n.at/100*goal-raised,0))} to go`;}
 
-// One moment of motion: numbers count up as bars fill
+// Journey stops
+const stopsEl=$("stops");
+stopsEl.innerHTML=stops.map((s,i)=>`
+  <li class="stop${s.reached?" reached":""}">
+    <div class="badge">${stamp(s)}<span class="icon">${LOCK}${CHECK}</span></div>
+    <div class="stop-text">
+      <b>${esc(s.stop)}</b><small>${esc(s.label)}</small>
+      <span class="at">${s.at===0?"Start":s.at+"%"}</span>
+      <span class="reward">${s.at===0?"":`<em>${s.reached?"Unlocked!":"Locked"}</em>`}${esc(s.reward)}</span>
+    </div>
+  </li>`).join("");
+const stopEls=[...stopsEl.children], route=$("route"), road=$("road"), roadFill=$("roadFill"), truck=$("truck");
+const pins=stops.map(()=>{const p=document.createElement("span");p.className="pin";route.insertBefore(p,stopsEl);return p;});
+
+// Where the truck sits, in "stop units": 2.5 means halfway between the 3rd and 4th stop
+const goalU=(()=>{const n=stops.length;
+  if(P<=stops[0].at)return 0;
+  for(let i=0;i<n-1;i++)if(P<stops[i+1].at)return i+(P-stops[i].at)/(stops[i+1].at-stops[i].at);
+  return n-1;})();
+const vertical=()=>window.matchMedia("(max-width:760px)").matches;
+let cur=0;
+function place(u){
+  const v=vertical(), r=route.getBoundingClientRect();
+  const c=stopEls.map(li=>{const b=li.querySelector(".badge").getBoundingClientRect();return v?b.top+b.height/2-r.top:b.left+b.width/2-r.left;});
+  const i=Math.min(Math.floor(u),c.length-2), at=c[i]+(u-i)*(c[i+1]-c[i]), len=c[c.length-1]-c[0];
+  road.style.cssText=v?`top:${c[0]}px;height:${len}px`:`left:${c[0]}px;width:${len}px`;
+  roadFill.style.cssText=v?`height:${at-c[0]}px;background-size:100% ${len}px`:`width:${at-c[0]}px;background-size:${len}px 100%`;
+  truck.style.cssText=v?`top:${at}px`:`left:${at}px`;
+  pins.forEach((p,k)=>{p.style.cssText=v?`top:${c[k]}px`:`left:${c[k]}px`;p.classList.toggle("lit",stopEls[k].classList.contains("lit"));});
+}
+function light(u,popIt){
+  stopEls.forEach((li,k)=>{
+    if(k>u+1e-6||!stops[k].reached||li.classList.contains("lit"))return;
+    li.classList.add("lit");
+    if(popIt&&k>0)li.classList.add("pop");
+  });
+}
+function celebrate(){
+  if(nextIdx>=0||reduce)return;
+  const box=document.createElement("span");box.className="confetti";
+  const cols=["#ffc21a","#1d5bd8","#e0402f","#2f8a57","#7a5af8"];
+  box.innerHTML=Array.from({length:28},(_,k)=>`<i style="--c:${cols[k%5]};--dx:${Math.round(Math.random()*200-100)}px;--dy:${Math.round(Math.random()*150-110)}px;--rot:${Math.round(Math.random()*720-360)}deg;animation-delay:${Math.round(Math.random()*200)}ms"></i>`).join("");
+  truck.appendChild(box);
+  setTimeout(()=>box.remove(),2200);
+}
 function countUp(el,to,format,dur=1600){
   if(reduce){el.textContent=format(to);return;}
-  el.textContent=format(0);
-  const start=performance.now();
-  (function tick(t){const k=Math.min((t-start)/dur,1),e=1-Math.pow(1-k,3);el.textContent=format(to*e);if(k<1)requestAnimationFrame(tick);})(start);
+  const t0=performance.now();
+  (function tick(t){const k=Math.min((t-t0)/dur,1),e=1-Math.pow(1-k,3);el.textContent=format(to*e);if(k<1)requestAnimationFrame(tick);})(t0);
 }
-const fillBars=root=>requestAnimationFrame(()=>requestAnimationFrame(()=>root.querySelectorAll("[data-w]").forEach(f=>f.style.width=f.dataset.w+"%")));
-const asPct=n=>Math.round(n)+"%";
 
-countUp(document.getElementById("totalRaised"),totalRaised,fmt);
-document.getElementById("totalBar").dataset.w=Math.min(totalPct,100);
-fillBars(document.querySelector(".tally"));
+// One moment of motion: the truck drives to today's total, the road fills behind it and the numbers count up
+let started=false;
+function start(){
+  if(started)return; started=true;
+  countUp($("statRaised"),raised,fmt);
+  countUp($("statPct"),P,n=>Math.round(n)+"%");
+  countUp($("statPart"),partP,n=>Math.round(n)+"%");
+  $("statBar").style.width=Math.min(P,100)+"%";
+  const finish=()=>{if(nextIdx>=0)stopEls[nextIdx].classList.add("next");celebrate();};
+  if(reduce){cur=goalU;light(cur,false);place(cur);finish();return;}
+  const dur=900+goalU*450, t0=performance.now();
+  truck.classList.add("driving");
+  (function frame(t){
+    const k=Math.min((t-t0)/dur,1), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    cur=goalU*e; light(cur,true); place(cur);
+    if(k<1)requestAnimationFrame(frame); else {truck.classList.remove("driving");finish();}
+  })(t0);
+}
+light(0,false); place(0);
+new ResizeObserver(()=>place(cur)).observe(route);
+if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();start();}},{threshold:.3});
+  io.observe(route);
+} else start();
 
-// Head-to-head scoreboard
-const gap=hq.pg-ch.pg, tied=Math.abs(gap)<0.5, leader=tied?null:(gap>0?hq:ch);
-const partGap=hq.pp-ch.pp, partLeader=Math.abs(partGap)<0.5?null:(partGap>0?hq:ch);
-const scale=Math.max(125,Math.ceil(Math.max(hq.pg,ch.pg)/25)*25);
-const card=t=>{
-  const where=t.key==="HQ"?`${names(t.offices)} · ${t.people} people`:`${t.offices.length} offices · ${t.people} people`;
-  return `<article class="team${t===leader?" lead":""}" style="--c:${t.c}">
-    <div class="team-top"><h3>${t.name}${t===leader?' <span class="tag">In the lead</span>':""}</h3><small>${where}</small></div>
-    <div class="team-body">
-      <div class="score"><b data-count="${t.pg}">0%</b><span>of goal</span></div>
-      <span class="track" role="img" aria-label="${t.name}: ${Math.round(t.pg)}% of goal">
-        <span class="fill" data-w="${Math.min(t.pg,scale)/scale*100}"></span>
-        <span class="goal" style="left:${100/scale*100}%"><span class="goal-label">Goal</span></span>
-      </span>
-      <p class="money"><b>${fmt(t.raised)}</b> raised of ${fmt(t.goal)}</p>
-      <div class="part">
-        <div class="part-head"><span>Participation${t===partLeader?' <span class="tag">Most people giving</span>':""}</span><b>${asPct(t.pp)}</b></div>
-        <span class="track slim" role="img" aria-label="${t.name}: ${Math.round(t.pp)}% participation"><span class="fill" data-w="${Math.min(t.pp,100)}"></span></span>
-        <small>${t.donors} of ${t.people} people gave</small>
-      </div>
-    </div>
-  </article>`;
-};
-const matchup=document.getElementById("matchup");
-matchup.innerHTML=card(hq)+'<div class="vs-badge" aria-hidden="true">VS</div>'+card(ch);
-matchup.querySelectorAll("[data-count]").forEach(el=>countUp(el,Number(el.dataset.count),asPct));
-fillBars(matchup);
-const pts=n=>`${n} point${n===1?"":"s"}`;
-document.getElementById("verdict").innerHTML=tied
-  ?"<em>Dead even.</em> Every donation could swing it."
-  :`<em>${leader.name}</em> leads by ${pts(Math.round(Math.abs(gap)))}. ${leader===ch?"The underdogs are out front!":"Still anyone’s game."}`;
-
-// Challengers office breakdown
-const stack=document.getElementById("stack");
-stack.setAttribute("aria-label",`${ch.name} total by office`);
-stack.innerHTML=ch.offices.map(o=>`<span style="--c:${o.c}" data-w="${pct(o.raised,ch.raised)}" title="${o.name}: ${fmt(o.raised)}"></span>`).join("");
-fillBars(stack);
-document.getElementById("breakdown").innerHTML=ch.offices.map(o=>{
-  const pp=pct(o.donors,o.people);
-  return `<article class="oc" style="--c:${o.c}">
-    <h3>${o.name}</h3>
-    <p class="city">${cities[o.name]||""} · ${o.people} ${o.people===1?"person":"people"}</p>
-    <span class="amt">${fmt(o.raised)}</span>
-    <p class="share">${asPct(pct(o.raised,ch.raised))} of the team’s total</p>
-    <span class="track slim" role="img" aria-label="${o.name}: ${Math.round(pp)}% participation"><span class="fill" data-w="${Math.min(pp,100)}"></span></span>
-    <small>${o.donors} of ${o.people} gave (${asPct(pp)})</small>
-    ${o.people&&o.donors>=o.people?'<span class="tag">Everyone gave!</span>':""}
+// Every office counts
+$("officeCards").innerHTML=DRIVE.offices.map(o=>{const p=PLACES[o.office]||{label:"",alt:o.office,art:""};return `
+  <article class="oc">
+    ${stamp(p)}
+    <h3>${esc(o.office)}</h3><p class="lbl">${esc(p.label)}</p>
+    <span class="amt">${fmt(num(o.raised))}</span>
+    <small>${num(o.donors)} of ${num(o.people)} ${num(o.people)===1?"person":"people"} gave</small>
+    <small>${Math.round(pct(num(o.raised),raised))}% of our total</small>
   </article>`;}).join("");
-fillBars(document.getElementById("breakdown"));
-document.getElementById("hqLine").textContent=`On the other side: ${hq.name} is all ${names(hq.offices)}, with ${hq.people} people and ${fmt(hq.raised)} raised so far.`;
+if(num(extra.raised)>0){const un=$("unassignedNote");un.hidden=false;un.textContent=`Plus ${fmt(extra.raised)} from donations not linked to an office.`;}
 
-// Donation buttons, one per team
-document.getElementById("giveCards").innerHTML=teams.map(t=>`
-  <article class="give" style="--c:${t.c}">
-    <h3>${t.name}</h3>
-    <p>${names(t.offices)}</p>
-    <p class="goalline">Team goal: ${fmt(t.goal)}</p>
-    ${t.link
-      ?`<a class="btn" href="${t.link}" target="_blank" rel="noopener">Donate to ${t.name}</a>`
-      :`<span class="btn soon">Donation link coming soon</span>`}
-  </article>`).join("");
-document.getElementById("whichTeam").innerHTML=`<strong>Which team am I on?</strong> Work at ${names(hq.offices)}? You’re ${hq.name}. ${names(ch.offices)}? You’re ${ch.name}.`;
+// Raffle draws come from the milestones whose reward mentions a raffle
+const draws=stops.filter(s=>/raffle/i.test(s.reward));
+$("raffleIntro").textContent=draws.length
+  ?`We’ll hold a raffle draw each time we reach ${list(draws.map(d=>d.at+"%"))} of our goal. Every draw is for a $25 digital gift card.`
+  :"Raffle details coming soon.";
+$("draws").innerHTML=draws.map((d,i)=>`<li${d.reached?' class="open"':""}>Draw ${i+1}: ${d.at}% (${esc(d.stop)}) ${d.reached?"✓ Unlocked":"🔒 Locked"}</li>`).join("");
+if(draws.length)$("faqDraw").textContent=`When we reach ${list(draws.map(d=>d.at+"%"))} of our goal, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
+
+// Sweater photo book
+const SWEATER='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 8h20l14 8 6 20-10 3-3-9v28H15V30l-3 9-10-3 6-20z" fill="#e0402f"/><path d="M22 8q10 10 20 0" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M15 34h34M15 42h34" stroke="#fff" stroke-width="2.5" stroke-dasharray="3 3"/><path d="M32 18l2.5 4.5-2.5 4.5-2.5-4.5z" fill="#ffc21a"/></svg>';
+const photoCards=PHOTOS.length
+  ?PHOTOS.map((p,i)=>`<figure class="polaroid"><button type="button" class="ph-btn" data-i="${i}" aria-label="Open ${esc(p.name)}’s sweater photo"><img src="photos/${encodeURIComponent(p.file)}" alt="${esc(p.name)} from ${esc(p.office)} in a holiday sweater" loading="lazy" decoding="async" width="400" height="400"></button><figcaption>${esc(p.name)}, ${esc(p.office)}</figcaption></figure>`)
+  :[1,2,3].map(()=>`<figure class="polaroid"><div class="ph-empty">${SWEATER}<span>Your sweater here</span></div><figcaption>Could be you!</figcaption></figure>`);
+const addInner=`<div class="ph-empty"><span class="plus" aria-hidden="true">+</span><span>${isLink(DRIVE.photoFormUrl)?"Add yours!":"Add yours! (form coming soon)"}</span></div>`;
+photoCards.push(`<figure class="polaroid add">${isLink(DRIVE.photoFormUrl)?`<a href="${esc(DRIVE.photoFormUrl)}" target="_blank" rel="noopener">${addInner}</a>`:addInner}<figcaption>Send us your sweater</figcaption></figure>`);
+$("book").innerHTML=photoCards.join("");
+
+const lb=$("lightbox");
+$("book").addEventListener("click",e=>{
+  const b=e.target.closest(".ph-btn"); if(!b)return;
+  const p=PHOTOS[b.dataset.i];
+  $("lbImg").src="photos/"+encodeURIComponent(p.file);
+  $("lbImg").alt=b.querySelector("img").alt;
+  $("lbCap").textContent=`${p.name}, ${p.office}`;
+  lb.showModal();
+});
+$("lbClose").addEventListener("click",()=>lb.close());
+lb.addEventListener("click",e=>{if(e.target===lb)lb.close();});
 </script>
 </body>
 </html>
