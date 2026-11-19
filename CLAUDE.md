@@ -33,11 +33,11 @@ A road-trip style route, not a real map. Six evenly spaced stops run west to eas
 | Stop | Office label | % of goal | At $3,340 goal | Reward | Landmark |
 |---|---|---|---|---|---|
 | Vancouver | Vancouver office | 0% (start) | $0 | Starting line | North Shore mountains and Lions Gate Bridge |
-| Timmins | Timmins office | 20% | $668 | Raffle draw | Gold mine headframe with pines |
+| Timmins | Timmins office | 20% | $668 | Raffle draw: $100 | Gold mine headframe with pines |
 | North Bay | North Bay office | 40% | $1,336 | Ugly sweater day on a company call | Canoe on Lake Nipissing, pines on shore |
-| Woodbridge | Woodbridge HQ | 60% | $2,004 | Raffle draw | HQ building with the Quasar chevron and an "HQ" flag |
-| Toronto | Toronto (Pratus, Sterling Road) | 80% | $2,672 | Raffle draw | CN Tower and skyline |
-| Ottawa | Ottawa office | 100% | $3,340 | Leadership dare (to be announced) | Peace Tower on Parliament Hill |
+| Woodbridge | Woodbridge HQ | 60% | $2,004 | Raffle draw: $150 | HQ building with the Quasar chevron and an "HQ" flag |
+| Toronto | Toronto (Pratus, Sterling Road) | 80% | $2,672 | Raffle draw: $175 | CN Tower and skyline |
+| Ottawa | Ottawa office | 100% | $3,340 | Grand prize raffle draw: $200 | Peace Tower on Parliament Hill |
 
 The offices are only places on the route; they don't have their own totals.
 
@@ -51,7 +51,7 @@ The offices are only places on the route; they don't have their own totals.
 
 ## Raffle
 
-- A draw happens at each stop whose reward mentions "raffle" (currently 20%, 60% and 80%). Each draw is for a $25 digital gift card. The site works out which % values to list from the milestones.
+- A draw happens at each stop that has a `prize` in the milestones (currently 20%, 60%, 80% and 100%). Prizes grow as the drive goes: $100, $150, $175, then a $200 grand prize at the goal. The leadership dare was dropped. The site builds the draw list, the "Win up to $200" heading and the FAQ from the milestones.
 - Two equal ways to enter: "Donated? Enter the draw" (`drawFormUrl`, a Microsoft Form) and "Share your holiday sweater" (`photoFormUrl`, a Microsoft Form; one entry, no donation needed).
 - One entry per person per way to enter. The FAQ says each draw picks from everyone who has entered so far (entries carry over). Confirm with Nate if that changes.
 
@@ -90,7 +90,7 @@ At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK 
 - `raised` (company total in dollars) and `gifts` (number of donations). These are the only two numbers that change each week.
 - `people` (334) and `goalPerPerson` (10), which set the goal.
 - The links `donateUrl`, `drawFormUrl`, `photoFormUrl`. A link that doesn't start with `https://` shows as a "coming soon" pill.
-- `milestones`: one line per stop with its `at` % and `reward` text.
+- `milestones`: one line per stop with its `at` %, `reward` text and, for raffle stops, a `prize` in dollars.
 
 Rules:
 - Everything else (goal, % of goal, stop dollar targets, unlocked stops, next stop, truck position, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
@@ -128,7 +128,7 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 
 - Food bank partner name and the real `donateUrl`.
 - The two Microsoft Form links (`drawFormUrl`, `photoFormUrl`).
-- The leadership dare at 100%.
+- What form the raffle prizes take (gift card or otherwise); the site just says "$100 prize" for now.
 
 ## Planned additions
 

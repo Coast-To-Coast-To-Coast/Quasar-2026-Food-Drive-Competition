@@ -29,13 +29,14 @@ const DRIVE = {
 
   // Journey stops. "at" is the % of the company goal. Change the reward text any time.
   // Stops unlock by themselves when the company total reaches them.
+  // "prize" makes a stop a raffle draw: the prize in dollars (no $ sign).
   milestones: [
     { stop: "Vancouver",  at: 0,   reward: "Starting line" },
-    { stop: "Timmins",    at: 20,  reward: "Raffle draw" },
+    { stop: "Timmins",    at: 20,  reward: "Raffle draw", prize: 100 },
     { stop: "North Bay",  at: 40,  reward: "Ugly sweater day on a company call" },
-    { stop: "Woodbridge", at: 60,  reward: "Raffle draw" },
-    { stop: "Toronto",    at: 80,  reward: "Raffle draw" },
-    { stop: "Ottawa",     at: 100, reward: "Leadership dare (to be announced)" }
+    { stop: "Woodbridge", at: 60,  reward: "Raffle draw", prize: 150 },
+    { stop: "Toronto",    at: 80,  reward: "Raffle draw", prize: 175 },
+    { stop: "Ottawa",     at: 100, reward: "Grand prize raffle draw", prize: 200 }
   ]
 };
 /* ===== END OF NUMBERS BLOCK ===== */
@@ -350,7 +351,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
 <section class="raffle" id="raffle">
   <div class="wrap">
     <p class="eyebrow">Holiday raffle</p>
-    <h2>Win a $25 digital gift card</h2>
+    <h2 id="raffleHead">Win a raffle prize</h2>
     <p id="raffleIntro"></p>
     <ul class="draws" id="draws"></ul>
     <div class="enter">
@@ -400,7 +401,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <details><summary>Where does my donation go?</summary><p>Donations go through our Canada-wide food bank partner, supporting food banks in every community where we live and work.</p></details>
     <details><summary>Do I get a tax receipt?</summary><p>Yes. Receipts come straight from our food bank partner, usually by email right after you give.</p></details>
     <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: November 27, December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
-    <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
+    <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
     <details><summary>Can my family and friends donate?</summary><p>Yes, please share the donation link with them. Every gift moves the truck. The raffle is just for our people, so only you can enter the draw.</p></details>
     <details><summary>Can I enter the draw without donating?</summary><p>Yes. Send a photo of your favourite holiday sweater and you get one entry, no donation needed.</p></details>
     <details><summary>Who can see the sweater photos?</summary><p>The photo book is part of this page, so anyone with the link can see it. Only send a photo you’re happy to share, and we’ll only show your first name and office.</p></details>
@@ -540,7 +541,7 @@ stopsEl.innerHTML=stops.map((s,i)=>`
     <div class="stop-text">
       <b>${esc(s.stop)}</b><small>${esc(s.label)}</small>
       <span class="at">${s.at===0?"Start":`${fmt(s.target)} <span>· ${s.at}%</span>`}</span>
-      <span class="reward">${s.at>0&&s.reached?"<em>Unlocked!</em>":""}${esc(s.reward)}</span>
+      <span class="reward">${s.at>0&&s.reached?"<em>Unlocked!</em>":""}${esc(s.reward)}${num(s.prize)>0?`: ${fmt(s.prize)}`:""}</span>
     </div>
   </li>`).join("");
 const stopEls=[...stopsEl.children], route=$("route"), road=$("road"), roadFill=$("roadFill"), truck=$("truck");
@@ -608,13 +609,15 @@ if("IntersectionObserver" in window){
   io.observe(route);
 } else start();
 
-// Raffle draws come from the milestones whose reward mentions a raffle
-const draws=stops.filter(s=>/raffle/i.test(s.reward));
+// Raffle draws come from the milestones that have a prize
+const draws=stops.filter(s=>num(s.prize)>0);
+const drawList=draws.map(d=>`${fmt(d.prize)} at ${fmt(d.target)}`);
+if(draws.length)$("raffleHead").textContent=`Win up to ${fmt(Math.max(...draws.map(d=>num(d.prize))))}`;
 $("raffleIntro").textContent=draws.length
-  ?`We’ll hold a raffle draw each time our total reaches ${list(draws.map(d=>fmt(d.target)))}. Every draw is for a $25 digital gift card.`
+  ?`Every time we reach a raffle stop, we draw a winner. The prizes grow as we go: ${list(drawList)} raised.`
   :"Raffle details coming soon.";
-$("draws").innerHTML=draws.map((d,i)=>`<li${d.reached?' class="open"':""}>Draw ${i+1}: ${fmt(d.target)} (${esc(d.stop)}) ${d.reached?"✓ Unlocked":"Coming up"}</li>`).join("");
-if(draws.length)$("faqDraw").textContent=`When our total reaches ${list(draws.map(d=>fmt(d.target)))}, we draw one winner for a $25 digital gift card from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
+$("draws").innerHTML=draws.map((d,i)=>`<li${d.reached?' class="open"':""}>Draw ${i+1}: ${fmt(d.prize)} prize at ${fmt(d.target)} (${esc(d.stop)}) ${d.reached?"✓ Unlocked":"Coming up"}</li>`).join("");
+if(draws.length)$("faqDraw").textContent=`There are ${draws.length} draws, and the prizes grow as we go: ${list(drawList)} raised. Each draw picks one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
 
 // Sweater photo book
 const SWEATER='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 8h20l14 8 6 20-10 3-3-9v28H15V30l-3 9-10-3 6-20z" fill="#e0402f"/><path d="M22 8q10 10 20 0" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M15 34h34M15 42h34" stroke="#fff" stroke-width="2.5" stroke-dasharray="3 3"/><path d="M32 18l2.5 4.5-2.5 4.5-2.5-4.5z" fill="#ffc21a"/></svg>';
