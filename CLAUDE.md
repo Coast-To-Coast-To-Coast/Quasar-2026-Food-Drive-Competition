@@ -33,8 +33,8 @@ A road-trip style route, not a real map. Six evenly spaced stops run west to eas
 | Stop | Office label | % of goal | At $3,340 goal | Reward | Landmark |
 |---|---|---|---|---|---|
 | Vancouver | Vancouver office | 0% (start) | $0 | Starting line | North Shore mountains and Lions Gate Bridge |
-| Timmins | Timmins office | 20% | $668 | Raffle draw: $100 | Gold mine headframe with pines |
-| North Bay | North Bay office | 40% | $1,336 | Ugly sweater day on a company call | Canoe on Lake Nipissing, pines on shore |
+| Timmins | Timmins office | 20% | $668 | Raffle draw: $50 | Gold mine headframe with pines |
+| North Bay | North Bay office | 40% | $1,336 | Raffle draw: $100 | Canoe on Lake Nipissing, pines on shore |
 | Woodbridge | Woodbridge HQ | 60% | $2,004 | Raffle draw: $150 | HQ building with the Quasar chevron and an "HQ" flag |
 | Toronto | Toronto (Pratus, Sterling Road) | 80% | $2,672 | Raffle draw: $175 | CN Tower and skyline |
 | Ottawa | Ottawa office | 100% | $3,340 | Grand prize raffle draw: $200 | Peace Tower on Parliament Hill |
@@ -51,7 +51,7 @@ The offices are only places on the route; they don't have their own totals.
 
 ## Raffle
 
-- A draw happens at each stop that has a `prize` in the milestones (currently 20%, 60%, 80% and 100%). Prizes grow as the drive goes: $100, $150, $175, then a $200 grand prize at the goal. The leadership dare was dropped. The site builds the draw list, the "Win up to $200" heading and the FAQ from the milestones.
+- A draw happens at each stop that has a `prize` in the milestones (every stop after Vancouver: 20%, 40%, 60%, 80% and 100%). Prizes grow as the drive goes: $50, $100, $150, $175, then a $200 grand prize at the goal. The leadership dare and the ugly sweater day were dropped (the sweater photo book and sweater raffle entry stay). The site builds the draw list, the "Win up to $200" heading and the FAQ from the milestones.
 - Two equal ways to enter: "Donated? Enter the draw" (`drawFormUrl`, a Microsoft Form) and "Share your holiday sweater" (`photoFormUrl`, a Microsoft Form; one entry, no donation needed).
 - One entry per person per way to enter. The FAQ says each draw picks from everyone who has entered so far (entries carry over). Confirm with Nate if that changes.
 
