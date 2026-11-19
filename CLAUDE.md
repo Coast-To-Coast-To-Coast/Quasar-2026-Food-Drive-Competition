@@ -21,8 +21,8 @@ This year's theme is **one link, one number, one place**. Every design or conten
 There is **no competition**. No teams, no winners or losers, no rankings, no "matchup" or "underdog" language. (An earlier HQ vs. challengers version was dropped.)
 
 - **No per-office totals or per-office participation anywhere.** Not everyone belongs to one office, families donate too, and the drive must never feel like it's shaming offices. The site tracks one company total only.
-- The goal is headcount × `goalPerPerson`: 334 × **$10** = **$3,340** ("a $10 a person vibe"; last year had low participation, so it should feel reachable). The site calculates it from the numbers block; never hardcode it.
-- Everyone donates through **one company donation link** (`donateUrl`), and employees are encouraged to share it with family and friends.
+- The goal is a round **$3,500** (`goal` in the numbers block), about $10 a person for 334 people ("a $10 a person vibe"; last year had low participation, so it should feel reachable). Nate wants round numbers, not oddly specific ones, so keep the goal a number whose 20% steps are round. Stop targets are calculated from it; never hardcode them.
+- Everyone donates through **one "Donate here" link** (`donateUrl`) to a single food bank donation page, whose dashboard is where the weekly total comes from. Employees are encouraged to share it with family and friends.
 - The third stat tile shows the number of gifts ("from our people, family and friends"), not a participation %.
 - The raffle is for employees only (family and friends can donate but don't enter).
 
@@ -30,19 +30,19 @@ There is **no competition**. No teams, no winners or losers, no rankings, no "ma
 
 A road-trip style route, not a real map. Six evenly spaced stops run west to east, each a round "postcard stamp" badge with a landmark:
 
-| Stop | Office label | % of goal | At $3,340 goal | Reward | Landmark |
+| Stop | Office label | % of goal | At $3,500 goal | Reward | Landmark |
 |---|---|---|---|---|---|
 | Vancouver | Vancouver office | 0% (start) | $0 | Starting line | North Shore mountains and Lions Gate Bridge |
-| Timmins | Timmins office | 20% | $668 | Raffle draw: $50 | Gold mine headframe with pines |
-| North Bay | North Bay office | 40% | $1,336 | Raffle draw: $100 | Canoe on Lake Nipissing, pines on shore |
-| Woodbridge | Woodbridge HQ | 60% | $2,004 | Raffle draw: $150 | HQ building with the Quasar chevron and an "HQ" flag |
-| Toronto | Toronto (Pratus, Sterling Road) | 80% | $2,672 | Raffle draw: $175 | CN Tower and skyline |
-| Ottawa | Ottawa office | 100% | $3,340 | Grand prize raffle draw: $200 | Peace Tower on Parliament Hill |
+| Timmins | Timmins office | 20% | $700 | Raffle draw: $50 | Gold mine headframe with pines |
+| North Bay | North Bay office | 40% | $1,400 | Raffle draw: $100 | Canoe on Lake Nipissing, pines on shore |
+| Woodbridge | Woodbridge HQ | 60% | $2,100 | Raffle draw: $150 | HQ building with the Quasar chevron and an "HQ" flag |
+| Toronto | Toronto (Pratus, Sterling Road) | 80% | $2,800 | Raffle draw: $175 | CN Tower and skyline |
+| Ottawa | Ottawa office | 100% | $3,500 | Grand prize raffle draw: $200 | Peace Tower on Parliament Hill |
 
 The offices are only places on the route; they don't have their own totals.
 
 - Landmarks are inline SVG in index.html (the `PLACES` object): flat, 2 to 3 colours each, same style, respectful hometown pride, never caricatures. Each has alt text naming the landmark and office.
-- Each stop's pill shows its dollar target first, then the %: "$668 · 20%" (calculated from the goal).
+- Each stop's pill shows its dollar target first, then the %: "$700 · 20%" (calculated from the goal).
 - **No lock icons and no "Locked" labels** (Nate didn't like them). Stops ahead are softly faded but still in colour. Reached stops are full colour with a gold ring, a gold check and "Unlocked!". The next stop gets a gentle blue highlight, and a "Next stop: X, $Y to go" line sits above the route. Raffle chips say "Coming up" until reached.
 - Stops unlock **automatically** when the company total reaches their %. Rewards are editable in the numbers block.
 - A delivery truck loaded with grocery bags sits on the road at the company's % of goal with a "$X raised, Y%" tag. On load it drives from Vancouver, the road fills in gold behind it and badges pop as it passes them. Past 100% it parks at Ottawa with confetti and a "Goal reached!" banner. Reduced motion: no animation, final state only.
@@ -71,8 +71,8 @@ The offices are only places on the route; they don't have their own totals.
 
 ## Timeline
 
-- Kickoff: Monday, November 23, 2026
-- Friday updates: Nov 27 (Week 1), Dec 4 (Week 2), Dec 11 (Week 3), Dec 18 (Week 4, last before holiday closure)
+- Kickoff: Friday, November 27, 2026 (the drive runs Nov 27 to Jan 1)
+- Friday updates: Dec 4 (Week 1), Dec 11 (Week 2), Dec 18 (Week 3, last before holiday closure)
 - Donations close: Friday, January 1, 2027
 - Wrap-up: first week back in January
 
@@ -88,7 +88,7 @@ The offices are only places on the route; they don't have their own totals.
 At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY." It holds:
 - `lastUpdated` (date text).
 - `raised` (company total in dollars) and `gifts` (number of donations). These are the only two numbers that change each week.
-- `people` (334) and `goalPerPerson` (10), which set the goal.
+- `goal` (3500, the company goal in dollars) and `people` (334, only used for the "about $10 a person" line).
 - The links `donateUrl`, `drawFormUrl`, `photoFormUrl`. A link that doesn't start with `https://` shows as a "coming soon" pill.
 - `milestones`: one line per stop with its `at` %, `reward` text and, for raffle stops, a `prize` in dollars.
 
@@ -96,13 +96,13 @@ Rules:
 - Everything else (goal, % of goal, stop dollar targets, unlocked stops, next stop, truck position, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
 - Nate sometimes edits this block directly on github.com with the pencil icon. Keep it simple and clearly labelled: plain numbers, no dollar signs or commas.
 - Before editing, pull the latest version from GitHub so web edits aren't overwritten.
-- Before kickoff, `raised` and `gifts` are 0, and the page shows "First update Friday, November 27".
+- Before kickoff, `raised` and `gifts` are 0, and the page shows "First update Friday, December 4".
 
 ## Project commands
 
 These live in `.claude/commands/` and work when Claude Code is opened in this repo folder.
 
-- **`/weekly-update`**: each Friday Nate pastes screenshots of the donation dashboards. Claude pulls, reads the company total and number of gifts, shows a table against last week and flags anything odd, never guesses a number, waits for Nate's OK, updates the block and `lastUpdated`, reports newly unlocked stops (raffle draw or reward to announce), writes a 2 to 3 sentence Teams message, then commits "Week N totals" and pushes. Screenshots are never saved in the repo.
+- **`/weekly-update`**: each Friday Nate pastes screenshots of the food bank donation dashboard. Claude pulls, reads the company total and number of gifts, shows a table against last week and flags anything odd, never guesses a number, waits for Nate's OK, updates the block and `lastUpdated`, reports newly unlocked stops (raffle draw or reward to announce), writes a 2 to 3 sentence Teams message, then commits "Week N totals" and pushes. Screenshots are never saved in the repo.
 - **`/add-photos`**: Nate gives photo files with first names and offices. Claude resizes them (about 1000px wide, JPG, under 300 KB, rotation fixed, metadata stripped), saves them in `photos/`, adds lines to the photo block, previews, and commits and pushes after Nate confirms.
 
 ## Brand and design

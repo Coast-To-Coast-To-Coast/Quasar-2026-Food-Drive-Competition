@@ -33,12 +33,12 @@ Ask Nate to confirm and wait for a clear yes. Don't edit anything until he confi
 
 In index.html, in the block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY":
 - Update `raised` and `gifts`. Plain numbers only: no dollar signs, no commas, rounded to the nearest dollar.
-- Set `lastUpdated` to today's date in the same style, for example "Friday, December 4".
+- Set `lastUpdated` to today's date in the same style, for example "Friday, December 11".
 - Don't change anything else (people, goal, links, milestones) unless Nate asks.
 
 ## 5. Milestones
 
-Work out the goal (`people` × `goalPerPerson`) and which stops the total has passed before and after the update. Tell Nate which stops this update unlocks, if any:
+Using `goal` from the numbers block, work out which stops the total has passed before and after the update. Tell Nate which stops this update unlocks, if any:
 - A raffle draw stop: remind him to draw a winner from the entries in the Microsoft Forms.
 - Any other reward: remind him to announce it.
 
@@ -55,6 +55,6 @@ Write a short, casual update Nate can paste into Teams: 2 to 3 sentences, no em 
 ## 8. Commit and push
 
 - Run `git status` and make sure index.html is the only changed file. **Screenshots must never be saved in or committed to this repo:** it's public, and dashboards can show donor names and emails. If an image or any other unexpected file shows up, stop and ask.
-- Commit only index.html with the message "Week N totals" (Nov 27 is Week 1, Dec 4 is Week 2, Dec 11 is Week 3, Dec 18 is Week 4; after donations close, use "Final totals").
+- Commit only index.html with the message "Week N totals" (Dec 4 is Week 1, Dec 11 is Week 2, Dec 18 is Week 3; after donations close on January 1, use "Final totals").
 - Push to main. If the push needs a GitHub sign-in that can't appear here, ask Nate to run `git push origin main` in a terminal opened in this folder.
 - Remind Nate the site updates in about a minute, and to hard refresh with Ctrl + F5.

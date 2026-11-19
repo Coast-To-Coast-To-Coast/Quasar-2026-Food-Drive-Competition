@@ -12,18 +12,18 @@
    Numbers: no dollar signs, no commas (write 3640, not $3,640).
    ===================================================== */
 const DRIVE = {
-  lastUpdated: "Friday, November 27",
+  lastUpdated: "Friday, December 4",
 
   // The company total so far, from the donation dashboard
   raised: 0,      // dollars raised
   gifts: 0,       // number of donations (employees, family and friends)
 
-  // The goal: everyone in the company x this amount (334 x $10 = $3,340)
-  people: 334,
-  goalPerPerson: 10,
+  // The company goal in dollars. Keep it a round number: the stops are 20%, 40%... of it.
+  goal: 3500,
+  people: 334,    // headcount, only used for the "about $10 a person" line
 
   // Links: paste each full link (starting with https://) between the quotes
-  donateUrl:    "PASTE-DONATION-LINK-HERE",
+  donateUrl:    "PASTE-DONATION-LINK-HERE",   // the one food bank donation page
   drawFormUrl:  "PASTE-DRAW-FORM-LINK-HERE",
   photoFormUrl: "PASTE-PHOTO-FORM-LINK-HERE",
 
@@ -290,7 +290,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <h1>Holiday Food Drive 2026</h1>
     <p><strong>The whole company, one goal.</strong> Every dollar moves our delivery truck from Vancouver to Ottawa, and family and friends are welcome to chip in too. Let’s get there together.</p>
     <div class="actions">
-      <span data-link="donateUrl" data-text="Donate now" data-cls="gold" data-soon="Donation link coming soon"></span>
+      <span data-link="donateUrl" data-text="Donate here" data-cls="gold" data-soon="Donation link coming soon"></span>
       <a class="btn outline" href="#journey">Follow the journey</a>
     </div>
   </div>
@@ -301,7 +301,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <div class="journey-head">
       <div>
         <p class="eyebrow">Coast to coast</p>
-        <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$6,680</span></h2>
+        <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$3,500</span></h2>
       </div>
       <p class="updated" id="updated"></p>
     </div>
@@ -328,7 +328,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
       <ol class="stops" id="stops"></ol>
     </div>
     <div class="stats">
-      <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$6,680</span> goal</small></div>
+      <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$3,500</span> goal</small></div>
       <div class="stat"><span class="lbl">Of our goal</span><b id="statPct">0%</b><span class="track"><span class="fill" id="statBar"></span></span></div>
       <div class="stat"><span class="lbl">Gifts so far</span><b id="statGifts">0</b><small>from our people, family and friends</small></div>
     </div>
@@ -344,7 +344,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
       <li><h3>Enter the draw</h3><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></li>
       <li><h3>Watch the truck move</h3><p>Totals update every Friday. Each stop we reach unlocks something fun for everyone.</p></li>
     </ol>
-    <p class="rulebox"><strong>The goal:</strong> <span id="perPerson">$20</span> for every person in the company, <span id="goalText2">$6,680</span> in all. Every gift counts toward the same goal, whether it comes from you, your family or your friends.</p>
+    <p class="rulebox"><strong>The goal:</strong> <span id="goalText2">$3,500</span> together, about <span id="perPerson">$10</span> for every person in the company. Every gift counts toward the same goal, whether it comes from you, your family or your friends.</p>
   </div>
 </section>
 
@@ -384,9 +384,9 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <p class="eyebrow">Mark your calendar</p>
     <h2>Six weeks, start to finish</h2>
     <ol class="timeline">
-      <li class="big"><span class="date">Mon, Nov 23</span><h3>Kickoff</h3><p>The donation link goes live and the truck leaves Vancouver.</p></li>
-      <li><span class="date">Fri, Nov 27</span><h3>First update</h3><p>Week one totals posted here and in Teams.</p></li>
-      <li><span class="date">Fri, Dec 4 and 11</span><h3>Weekly updates</h3><p>Fresh totals every Friday afternoon.</p></li>
+      <li class="big"><span class="date">Fri, Nov 27</span><h3>Kickoff</h3><p>The donation link goes live and the truck leaves Vancouver.</p></li>
+      <li><span class="date">Fri, Dec 4</span><h3>First update</h3><p>Week one totals posted here and in Teams.</p></li>
+      <li><span class="date">Fri, Dec 11</span><h3>Weekly update</h3><p>Fresh totals Friday afternoon.</p></li>
       <li><span class="date">Fri, Dec 18</span><h3>Last update of 2026</h3><p>Final totals before the holiday closure.</p></li>
       <li><span class="date">Fri, Jan 1</span><h3>Donations close</h3><p>Last chance to give and move the truck.</p></li>
       <li class="big"><span class="date">Early January</span><h3>Wrap-up</h3><p>Final total and a big thank you in our first week back.</p></li>
@@ -400,7 +400,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <h2>Questions</h2>
     <details><summary>Where does my donation go?</summary><p>Donations go through our Canada-wide food bank partner, supporting food banks in every community where we live and work.</p></details>
     <details><summary>Do I get a tax receipt?</summary><p>Yes. Receipts come straight from our food bank partner, usually by email right after you give.</p></details>
-    <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: November 27, December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
+    <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
     <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
     <details><summary>Can my family and friends donate?</summary><p>Yes, please share the donation link with them. Every gift moves the truck. The raffle is just for our people, so only you can enter the draw.</p></details>
     <details><summary>Can I enter the draw without donating?</summary><p>Yes. Send a photo of your favourite holiday sweater and you get one entry, no donation needed.</p></details>
@@ -414,7 +414,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <h2>Every dollar moves the truck</h2>
     <p>Give what you can, share your sweater, and let’s get to Ottawa together.</p>
     <div class="actions">
-      <span data-link="donateUrl" data-text="Donate now" data-cls="gold" data-soon="Donation link coming soon"></span>
+      <span data-link="donateUrl" data-text="Donate here" data-cls="gold" data-soon="Donation link coming soon"></span>
       <span data-link="photoFormUrl" data-text="Share your holiday sweater" data-cls="white" data-soon="Photo form coming soon"></span>
     </div>
   </div>
@@ -504,14 +504,14 @@ const PLACES={
 const stamp=p=>`<svg viewBox="0 0 100 100" role="img" aria-label="${p.alt}">${p.art}${RING}</svg>`;
 const CHECK='<svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-const num=v=>Number(v)||0, PER=num(DRIVE.goalPerPerson), fmt=n=>"$"+Math.round(n).toLocaleString("en-CA"), pct=(a,b)=>b?a/b*100:0;
+const num=v=>Number(v)||0, fmt=n=>"$"+Math.round(n).toLocaleString("en-CA"), pct=(a,b)=>b?a/b*100:0;
 const isLink=u=>/^https?:\/\//i.test(u||"");
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const list=a=>a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1];
 const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $=id=>document.getElementById(id);
 
-const people=num(DRIVE.people), goal=people*PER;
+const people=num(DRIVE.people), goal=num(DRIVE.goal);
 const raised=num(DRIVE.raised), gifts=num(DRIVE.gifts);
 const P=pct(raised,goal);
 const stops=DRIVE.milestones.map(m=>({...m,...(PLACES[m.stop]||{label:"",alt:m.stop,art:""}),target:m.at/100*goal,reached:raised*100>=m.at*goal}));
@@ -526,8 +526,8 @@ document.querySelectorAll("[data-link]").forEach(el=>{
 });
 
 ["goalText","goalText2","statGoal"].forEach(id=>$(id).textContent=fmt(goal));
-$("perPerson").textContent=fmt(PER);
-$("updated").textContent=raised>0?"Updated "+DRIVE.lastUpdated:"First update Friday, November 27";
+$("perPerson").textContent=fmt(people?goal/people:0);
+$("updated").textContent=raised>0?"Updated "+DRIVE.lastUpdated:"First update Friday, December 4";
 $("truckTag").textContent=`${fmt(raised)} raised, ${Math.round(P)}%`;
 const ns=$("nextStop");
 if(nextIdx<0){ns.classList.add("done");ns.innerHTML="🎉 <b>Goal reached!</b> We made it coast to coast. Thank you!";}
