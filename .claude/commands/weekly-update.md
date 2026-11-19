@@ -50,7 +50,7 @@ Open the page in the preview and check that the truck, the stats and the "Next s
 
 ## 7. Teams message
 
-Write a short, casual update Nate can paste into Teams: 2 to 3 sentences, no em dashes, curly apostrophes. Include the new total, the % of goal, the next stop and how much is left to reach it, plus any stop that just unlocked. Never compare or single out offices. End with the site link: https://nathanielmarketing.github.io/Quasar-2026-Food-Drive-Competition/
+Write a short, casual update Nate can paste into Teams: 2 to 3 sentences, no em dashes, curly apostrophes. Include the new total, the meals it provides (total × `mealsPerDollar`), the % of goal, the next stop and how much is left to reach it, plus any stop that just unlocked. Never compare or single out offices. End with the site link: https://nathanielmarketing.github.io/Quasar-2026-Food-Drive-Competition/
 
 ## 8. Commit and push
 

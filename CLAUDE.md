@@ -47,7 +47,7 @@ The offices are only places on the route; they don't have their own totals.
 - Stops unlock **automatically** when the company total reaches their %. Rewards are editable in the numbers block.
 - A delivery truck loaded with grocery bags sits on the road at the company's % of goal with a "$X raised, Y%" tag. On load it drives from Vancouver, the road fills in gold behind it and badges pop as it passes them. Past 100% it parks at Ottawa with confetti and a "Goal reached!" banner. Reduced motion: no animation, final state only.
 - Desktop: the route runs left to right. Phones (760px and narrower): top to bottom like a trip itinerary.
-- Below the route: stat tiles (total raised, % of goal, gifts so far). The "Every office counts" section was removed on purpose; don't bring back per-office numbers.
+- Below the route: stat tiles (total raised, meals provided, % of goal, gifts so far). The truck tag reads "$X raised, Y meals". The "Every office counts" section was removed on purpose; don't bring back per-office numbers.
 
 ## Raffle
 
@@ -63,11 +63,34 @@ The offices are only places on the route; they don't have their own totals.
 - Save photos at about **1000px wide, JPG, under 300 KB**, with location data removed. First names only. The site is public, so the FAQ tells people anyone with the link can see the photo book.
 - To add photos, use the `/add-photos` command (see below).
 
-## Where donations go
+## Where donations go: Food Banks Canada
 
-- A **Canada-wide food bank partner**, likely Food Banks Canada (to be confirmed). Don't name it on the site until confirmed.
-- Messaging: "supporting food banks in every community where we live and work." Don't say donations go to one specific local food bank.
-- Tax receipts come from the partner.
+- Our partner is **Food Banks Canada** (confirmed). Name it on the site; never use generic "our food bank partner" wording.
+- Messaging: supporting food banks in every community where we live and work, from coast to coast to coast. Don't say donations go to one specific local food bank.
+- Tax receipts come from Food Banks Canada.
+- **Never use the Food Banks Canada logo.** We don't have permission yet. Use their name in text only.
+- Meals: Food Banks Canada's meal metric is $1 = 2 meals, set as `mealsPerDollar` in the numbers block. Every meal number on the site (hero line, meals stat, truck tag, goal line, gift tiles, FAQ) is calculated from it and the totals. Never hardcode meal numbers.
+- Tone: food banks are grateful for every kind of donation. Explain why money goes further, but never suggest food donations are bad or unwanted.
+
+### Food Banks Canada sections and sources
+
+Page order: hero, journey and stats, What your gift does, How it works, Why money goes further, raffle, sweater photo book, Why it matters, About Food Banks Canada, timeline, FAQ, closing. Section backgrounds alternate (white, sky, gold, festive, navy).
+
+- **What your gift does:** four tiles ($5, $10, $25, $50) with meals from `mealsPerDollar`; each tile links to `donateUrl`. Source line links to https://foodbankscanada.ca/give/
+- **Why money goes further:** three cards (better prices, where it's needed most, behind the scenes). Link to https://foodbankscanada.ca/give/
+- **Why it matters this year** (navy band). Stats, checked against Food Banks Canada's site in November 2026:
+  - 2.35M visits to food banks in March 2026, a record. HungerCount 2026 (released October 2026): https://foodbankscanada.ca/hunger-in-canada/hungercount/
+  - 1 in 3 visits are by children (32.5%). HungerCount 2026, same link.
+  - 21% of food banks ran out of food before demand was met. https://foodbankscanada.ca/give/
+  - 1 in 4 people in Canada live in food insecure households (their site says "more than 1 in 4"). https://foodbankscanada.ca/give/
+  - 2.35M and 21% count up on scroll; "1 in 3" and "1 in 4" stay static (counting them would show odd values like "1 in 0"). Report button: https://foodbankscanada.ca/hungercount-report-2026/
+  - Update these when a new HungerCount comes out.
+- **About Food Banks Canada:** short description (5,500+ food banks and community organizations), tied to the road trip, plus four outline link buttons: about-us, our-impact, find-a-food-bank, how-to-help/ways-to-support.
+
+### Link rules for Food Banks Canada links
+
+- Give them `class="ext"` and `target="_blank" rel="noopener"`. A script adds the external-link icon and "(opens in a new tab)" for screen readers to every `a.ext`.
+- Links use the `--link` colour token (brand blue in light mode, light blue in dark mode, gold on the navy band) and are underlined.
 
 ## Timeline
 
@@ -89,11 +112,12 @@ At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK 
 - `lastUpdated` (date text).
 - `raised` (company total in dollars) and `gifts` (number of donations). These are the only two numbers that change each week.
 - `goal` (3500, the company goal in dollars) and `people` (334, only used for the "about $10 a person" line).
+- `mealsPerDollar` (2, Food Banks Canada's meal metric).
 - The links `donateUrl`, `drawFormUrl`, `photoFormUrl`. A link that doesn't start with `https://` shows as a "coming soon" pill.
 - `milestones`: one line per stop with its `at` %, `reward` text and, for raffle stops, a `prize` in dollars.
 
 Rules:
-- Everything else (goal, % of goal, stop dollar targets, unlocked stops, next stop, truck position, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
+- Everything else (goal, % of goal, meals, stop dollar targets, unlocked stops, next stop, truck position, raffle draw list) is calculated from this block. Never hardcode those numbers elsewhere.
 - Nate sometimes edits this block directly on github.com with the pencil icon. Keep it simple and clearly labelled: plain numbers, no dollar signs or commas.
 - Before editing, pull the latest version from GitHub so web edits aren't overwritten.
 - Before kickoff, `raised` and `gifts` are 0, and the page shows "First update Friday, December 4".
@@ -114,7 +138,7 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 - Section pattern from The Pulse: a gold eyebrow line above a large heading.
 - The Quasar chevron shapes appear as decoration in the hero and on the Woodbridge landmark.
 - Rounded cards, pill buttons, gold for anything reached or unlocked.
-- One moment of motion: the truck drives, the road fills and numbers count up when the journey scrolls into view. Respect reduced-motion settings.
+- Motion: the truck drives, the road fills and numbers count up when the journey scrolls into view; the Why it matters numbers count up too. Respect reduced-motion settings.
 - Must work well on phones, and in both light and dark mode.
 
 ## Writing rules
@@ -126,7 +150,7 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 
 ## Still to confirm
 
-- Food bank partner name and the real `donateUrl`.
+- The real `donateUrl` (the Food Banks Canada donation page).
 - The two Microsoft Form links (`drawFormUrl`, `photoFormUrl`).
 - What form the raffle prizes take (gift card or otherwise); the site just says "$100 prize" for now.
 
