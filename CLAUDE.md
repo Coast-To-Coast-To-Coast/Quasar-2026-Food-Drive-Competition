@@ -153,7 +153,7 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 ## Still to confirm
 
 - The real `donateUrl` (the Food Banks Canada donation page).
-- The two Microsoft Form links (`drawFormUrl`, `photoFormUrl`).
+- The sweater photo Microsoft Form link (`photoFormUrl`). The draw form (`drawFormUrl`) is set.
 - What form the raffle prizes take (gift card or otherwise); the site just says "$100 prize" for now.
 
 ## Planned additions
