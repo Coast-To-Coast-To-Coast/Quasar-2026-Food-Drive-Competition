@@ -19,8 +19,11 @@ const DRIVE = {
   gifts: 0,       // number of donations (employees, family and friends)
 
   // The company goal in dollars. Keep it a round number: the stops are 20%, 40%... of it.
-  goal: 3500,
-  people: 334,    // headcount, only used for the "about $10 a person" line
+  goal: 5000,
+  people: 334,    // headcount, only used for the "about $15 a person" line
+
+  // Last year's company total, for the "let's beat it" line
+  lastYearRaised: 3160,
 
   // Food Banks Canada's meal metric: every $1 provides this many meals
   mealsPerDollar: 2,
@@ -366,7 +369,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <div class="journey-head">
       <div>
         <p class="eyebrow">Coast to coast</p>
-        <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$3,500</span></h2>
+        <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$5,000</span></h2>
       </div>
       <p class="updated" id="updated"></p>
     </div>
@@ -393,7 +396,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
       <ol class="stops" id="stops"></ol>
     </div>
     <div class="stats">
-      <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$3,500</span> goal</small></div>
+      <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$5,000</span> goal</small></div>
       <div class="stat"><span class="lbl">Meals provided</span><b id="statMeals">0</b><small id="statMealsNote">Every $1 = 2 meals</small></div>
       <div class="stat"><span class="lbl">Of our goal</span><b id="statPct">0%</b><span class="track"><span class="fill" id="statBar"></span></span></div>
       <div class="stat"><span class="lbl">Gifts so far</span><b id="statGifts">0</b><small>from our people, family and friends</small></div>
@@ -420,7 +423,7 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
       <li><h3>Enter the draw</h3><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></li>
       <li><h3>Watch the truck move</h3><p>Totals update every Friday. Each stop we reach unlocks something fun for everyone.</p></li>
     </ol>
-    <p class="rulebox"><strong>The goal:</strong> <span id="goalText2">$3,500</span> together, that’s <span id="goalMeals">7,000</span> meals. That’s about <span id="perPerson">$10</span> for every person in the company. Every gift counts toward the same goal, whether it comes from you, your family or your friends.</p>
+    <p class="rulebox"><strong>The goal:</strong> <span id="goalText2">$5,000</span> together, that’s <span id="goalMeals">10,000</span> meals. That’s about <span id="perPerson">$15</span> for every person in the company.<span id="lastYear"> Last year we raised about $3,160 together, so let’s go further this time.</span> Every gift counts toward the same goal, whether it comes from you, your family or your friends.</p>
   </div>
 </section>
 
@@ -658,6 +661,8 @@ document.querySelectorAll("[data-link]").forEach(el=>{
 
 ["goalText","goalText2","statGoal"].forEach(id=>$(id).textContent=fmt(goal));
 $("perPerson").textContent=fmt(people?goal/people:0);
+const ly=num(DRIVE.lastYearRaised);
+if(ly>0)$("lastYear").textContent=` Last year we raised about ${fmt(ly)} together, so let’s go further this time.`; else $("lastYear").remove();
 $("updated").textContent=raised>0?"Updated "+DRIVE.lastUpdated:"First update Friday, December 4";
 $("truckTag").textContent=`${fmt(raised)} raised, ${mealsWord(raised*MPD)}`;
 $("mealsLine").textContent=`Every $1 = ${mealsWord(MPD)} through Food Banks Canada.`;
