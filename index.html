@@ -370,11 +370,12 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
   <div class="wrap">
     <div class="journey-head">
       <div>
-        <p class="eyebrow">Coast to coast</p>
+        <p class="eyebrow">Coast to coast to coast</p>
         <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$5,000</span></h2>
       </div>
       <p class="updated" id="updated"></p>
     </div>
+    <p class="lede" style="margin-top:.75rem">Food Banks Canada serves communities on all three of Canada’s coasts: Pacific, Atlantic and Arctic. From Vancouver to our northern offices in Timmins and North Bay, every gift helps food banks in every part of the country.</p>
     <p class="nextstop" id="nextStop" aria-live="polite"></p>
     <div class="route" id="route">
       <div class="road" id="road"><div class="road-fill" id="roadFill"></div></div>
@@ -672,7 +673,7 @@ $("statMealsNote").textContent=`Every $1 = ${mealsWord(MPD)}`;
 $("goalMeals").textContent=nf(goal*MPD);
 $("faqMeals").textContent=`It’s Food Banks Canada’s meal metric: every $1 donated helps provide ${mealsWord(MPD)}.`;
 const ns=$("nextStop");
-if(nextIdx<0){ns.classList.add("done");ns.innerHTML="🎉 <b>Goal reached!</b> We made it coast to coast. Thank you!";}
+if(nextIdx<0){ns.classList.add("done");ns.innerHTML="🎉 <b>Goal reached!</b> We made it coast to coast to coast. Thank you!";}
 else{const n=stops[nextIdx];ns.innerHTML=`Next stop: <b>${esc(n.stop)}</b>, ${fmt(Math.max(n.target-raised,0))} to go`;}
 
 // Journey stops
