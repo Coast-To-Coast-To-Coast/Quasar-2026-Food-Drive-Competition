@@ -124,6 +124,11 @@ Rules:
 - Before editing, pull the latest version from GitHub so web edits aren't overwritten.
 - Before kickoff, `raised` and `gifts` are 0, and the page shows "First update Friday, December 4".
 
+### Design preview (preview.html)
+
+- `preview.html` is a redesign mock Nate is reviewing (November 2026): softer flow with wave transitions, sections merged into chapters (Give, raffle and sweaters, Food Banks Canada, Good to know), side-by-side layouts, and the raffle as a "prize ticket ladder". It has `noindex` and a "Design preview" pill. It's not linked from the live page.
+- `index.html` stays the live site and the backup until Nate approves swapping. The preview's numbers block is a copy and is **not** updated by `/weekly-update`; if the preview is approved, move the design into index.html (keeping index.html's current numbers) and delete preview.html.
+
 ## Project commands
 
 These live in `.claude/commands/` and work when Claude Code is opened in this repo folder.

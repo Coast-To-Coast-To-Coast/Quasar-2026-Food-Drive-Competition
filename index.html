@@ -235,7 +235,7 @@ a.gift .go{color:var(--link)}
 
 /* Raffle */
 .raffle{background:var(--gold);color:var(--navy)}
-.raffle .eyebrow{color:var(--navy)}
+.raffle .eyebrow,:root .raffle .eyebrow,:root:not([data-theme="light"]) .raffle .eyebrow{color:var(--navy)}
 .raffle p{font-size:1.1rem}
 .draws{list-style:none;padding:0;margin:1.25rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem}
 .draws li{background:rgba(255,255,255,.55);border-radius:999px;padding:.35rem .95rem;font-weight:700;font-size:.95rem}

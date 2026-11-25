@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Preview | Holiday Food Drive 2026</title>
+<meta name="robots" content="noindex">
+<!-- Tab icon: the Quasar mark -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-28 0 1150 1150'%3E%3Cg fill='%2319428b'%3E%3Cpath d='M230 0H638L560 136H311Z'/%3E%3Cpath d='M338 183H746L667 320H418Z'/%3E%3Cpath d='M782 203 983 550H825L704 340Z'/%3E%3Cpath d='M829 592H987L784 942 705 807Z'/%3E%3Cpath d='M936 775H1094L891 1125 812 990Z'/%3E%3C/g%3E%3Cg fill='%23717271'%3E%3Cpath d='M197 25 277 160 157 367H0Z'/%3E%3Cpath d='M304 208 384 343 264 550H107Z'/%3E%3Cpath d='M103 592H261L386 808 307 945Z'/%3E%3Cpath d='M422 829H669L750 966H343Z'/%3E%3Cpath d='M529 1013H777L857 1149H450Z'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+/* =====================================================
+   FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY
+   Only change the numbers, the text between quotes and the links.
+   Keep the quotes, commas and brackets as they are.
+   Numbers: no dollar signs, no commas (write 3640, not $3,640).
+   ===================================================== */
+const DRIVE = {
+  lastUpdated: "Friday, December 4",
+
+  // The company total so far, from the donation dashboard
+  raised: 0,      // dollars raised
+  gifts: 0,       // number of donations (employees, family and friends)
+
+  // The company goal in dollars. Keep it a round number: the stops are 20%, 40%... of it.
+  goal: 5000,
+  people: 334,    // headcount, only used for the "about $15 a person" line
+
+  // Last year's company total, for the "let's beat it" line
+  lastYearRaised: 3160,
+
+  // Food Banks Canada's meal metric: every $1 provides this many meals
+  mealsPerDollar: 2,
+
+  // Links: paste each full link (starting with https://) between the quotes
+  donateUrl:    "PASTE-DONATION-LINK-HERE",   // the Food Banks Canada donation page
+  drawFormUrl:  "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DKlrQeWIQkecQLlaG8xfOvQGp3bLRi9GiAkp4vFEsktUMjRGQ0hBUlAyU1A3NlpRNjgyWllUNk42WS4u",
+  photoFormUrl: "PASTE-PHOTO-FORM-LINK-HERE",
+
+  // Journey stops. "at" is the % of the company goal. Change the reward text any time.
+  // Stops unlock by themselves when the company total reaches them.
+  // "prize" makes a stop a raffle draw: the prize in dollars (no $ sign).
+  milestones: [
+    { stop: "Vancouver",  at: 0,   reward: "Starting line" },
+    { stop: "Timmins",    at: 20,  reward: "Raffle draw", prize: 50 },
+    { stop: "North Bay",  at: 40,  reward: "Raffle draw", prize: 100 },
+    { stop: "Woodbridge", at: 60,  reward: "Raffle draw", prize: 150 },
+    { stop: "Toronto",    at: 80,  reward: "Raffle draw", prize: 175 },
+    { stop: "Ottawa",     at: 100, reward: "Grand prize raffle draw", prize: 200 }
+  ]
+};
+/* ===== END OF NUMBERS BLOCK ===== */
+
+/* =====================================================
+   SWEATER PHOTOS: ADD ONE LINE PER PHOTO
+   1. Save the photo in the "photos" folder
+      (about 1000px wide, JPG, under 300 KB).
+   2. Add a line below with the file name, first name only, and office.
+   Example line:
+   { file: "jordan-ottawa.jpg", name: "Jordan", office: "Ottawa" },
+   ===================================================== */
+const PHOTOS = [
+
+];
+/* ===== END OF PHOTOS BLOCK ===== */
+</script>
+<style>
+:root{
+  --blue:#1d5bd8; --blue-deep:#123f9e; --navy:#10285c; --gold:#ffc21a; --gold-soft:#fff3cc;
+  --sky:#eaf2ff; --bg:#ffffff; --ink:#1c2333; --ink-soft:#4a5468; --line:#d8e0ee; --track:#e4eaf5; --card:#ffffff;
+  --num:#123f9e; --road:#cfd8e6; --road-line:#ffffff; --link:#1d5bd8;
+  --festive:#fff6ea; --dot-a:rgba(224,64,47,.13); --dot-b:rgba(47,138,87,.13);
+  --hand:"Segoe Print","Bradley Hand","Noteworthy","Chalkboard SE",cursive;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --blue:#2f6be6; --blue-deep:#163d8f; --navy:#10285c; --gold:#ffc933; --gold-soft:#3a3010;
+  --sky:#161d2b; --bg:#10141c; --ink:#ebeff6; --ink-soft:#aeb7c7; --line:#2a3344; --track:#263042; --card:#1a2130;
+  --num:#9dbcff; --road:#2c3649; --road-line:#46536b; --link:#9dbcff;
+  --festive:#17191f; --dot-a:rgba(255,106,89,.12); --dot-b:rgba(76,196,106,.12);
+  color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --blue:#2f6be6; --blue-deep:#163d8f; --navy:#10285c; --gold:#ffc933; --gold-soft:#3a3010;
+  --sky:#161d2b; --bg:#10141c; --ink:#ebeff6; --ink-soft:#aeb7c7; --line:#2a3344; --track:#263042; --card:#1a2130;
+  --num:#9dbcff; --road:#2c3649; --road-line:#46536b; --link:#9dbcff;
+  --festive:#17191f; --dot-a:rgba(255,106,89,.12); --dot-b:rgba(76,196,106,.12);
+  color-scheme:dark;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Segoe UI","Segoe UI Web (West European)",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.eyebrow{color:#d99a00;font-size:1.5rem;font-weight:700;margin:0 0 .1rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .eyebrow{color:var(--gold)}}
+:root[data-theme="dark"] .eyebrow{color:var(--gold)}
+h2{font-size:clamp(2rem,3.6vw,2.8rem);font-weight:600;line-height:1.12;margin:0 0 1rem}
+p{max-width:62ch}
+a{color:var(--link)}
+.ext{font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+.ext:hover{text-decoration-thickness:3px}
+.ext-ic{display:inline-block;width:.8em;height:.8em;margin-left:.3em;vertical-align:-.05em;flex:none}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:.8rem 1.4rem;border-radius:999px;border:2px solid var(--blue);text-align:center}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.btn.white{background:#fff;border-color:#fff;color:var(--blue-deep)}
+.btn.outline{background:transparent;border-color:#fff;color:#fff}
+.btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.soon{background:transparent;border:2px dashed currentColor;color:inherit;opacity:.75;cursor:default}
+section{padding:4.5rem 0}
+.sky{background:var(--sky)}
+.lede{color:var(--ink-soft);margin:0}
+.note{display:inline-block;margin-top:1rem;font-size:.9rem;color:var(--ink-soft)}
+.track{position:relative;display:block;height:12px;background:var(--track);border-radius:999px;overflow:hidden}
+.fill{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#ffd451,#ffad14);transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+
+/* Hero */
+.hero{background:var(--blue);color:#fff;position:relative;overflow:hidden}
+.hero .deco{position:absolute;inset:0;pointer-events:none}
+.hero .wrap{position:relative;padding-top:4.5rem;padding-bottom:5rem}
+.hero .eyebrow{color:var(--gold);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600}
+.hero h1{font-size:clamp(3rem,7.5vw,5.6rem);font-weight:700;line-height:.98;margin:0 0 1.25rem;letter-spacing:-.02em;max-width:11ch}
+.hero p{font-size:1.25rem;color:#e3ecff;margin:0 0 1.75rem;max-width:44ch}
+.hero p strong{color:#fff}
+.hero .actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.hero p.meals-line{display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.35rem 1rem;margin:-.5rem 0 1.75rem;max-width:none}
+.meals-line svg{width:1.3em;height:1.3em;flex:none}
+
+/* Journey */
+.journey-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:.5rem 2rem}
+.updated{color:var(--ink-soft);margin:0;font-weight:600}
+.nextstop{display:inline-block;margin:1.5rem 0 0;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:.55rem 1.2rem;font-weight:700;font-size:1.1rem;max-width:none}
+.nextstop b{color:var(--num)}
+.nextstop.done{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.nextstop.done b{color:var(--navy)}
+.route{position:relative;margin-top:1.75rem;padding-top:108px;--badge:104px}
+.road{position:absolute;top:72px;left:0;width:0;height:18px;border-radius:999px;background:var(--road)}
+.road-fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#ffd451,#ffad14) no-repeat}
+.road::after{content:"";position:absolute;left:10px;right:10px;top:50%;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,var(--road-line) 0 10px,transparent 10px 22px)}
+.pin{position:absolute;top:81px;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--card);border:4px solid var(--road);z-index:1;transition:border-color .3s}
+.pin.lit{border-color:var(--gold)}
+.truck{position:absolute;top:44px;left:0;width:64px;height:40px;margin-left:-32px;z-index:3;pointer-events:none}
+.truck svg{display:block;width:100%;height:100%}
+.truck.driving svg{animation:bob .35s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-1.5px)}}
+.truck-tag{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--navy);color:#fff;font-weight:700;font-size:.82rem;line-height:1.25;padding:.25rem .7rem;border-radius:999px;white-space:nowrap;box-shadow:0 0 0 2px var(--gold)}
+.truck-tag::after{content:"";position:absolute;top:100%;left:50%;margin-left:-5px;border:5px solid transparent;border-top-color:var(--navy)}
+.stops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;position:relative;z-index:2}
+.stop{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.stop::before{content:"";position:absolute;bottom:100%;left:50%;height:16px;border-left:3px dotted var(--road)}
+.badge{position:relative;flex:none;width:var(--badge);height:var(--badge);border-radius:50%;background:var(--card);padding:5px;box-shadow:0 0 0 3px var(--line),0 6px 14px rgba(16,40,92,.12);transition:box-shadow .4s}
+.badge svg{display:block;width:100%;height:100%;border-radius:50%;overflow:hidden;filter:saturate(.45) opacity(.75);transition:filter .6s}
+.stop.next .badge{box-shadow:0 0 0 4px var(--blue),0 6px 18px rgba(29,91,216,.3);animation:breathe 2.6s ease-in-out infinite}
+.stop.next .badge svg{filter:saturate(.8) opacity(.92)}
+.stop.lit .badge{box-shadow:0 0 0 5px var(--gold),0 6px 16px rgba(16,40,92,.18)}
+.stop.lit .badge svg{filter:none}
+.stop.pop .badge{animation:pop .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.88)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes breathe{50%{transform:scale(1.045)}}
+.badge .icon{position:absolute;right:-3px;bottom:0;width:32px;height:32px;border-radius:50%;display:none;place-items:center;background:var(--gold);color:var(--navy);border:3px solid var(--card)}
+.badge .icon svg{width:15px;height:15px;filter:none;border-radius:0}
+.stop.lit .badge .icon{display:grid}
+.stop-text{margin-top:.8rem;display:flex;flex-direction:column;align-items:center}
+.stop-text b{font-size:1.15rem;line-height:1.2}
+.stop-text small{color:var(--ink-soft);font-size:.82rem;line-height:1.3}
+.at{display:inline-block;margin:.45rem 0 .3rem;font-weight:800;font-size:.8rem;background:var(--track);color:var(--ink-soft);padding:.1rem .65rem;border-radius:999px}
+.at span{font-weight:600;opacity:.8}
+.stop.reached .at{background:var(--gold);color:var(--navy)}
+.reward{font-size:.9rem;font-weight:600;line-height:1.3}
+.reward em{display:block;font-style:normal;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+.stop.reached .reward em{color:#b07c00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stop.reached .reward em{color:var(--gold)}}
+:root[data-theme="dark"] .stop.reached .reward em{color:var(--gold)}
+.confetti{position:absolute;left:50%;top:50%;width:0;height:0}
+.confetti i{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);animation:burst 1.6s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes burst{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.75rem}
+.stat{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:.15rem}
+.stat .lbl{font-weight:700;color:var(--ink-soft)}
+.stat b{font-size:clamp(2.1rem,4vw,2.7rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--num)}
+.stat small{color:var(--ink-soft);font-size:.92rem}
+.stat .track{margin:.5rem 0 .3rem}
+
+/* What your gift does */
+.gifts{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2rem}
+.gift{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.2rem;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:1.6rem 1rem 1.4rem;color:var(--ink);text-decoration:none;transition:transform .2s,border-color .2s,box-shadow .2s}
+a.gift:hover,a.gift:focus-visible{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 22px rgba(16,40,92,.14)}
+.gift svg{width:76px;height:76px;margin-bottom:.6rem}
+.gift .amt{font-size:clamp(2.2rem,4vw,2.8rem);font-weight:800;line-height:1;color:var(--num);font-variant-numeric:tabular-nums}
+.gift .meals{font-size:1.15rem;font-weight:700}
+.gift .go{margin-top:.7rem;font-size:.88rem;font-weight:700;color:var(--ink-soft)}
+a.gift .go{color:var(--link)}
+.source-line{margin:1.5rem 0 0;font-size:.95rem;color:var(--ink-soft);max-width:none}
+
+/* Why money goes further */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+.why{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.5rem}
+.why .ic{display:grid;place-items:center;width:58px;height:58px;border-radius:16px;background:var(--gold-soft);margin-bottom:1rem}
+.why .ic svg{width:34px;height:34px}
+.why h3{margin:0 0 .35rem;font-size:1.3rem}
+.why p{margin:0;color:var(--ink-soft)}
+.more{margin:1.75rem 0 0;font-size:1.05rem;max-width:none}
+
+/* Why it matters */
+.band{background:var(--navy);color:#fff}
+.band .eyebrow{color:var(--gold)}
+.band .lede{color:#cfdcf5}
+.band a.ext:not(.btn){color:#ffd451}
+.bigstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2rem}
+.bigstat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:1.5rem 1.4rem;display:flex;flex-direction:column}
+.bigstat b{font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.bigstat p{margin:.6rem 0 1rem;font-size:1.02rem;color:#e8eefb}
+.bigstat small{margin-top:auto;font-size:.82rem;color:#b9c7e2}
+.hope{font-size:1.3rem;font-weight:600;margin:2.25rem 0 1.25rem;max-width:none}
+
+/* About Food Banks Canada */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:24px;padding:clamp(1.5rem,4vw,2.75rem)}
+.about p{margin:0 0 1rem;font-size:1.1rem}
+.about p.tie{font-weight:700;color:var(--num)}
+.mini-route{position:relative;display:flex;justify-content:space-between;align-items:center;gap:.4rem}
+.mini-route::before{content:"";position:absolute;left:24px;right:24px;top:50%;border-top:3px dotted var(--road);z-index:0}
+.mini-route svg{position:relative;z-index:1;width:48px;height:48px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px var(--card),0 0 0 5px var(--gold)}
+.mini-route .plus5{position:relative;z-index:1;display:grid;place-items:center;text-align:center;width:72px;height:72px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:800;font-size:.78rem;line-height:1.1;flex:none}
+.mini-route .plus5 b{display:block;font-size:1.05rem}
+.links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.75rem}
+.btn.line{background:transparent;color:var(--link);border-color:var(--link)}
+.btn.line:hover{background:var(--link);color:var(--bg)}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:2rem 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1.5rem}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;background:var(--gold);color:var(--navy);font-size:1.5rem;font-weight:800;margin-bottom:1rem}
+.steps h3{font-size:1.3rem;margin:0 0 .35rem}
+.steps p{margin:0;color:var(--ink-soft)}
+.rulebox{margin-top:2rem;padding:1.4rem 1.6rem;background:var(--gold-soft);border-radius:16px;font-size:1.15rem;border:2px dashed #e5ae00;max-width:none}
+
+/* Raffle */
+.raffle{background:var(--gold);color:var(--navy)}
+.raffle .eyebrow,:root .raffle .eyebrow,:root:not([data-theme="light"]) .raffle .eyebrow{color:var(--navy)}
+.raffle p{font-size:1.1rem}
+.draws{list-style:none;padding:0;margin:1.25rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem}
+.draws li{background:rgba(255,255,255,.55);border-radius:999px;padding:.35rem .95rem;font-weight:700;font-size:.95rem}
+.draws li.open{background:var(--navy);color:#fff}
+.enter{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.75rem}
+.enter>div{background:#fff;color:var(--navy);border-radius:18px;padding:1.4rem 1.5rem;display:flex;flex-direction:column}
+.enter h3{margin:0 0 .3rem;font-size:1.3rem}
+.enter p{margin:0 0 1.1rem;font-size:1rem;color:#4a5468}
+.enter .btn{margin-top:auto;width:100%}
+.raffle .note{color:var(--navy);opacity:.85}
+
+/* Photo book */
+.festive{background-color:var(--festive);background-image:radial-gradient(circle at 18px 18px,var(--dot-a) 2.5px,transparent 3.5px),radial-gradient(circle at 58px 52px,var(--dot-b) 2.5px,transparent 3.5px);background-size:80px 72px}
+.book{display:flex;flex-wrap:wrap;justify-content:center;gap:2.25rem 1.75rem;margin-top:2.75rem}
+.polaroid{position:relative;margin:0;width:min(210px,calc(50% - 1rem));background:#fff;padding:10px 10px 0;box-shadow:0 10px 24px rgba(40,30,10,.18),0 2px 4px rgba(40,30,10,.12);transform:rotate(var(--r,0deg));transition:transform .25s}
+.polaroid::before{content:"";position:absolute;top:-13px;left:50%;width:86px;height:26px;margin-left:-43px;transform:rotate(var(--tr,-4deg));background:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px),var(--tape,rgba(255,194,26,.8));z-index:1}
+.polaroid:nth-child(6n+1){--r:-3deg;--tr:-5deg}
+.polaroid:nth-child(6n+2){--r:2.5deg;--tr:4deg;--tape:rgba(224,64,47,.6)}
+.polaroid:nth-child(6n+3){--r:-1.5deg;--tr:-2deg;--tape:rgba(47,160,140,.6)}
+.polaroid:nth-child(6n+4){--r:3deg;--tr:3deg}
+.polaroid:nth-child(6n+5){--r:-2.5deg;--tr:-6deg;--tape:rgba(47,160,140,.6)}
+.polaroid:nth-child(6n){--r:1.5deg;--tr:5deg;--tape:rgba(224,64,47,.6)}
+.polaroid:hover,.polaroid:focus-within{transform:rotate(0) scale(1.03)}
+.ph-btn{display:block;width:100%;aspect-ratio:1;padding:0;border:0;background:#eef0f4;cursor:zoom-in}
+.ph-btn img{display:block;width:100%;height:100%;object-fit:cover}
+.polaroid figcaption{font-family:var(--hand);color:#2a2a2a;text-align:center;padding:.6rem .25rem .85rem;font-size:1.05rem;line-height:1.25}
+.ph-empty{aspect-ratio:1;border:2px dashed #c9cfda;background:#f6f7fa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:#6b7486;font-weight:700;text-align:center;padding:.5rem}
+.ph-empty svg{width:56px;height:56px}
+.polaroid.add .ph-empty{background:#fff3cc;border-color:#e5ae00;color:#10285c}
+.polaroid.add a{text-decoration:none;display:block}
+.polaroid.add a .ph-empty{transition:background .2s}
+.polaroid.add a:hover .ph-empty{background:#ffe48a}
+.plus{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:2rem;font-weight:800;line-height:1}
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(92vw,900px);max-height:94vh;overflow:visible}
+dialog.lightbox::backdrop{background:rgba(10,16,30,.85)}
+.lightbox figure{margin:0;background:#fff;padding:12px 12px 4px;border-radius:4px}
+.lightbox img{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;margin:0 auto}
+.lightbox figcaption{font-family:var(--hand);color:#2a2a2a;text-align:center;font-size:1.3rem;padding:.5rem 0 .6rem}
+.lb-close{position:absolute;top:-16px;right:-12px;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--navy);border:3px solid #fff;font:800 1.5rem/1 "Segoe UI",Arial,sans-serif;cursor:pointer}
+
+/* Timeline */
+.timeline{list-style:none;padding:0;margin:2.25rem 0 0;display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:12px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--gold))}
+.timeline li{position:relative;padding:2.4rem 1rem 0 0}
+.timeline li::before{content:"";position:absolute;top:2px;left:0;width:24px;height:24px;border-radius:50%;background:var(--card);border:5px solid var(--blue)}
+.timeline li.big::before{background:var(--gold);border-color:var(--gold)}
+.timeline .date{font-weight:800}
+.timeline h3{font-size:1.1rem;margin:.1rem 0 .3rem;color:var(--blue)}
+.timeline p{margin:0;font-size:.93rem;color:var(--ink-soft)}
+
+/* FAQ */
+details{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:1rem 1.25rem;margin-bottom:.6rem}
+summary{cursor:pointer;font-weight:700;font-size:1.1rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--blue);font-size:1.5rem;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{margin:.6rem 0 0;color:var(--ink-soft)}
+
+/* Closing */
+.closing{background:var(--blue);color:#fff;text-align:center}
+.closing p{margin:0 auto 1.5rem;color:#e3ecff;font-size:1.1rem}
+.closing .actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+
+@media (max-width:1000px){
+  .route{--badge:92px}
+  .stats,.gifts,.bigstats{grid-template-columns:1fr 1fr}
+  .about{grid-template-columns:1fr}
+  .stop-text small{font-size:.78rem}
+}
+@media (max-width:900px){
+  .steps{grid-template-columns:1fr 1fr}
+  .timeline{grid-template-columns:1fr;gap:1.25rem}
+  .timeline::before{left:10px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--blue),var(--gold))}
+  .timeline li{padding:0 0 0 2.5rem}
+}
+/* Phones: the route turns into a top-to-bottom itinerary */
+@media (max-width:760px){
+  .route{padding:44px 0 0 88px;--badge:92px}
+  .road{top:0;left:35px;width:18px;height:0}
+  .road::after{left:50%;right:auto;top:10px;bottom:10px;width:2px;height:auto;margin:0 0 0 -1px;background:repeating-linear-gradient(180deg,var(--road-line) 0 10px,transparent 10px 22px)}
+  .road-fill{width:100%;height:0;background-image:linear-gradient(180deg,#ffd451,#ffad14)}
+  .pin{top:0;left:44px}
+  .truck{top:0;left:44px;width:52px;height:33px;margin:-17px 0 0 -26px}
+  .truck-tag{white-space:normal;width:max-content;max-width:84px;text-align:center;font-size:.72rem;border-radius:10px;padding:.2rem .45rem}
+  .stops{grid-template-columns:1fr;gap:1.5rem}
+  .stop{flex-direction:row;align-items:center;text-align:left;gap:1rem}
+  .stop::before{bottom:auto;top:50%;left:-44px;height:0;width:44px;border-left:0;border-top:3px dotted var(--road)}
+  .stop-text{margin:0;align-items:flex-start;min-width:0;overflow-wrap:anywhere}
+  .enter{grid-template-columns:1fr}
+  .cards3{grid-template-columns:1fr}
+  .truck-tag{max-width:96px}
+}
+@media (max-width:640px){
+  section{padding:3.25rem 0}
+  .bigstats{grid-template-columns:1fr}
+  .gifts{gap:.75rem}
+  .gift{padding:1.2rem .6rem 1rem}
+  .gift svg{width:58px;height:58px}
+  .mini-route svg{width:36px;height:36px}
+  .mini-route svg:nth-child(2),.mini-route svg:nth-child(3),.mini-route svg:nth-child(5){display:none}
+  .mini-route .plus5{width:62px;height:62px;font-size:.7rem}
+  .steps{grid-template-columns:1fr}
+  .nextstop{border-radius:16px;font-size:1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .fill,.badge,.badge svg,.pin,.polaroid,.gift{transition:none}
+  .stop.next .badge,.stop.pop .badge,.truck.driving svg{animation:none}
+}
+
+/* ===== Design preview: softer flow ===== */
+.preview-pill{position:fixed;left:12px;bottom:12px;z-index:50;margin:0;background:var(--navy);color:#fff;font-weight:700;font-size:.8rem;padding:.35rem .8rem;border-radius:999px;box-shadow:0 0 0 2px var(--gold);opacity:.9}
+section{padding:4rem 0;position:relative}
+.wave{position:absolute;left:0;width:100%;height:56px;display:block;pointer-events:none}
+.wave path{fill:var(--bg)}
+.wave.sky-fill path{fill:var(--sky)}
+.wave.top{top:-1px}
+.wave.bot{bottom:-1px}
+.hero .wrap{padding-bottom:6.5rem}
+.journey-glow{background:linear-gradient(var(--sky) 0, var(--sky) 35%, var(--bg) 100%);padding-top:2.5rem}
+.chapter{padding:4.5rem 0}
+h3.sub{font-size:1.35rem;margin:0 0 1rem;color:var(--num)}
+.give-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;margin-top:1.75rem;align-items:start}
+.give-grid .gifts{grid-template-columns:1fr 1fr;margin-top:0;gap:1rem}
+.give-grid .gift{padding:1.2rem .8rem 1rem}
+.give-grid .gift svg{width:60px;height:60px;margin-bottom:.4rem}
+.steps.v{grid-template-columns:1fr;gap:.8rem;margin:0}
+.steps.v li{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.2rem;border-radius:16px}
+.steps.v li::before{flex:none;width:2.4rem;height:2.4rem;font-size:1.15rem;margin:0}
+.steps.v h4{margin:.15rem 0 .2rem;font-size:1.1rem}
+.steps.v p{font-size:.95rem}
+.give-grid .rulebox{margin-top:1rem;font-size:1rem;padding:1.1rem 1.3rem}
+.money{margin-top:3rem;background:var(--sky);border-radius:28px;padding:clamp(1.5rem,3.5vw,2.5rem);display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:start}
+.money .more{margin-top:1rem}
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.points .why{border:0;background:var(--card);padding:1.2rem}
+.points .why .ic{width:46px;height:46px;border-radius:12px;margin-bottom:.7rem}
+.points .why .ic svg{width:26px;height:26px}
+.points .why h3{font-size:1.1rem}
+.points .why p{font-size:.93rem}
+
+/* Raffle: prize ticket ladder */
+.raffle.fancy{padding:6.5rem 0;overflow:hidden;background:repeating-conic-gradient(from -90deg at 50% -10%,rgba(255,255,255,.16) 0 5deg,transparent 5deg 10deg),radial-gradient(circle at 50% 0,#ffe27a,transparent 60%),var(--gold)}
+.raffle-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem}
+.raffle .raffle-intro{font-size:1.2rem;max-width:48ch;margin:0}
+.pot{flex:none;display:grid;place-items:center;text-align:center;width:150px;height:150px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:.95rem;line-height:1.15;transform:rotate(8deg);box-shadow:0 0 0 6px rgba(255,255,255,.5),0 12px 24px rgba(16,40,92,.25);margin:0}
+.pot b{display:block;font-size:2.3rem;color:var(--gold);font-weight:800}
+.tickets{list-style:none;padding:0;margin:2.25rem 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;align-items:end}
+.ticket{--notch:118px;position:relative;background:#fff;color:var(--navy);border-radius:16px;text-align:center;box-shadow:0 10px 22px rgba(120,80,0,.22);
+  -webkit-mask:radial-gradient(circle 11px at 0 var(--notch),transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% var(--notch),transparent 98%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 11px at 0 var(--notch),transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% var(--notch),transparent 98%,#000) right/51% 100% no-repeat;
+  transform:rotate(calc((var(--i) - 2) * 1.2deg));transition:transform .25s}
+.ticket:hover{transform:rotate(0) translateY(-6px)}
+.t-top{height:var(--notch);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;padding:.6rem .5rem 0}
+.t-no{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8a6a00}
+.t-prize{font-size:calc(2rem + var(--i) * .3rem);font-weight:800;line-height:1;letter-spacing:-.02em}
+.t-tag{font-size:.72rem;font-weight:800;padding:.15rem .6rem;border-radius:999px;background:#eef1f7;color:#4a5468;margin-top:.25rem}
+.t-bot{display:flex;flex-direction:column;align-items:center;gap:.1rem;border-top:2px dashed #e5ae00;padding:.8rem .6rem 1rem;font-size:.82rem;color:#4a5468;line-height:1.25}
+.t-bot b{font-size:1.25rem;color:var(--navy);font-weight:800}
+.t-bot small{font-size:.75rem}
+.ticket.next .t-tag{background:var(--blue);color:#fff}
+.ticket.won{background:var(--navy);color:#fff}
+.ticket.won .t-no{color:var(--gold)}
+.ticket.won .t-tag{background:var(--gold);color:var(--navy)}
+.ticket.won .t-bot{color:#cfdcf5;border-color:rgba(255,255,255,.35)}
+.ticket.won .t-bot b{color:#fff}
+.ticket.grand{--notch:150px;background:linear-gradient(160deg,#fff 40%,#fff3cc);box-shadow:0 0 0 4px #fff,0 0 0 7px var(--navy),0 14px 28px rgba(120,80,0,.3)}
+.ticket.grand .t-no{color:var(--blue)}
+.ticket.grand::after{content:"\2605";position:absolute;top:10px;right:12px;color:var(--gold);font-size:1.3rem}
+.enter-title{margin:3rem 0 0;font-size:1.4rem}
+.enter{margin-top:1rem}
+.enter>div{position:relative;padding-top:1.6rem}
+.e-ic{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#fff3cc;margin-bottom:.7rem}
+.e-ic svg{width:30px;height:30px}
+.raffle .note{display:block;margin-top:1rem}
+
+.festive.soft{background:var(--bg)}
+.festive.soft::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 18px 18px,var(--dot-a) 2.5px,transparent 3.5px),radial-gradient(circle at 58px 52px,var(--dot-b) 2.5px,transparent 3.5px);background-size:80px 72px;-webkit-mask:linear-gradient(transparent,#000 25%,#000 75%,transparent);mask:linear-gradient(transparent,#000 25%,#000 75%,transparent);pointer-events:none}
+.festive.soft .wrap{position:relative}
+
+.band{padding:6.5rem 0}
+.band .about{margin-top:3rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);grid-template-columns:1.3fr 1fr}
+.band .about h3{font-size:1.7rem;margin:0 0 .8rem;color:#fff}
+.band .about p{color:#e8eefb;font-size:1.05rem}
+.band .about p.tie{color:var(--gold)}
+.eyebrow.small{font-size:1.05rem}
+.band .links{margin-top:1.25rem}
+.band .btn.line{color:#fff;border-color:rgba(255,255,255,.55)}
+.band .btn.line:hover{background:#fff;color:var(--navy)}
+.band .mini-route svg{box-shadow:0 0 0 3px var(--navy),0 0 0 5px var(--gold)}
+
+.info-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;margin-top:1.75rem;align-items:start}
+.timeline.v{grid-template-columns:1fr;gap:1.1rem;margin:0}
+.timeline.v::before{left:10px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--blue),var(--gold))}
+.timeline.v li{padding:0 0 0 2.5rem}
+.timeline.v h3{margin:.05rem 0 .15rem}
+
+.closing{padding:6rem 0 4.5rem}
+
+@media (max-width:1000px){
+  .tickets{grid-template-columns:repeat(3,1fr)}
+  .money{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .give-grid,.info-grid{grid-template-columns:1fr}
+  .band .about{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .points{grid-template-columns:1fr}
+  .raffle-head{flex-direction:column}
+  .pot{width:120px;height:120px;font-size:.85rem;position:absolute;right:16px;top:3.5rem}
+  .pot b{font-size:1.8rem}
+  .raffle .raffle-intro{padding-right:0}
+  .raffle-head>div{padding-right:120px}
+  .tickets{grid-template-columns:1fr 1fr}
+  .ticket.grand{grid-column:1/-1}
+  .wave{height:34px}
+}
+@media (max-width:420px){
+  .raffle-head>div{padding-right:0}
+  .pot{position:static;transform:rotate(4deg)}
+}
+@media (prefers-reduced-motion:reduce){.ticket{transition:none}}
+</style>
+</head>
+<body>
+<p class="preview-pill">Design preview</p>
+
+<header class="hero">
+  <svg class="deco" viewBox="0 0 1200 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+    <g fill="#ffc21a" opacity=".9"><polygon points="1010,-20 1110,-20 1200,90 1100,90"/><polygon points="1100,110 1200,110 1110,220 1010,220"/></g>
+    <g fill="#ffffff" opacity=".12"><polygon points="860,240 980,240 1090,380 970,380"/><polygon points="970,400 1090,400 980,540 860,540"/><polygon points="700,-40 790,-40 870,60 780,60"/></g>
+    <g fill="#ffffff" opacity=".5"><circle cx="640" cy="70" r="4"/><circle cx="760" cy="200" r="3"/><circle cx="1160" cy="300" r="5"/><circle cx="820" cy="560" r="4"/><circle cx="560" cy="540" r="3"/><circle cx="1050" cy="470" r="3"/></g>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow">Giving back together</p>
+    <h1>Holiday Food Drive 2026</h1>
+    <p><strong>The whole company, one goal.</strong> Every dollar moves our delivery truck from Vancouver to Ottawa, and family and friends are welcome to chip in too. Let’s get there together.</p>
+    <p class="meals-line"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8.5" fill="#ffc21a"/><circle cx="12" cy="13" r="5" fill="#fff3cc"/></svg><span id="mealsLine">Every $1 = 2 meals through Food Banks Canada.</span></p>
+    <div class="actions">
+      <span data-link="donateUrl" data-text="Donate here" data-cls="gold" data-soon="Donation link coming soon"></span>
+      <a class="btn outline" href="#journey">Follow the journey</a>
+    </div>
+  </div>
+  <svg class="wave bot sky-fill" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
+</header>
+
+<section class="journey-glow" id="journey">
+  <div class="wrap">
+    <div class="journey-head">
+      <div>
+        <p class="eyebrow">Coast to coast to coast</p>
+        <h2 style="margin-bottom:0">Our road trip to <span id="goalText">$5,000</span></h2>
+      </div>
+      <p class="updated" id="updated"></p>
+    </div>
+    <p class="lede" style="margin-top:.75rem">Food Banks Canada serves communities on all three of Canada’s coasts: Pacific, Atlantic and Arctic. From Vancouver to our northern offices in Timmins and North Bay, every gift helps food banks in every part of the country.</p>
+    <p class="nextstop" id="nextStop" aria-live="polite"></p>
+    <div class="route" id="route">
+      <div class="road" id="road"><div class="road-fill" id="roadFill"></div></div>
+      <div class="truck" id="truck" aria-hidden="true">
+        <span class="truck-tag" id="truckTag"></span>
+        <svg viewBox="0 0 64 40">
+          <ellipse cx="32" cy="38" rx="28" ry="1.8" fill="rgba(0,0,0,.2)"/>
+          <path d="M5 11h12v12H5z" fill="#c8955a"/><path d="M18 8h11v15H18z" fill="#dcab6e"/><path d="M30 12h10v11H30z" fill="#c8955a"/>
+          <circle cx="8" cy="10" r="3" fill="#3fa34d"/><circle cx="12.5" cy="8.6" r="3" fill="#4cb85a"/>
+          <rect x="21" y="1" width="3.6" height="10" rx="1.8" fill="#e8c27a" transform="rotate(14 22.8 6)"/>
+          <circle cx="35" cy="10.5" r="2.8" fill="#ff9a2e"/>
+          <rect x="2" y="20" width="40" height="11" rx="2" fill="#1d5bd8"/>
+          <path d="M42 12h11q2 0 3 2l5 7q1 1 1 3v7H42z" fill="#1d5bd8"/>
+          <path d="M45 15h7.5l4.5 6.5H45z" fill="#eaf2ff"/>
+          <rect x="2" y="25" width="60" height="2.4" fill="#ffc21a"/>
+          <rect x="59.5" y="23" width="2.5" height="1.8" fill="#fff3cc"/>
+          <circle cx="14" cy="32" r="5.5" fill="#1c2333"/><circle cx="14" cy="32" r="2" fill="#c9d2de"/>
+          <circle cx="51" cy="32" r="5.5" fill="#1c2333"/><circle cx="51" cy="32" r="2" fill="#c9d2de"/>
+        </svg>
+      </div>
+      <ol class="stops" id="stops"></ol>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="lbl">Raised so far</span><b id="statRaised">$0</b><small>of our <span id="statGoal">$5,000</span> goal</small></div>
+      <div class="stat"><span class="lbl">Meals provided</span><b id="statMeals">0</b><small id="statMealsNote">Every $1 = 2 meals</small></div>
+      <div class="stat"><span class="lbl">Of our goal</span><b id="statPct">0%</b><span class="track"><span class="fill" id="statBar"></span></span></div>
+      <div class="stat"><span class="lbl">Gifts so far</span><b id="statGifts">0</b><small>from our people, family and friends</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="give" class="chapter">
+  <div class="wrap">
+    <p class="eyebrow">Give</p>
+    <h2>Every gift goes further</h2>
+    <div class="give-grid">
+      <div id="impact">
+        <h3 class="sub">What your gift does</h3>
+        <div class="gifts" id="giftTiles"></div>
+        <p class="source-line"><a class="ext" target="_blank" rel="noopener" href="https://foodbankscanada.ca/give/">Meal values are based on Food Banks Canada’s meal metric.</a></p>
+      </div>
+      <div>
+        <h3 class="sub">Three steps, about two minutes</h3>
+        <ol class="steps v">
+          <li><div><h4>Donate online</h4><p>Give any amount through our company donation link. Your tax receipt comes straight from Food Banks Canada.</p></div></li>
+          <li><div><h4>Enter the draw</h4><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></div></li>
+          <li><div><h4>Watch the truck move</h4><p>Totals update every Friday, and every stop we reach is a raffle draw.</p></div></li>
+        </ol>
+        <p class="rulebox"><strong>The goal:</strong> <span id="goalText2">$5,000</span> together, that’s <span id="goalMeals">10,000</span> meals. That’s about <span id="perPerson">$15</span> for every person in the company.<span id="lastYear"> Last year we raised about $3,160 together, so let’s go further this time.</span></p>
+      </div>
+    </div>
+    <div class="money">
+      <div class="money-head">
+        <h3 class="sub">Why money goes further</h3>
+        <p class="lede">Food banks are grateful for every kind of donation. Money gives them the most flexibility, especially over the busy holiday season.</p>
+        <p class="more"><a class="ext" target="_blank" rel="noopener" href="https://foodbankscanada.ca/give/">Learn more about how your gift helps</a></p>
+      </div>
+      <div class="points">
+      <article class="why"><span class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16 16 4h12v12L16 28z" fill="#1d5bd8"/><circle cx="22" cy="10" r="2.6" fill="#ffc21a"/></svg></span><h3>Better prices</h3><p>Food Banks Canada uses donations to source more healthy food at the best possible price.</p></article>
+      <article class="why"><span class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2a9 9 0 0 0-9 9c0 7 9 17 9 17s9-10 9-17a9 9 0 0 0-9-9z" fill="#1d5bd8"/><circle cx="16" cy="11" r="3.6" fill="#ffc21a"/></svg></span><h3>Where it’s needed most</h3><p>Money gets fresh, nutritious food quickly to food banks across the country as demand rises.</p></article>
+      <article class="why"><span class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="3" width="18" height="26" rx="3" fill="#1d5bd8"/><path d="M7 13h18" stroke="#fff3cc" stroke-width="2"/><path d="M11 7v3M11 17v5" stroke="#ffc21a" stroke-width="2.4" stroke-linecap="round"/></svg></span><h3>Behind the scenes</h3><p>Donations also fund the tools food banks need, like freezers, refrigerated trucks and warehouse space.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="raffle fancy" id="raffle">
+  <svg class="wave top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V22C1150 74 840 6 560 34S150 60 0 22Z"/></svg>
+  <div class="wrap">
+    <div class="raffle-head">
+      <div>
+        <p class="eyebrow">Holiday raffle</p>
+        <h2 id="raffleHead">Win a raffle prize</h2>
+        <p id="raffleIntro" class="raffle-intro"></p>
+      </div>
+      <p class="pot" id="prizePot" aria-hidden="true"></p>
+    </div>
+    <ol class="tickets" id="tickets"></ol>
+    <h3 class="enter-title">Two ways to get your ticket</h3>
+    <div class="enter">
+      <div>
+        <span class="e-ic" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 28 4.5 16.6A7 7 0 0 1 16 7.4a7 7 0 0 1 11.5 9.2Z" fill="#e0402f"/></svg></span>
+        <h3>Already donated?</h3>
+        <p>Let us know with a quick form and you’re in the draw.</p>
+        <span data-link="drawFormUrl" data-text="Donated? Enter the draw" data-cls="navy" data-soon="Draw form coming soon"></span>
+      </div>
+      <div>
+        <span class="e-ic" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M22 8h20l14 8 6 20-10 3-3-9v28H15V30l-3 9-10-3 6-20z" fill="#1d5bd8"/><path d="M15 34h34M15 42h34" stroke="#fff" stroke-width="3" stroke-dasharray="3 3"/></svg></span>
+        <h3>Love a holiday sweater?</h3>
+        <p>Send a photo of your favourite holiday sweater for one entry. No donation needed.</p>
+        <span data-link="photoFormUrl" data-text="Share your holiday sweater" data-cls="navy" data-soon="Photo form coming soon"></span>
+      </div>
+    </div>
+    <p class="note">One entry per person for each way to enter. Entries carry over to every draw.</p>
+  </div>
+  <svg class="wave bot" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
+</section>
+
+<section class="festive soft" id="sweaters">
+  <div class="wrap">
+    <p class="eyebrow">The sweater photo book</p>
+    <h2>Show us your holiday sweater</h2>
+    <p class="lede">Festive, sparkly, gloriously ugly: every photo you send lands here and gets you a raffle entry.</p>
+    <div class="book" id="book"></div>
+  </div>
+</section>
+
+<section class="band" id="matters">
+  <svg class="wave top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V22C1150 74 840 6 560 34S150 60 0 22Z"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">The need is real</p>
+    <h2>Why it matters this year</h2>
+    <p class="lede">More people than ever are turning to food banks. Every gift helps them keep up.</p>
+    <div class="bigstats" id="bigStats">
+      <div class="bigstat"><b data-count="2.35" data-dec="2" data-suffix="M">2.35M</b><p>visits to food banks in Canada in March 2026, a new record</p><small>Source: <a class="ext" href="https://foodbankscanada.ca/hunger-in-canada/hungercount/" target="_blank" rel="noopener">Food Banks Canada, HungerCount 2026</a></small></div>
+      <div class="bigstat"><b>1 in 3</b><p>food bank visits are by children (32.5%)</p><small>Source: <a class="ext" href="https://foodbankscanada.ca/hunger-in-canada/hungercount/" target="_blank" rel="noopener">Food Banks Canada, HungerCount 2026</a></small></div>
+      <div class="bigstat"><b data-count="21" data-suffix="%">21%</b><p>of food banks ran out of food before demand was met</p><small>Source: <a class="ext" href="https://foodbankscanada.ca/give/" target="_blank" rel="noopener">Food Banks Canada</a></small></div>
+      <div class="bigstat"><b>1 in 4</b><p>people in Canada live in food insecure households</p><small>Source: <a class="ext" href="https://foodbankscanada.ca/give/" target="_blank" rel="noopener">Food Banks Canada</a></small></div>
+    </div>
+    <p class="hope">Together, we can help make sure no one goes hungry this holiday season.</p>
+    <a class="btn gold ext" href="https://foodbankscanada.ca/hungercount-report-2026/" target="_blank" rel="noopener">Read the HungerCount 2026 report</a>
+
+    <div class="about" id="about-fbc">
+      <div>
+        <p class="eyebrow small">Our partner</p>
+        <h3>About Food Banks Canada</h3>
+        <p>Food Banks Canada is a national charity supporting a network of more than 5,500 food banks and community organizations from coast to coast to coast, working to relieve hunger today and prevent hunger tomorrow.</p>
+        <p class="tie">Just like our road trip, their work stretches from Vancouver to Ottawa and beyond.</p>
+        <div class="links">
+          <a class="btn line ext" href="https://foodbankscanada.ca/about-us/" target="_blank" rel="noopener">About Food Banks Canada</a>
+          <a class="btn line ext" href="https://foodbankscanada.ca/our-impact/" target="_blank" rel="noopener">Their impact</a>
+          <a class="btn line ext" href="https://foodbankscanada.ca/find-a-food-bank/" target="_blank" rel="noopener">Find a food bank near you</a>
+          <a class="btn line ext" href="https://foodbankscanada.ca/how-to-help/ways-to-support/" target="_blank" rel="noopener">Other ways to help</a>
+        </div>
+      </div>
+      <div class="mini-route" id="miniRoute" aria-hidden="true"></div>
+    </div>
+  </div>
+  <svg class="wave bot" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
+</section>
+
+<section class="chapter" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Good to know</p>
+    <h2>Dates and questions</h2>
+    <div class="info-grid">
+      <div>
+        <h3 class="sub">Six weeks, start to finish</h3>
+        <ol class="timeline v">
+          <li class="big"><span class="date">Fri, Nov 27</span><h3>Kickoff</h3><p>The donation link goes live and the truck leaves Vancouver.</p></li>
+          <li><span class="date">Fri, Dec 4</span><h3>First update</h3><p>Week one totals posted here and in Teams.</p></li>
+          <li><span class="date">Fri, Dec 11</span><h3>Weekly update</h3><p>Fresh totals Friday afternoon.</p></li>
+          <li><span class="date">Fri, Dec 18</span><h3>Last update of 2026</h3><p>Final totals before the holiday closure.</p></li>
+          <li><span class="date">Fri, Jan 1</span><h3>Donations close</h3><p>Last chance to give and move the truck.</p></li>
+          <li class="big"><span class="date">Early January</span><h3>Wrap-up</h3><p>Final total and a big thank you in our first week back.</p></li>
+        </ol>
+      </div>
+      <div>
+        <h3 class="sub">Questions</h3>
+        <details><summary>Where does my donation go?</summary><p>Your donation goes to Food Banks Canada, which supports food banks in every community where we live and work, from coast to coast to coast.</p></details>
+    <details><summary>Do I get a tax receipt?</summary><p>Yes. Receipts come straight from Food Banks Canada, usually by email right after you give.</p></details>
+    <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
+    <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
+    <details><summary>Can my family and friends donate?</summary><p>Yes, please share the donation link with them. Every gift moves the truck. The raffle is just for our people, so only you can enter the draw.</p></details>
+    <details><summary>Can I enter the draw without donating?</summary><p>Yes. Send a photo of your favourite holiday sweater and you get one entry, no donation needed.</p></details>
+    <details><summary>Who can see the sweater photos?</summary><p>The photo book is part of this page, so anyone with the link can see it. Only send a photo you’re happy to share, and we’ll only show your first name and office.</p></details>
+    <details><summary>What does “$1 = 2 meals” mean?</summary><p><span id="faqMeals">It’s Food Banks Canada’s meal metric: every $1 donated helps provide 2 meals.</span> <a class="ext" href="https://foodbankscanada.ca/give/" target="_blank" rel="noopener">See how your gift helps</a></p></details>
+    <details><summary>Can I donate food instead of money?</summary><p>This drive is online only because it lets Food Banks Canada stretch every dollar, and it keeps our total simple. Food donations to <a class="ext" href="https://foodbankscanada.ca/find-a-food-bank/" target="_blank" rel="noopener">your local food bank</a> are always welcome too.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <svg class="wave top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V22C1150 74 840 6 560 34S150 60 0 22Z"/></svg>
+  <div class="wrap">
+    <h2>Every dollar moves the truck</h2>
+    <p>Give what you can, share your sweater, and let’s get to Ottawa together.</p>
+    <div class="actions">
+      <span data-link="donateUrl" data-text="Donate here" data-cls="gold" data-soon="Donation link coming soon"></span>
+      <span data-link="photoFormUrl" data-text="Share your holiday sweater" data-cls="white" data-soon="Photo form coming soon"></span>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Sweater photo">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Close photo">&times;</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+</dialog>
+
+<script>
+const RING='<circle cx="50" cy="50" r="45.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".85"/>';
+const PLACES={
+  "Vancouver":{label:"Vancouver office",alt:"Lions Gate Bridge and the North Shore mountains, Vancouver office",art:`
+    <rect width="100" height="100" fill="#cfe6fb"/>
+    <path d="M-2 66 20 38 32 50 50 24 66 46 78 36 102 62V100H-2z" fill="#3e6b8a"/>
+    <path d="M50 24 43 34 48 32 51 35 56 32zM20 38 15 45 19 43 22 45 25 42zM78 36 74 41 78 40 82 42z" fill="#fff"/>
+    <rect y="70" width="100" height="30" fill="#4b93cf"/>
+    <g stroke="#2f8a57" fill="none" stroke-linecap="round">
+      <path d="M0 64Q18 52 31 44Q50 66 69 44Q82 52 100 64" stroke-width="1.8"/>
+      <path d="M40 70V52M50 70V55M60 70V52M18 70V52M82 70V52" stroke-width="1"/>
+      <path d="M0 70H100" stroke-width="3.5"/>
+      <path d="M31 73V40M69 73V40" stroke-width="4"/>
+    </g>
+    <path d="M10 81H24M60 87H78M34 93H46" stroke="#cfe6fb" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>`},
+  "Timmins":{label:"Timmins office",alt:"Gold mine headframe, Timmins office",art:`
+    <rect width="100" height="100" fill="#fde7c0"/>
+    <circle cx="80" cy="25" r="9" fill="#f2a516"/>
+    <rect y="76" width="100" height="24" fill="#5b4632"/>
+    <g stroke="#a33a2c" stroke-width="3.2" stroke-linecap="round" fill="none">
+      <path d="M38 76 44 26M56 76 50 26M50 30 68 76"/>
+      <path d="M43 34H51M42 42H52M40 58H56M43 34 52 42M51 34 42 42M42 42 56 58M52 42 40 58" stroke-width="2"/>
+    </g>
+    <rect x="40" y="22" width="14" height="5" fill="#a33a2c"/>
+    <circle cx="47" cy="16" r="6" fill="none" stroke="#5b4632" stroke-width="2.4"/><circle cx="47" cy="16" r="1.6" fill="#5b4632"/>
+    <path d="M62 76V64H80V76z" fill="#a33a2c"/><path d="M60 64 71 57 82 64z" fill="#5b4632"/>
+    <g fill="#2e6b3c"><path d="M17 44 9 60H25zM17 52 7 72H27z"/><path d="M90 52 84 64H96zM90 58 82 76H98z"/></g>
+    <rect x="15.5" y="72" width="3" height="5" fill="#2e6b3c"/>`},
+  "North Bay":{label:"North Bay office",alt:"Canoe on Lake Nipissing, North Bay office",art:`
+    <rect width="100" height="100" fill="#ffe3c7"/>
+    <circle cx="68" cy="50" r="11" fill="#ffb347"/>
+    <path d="M-2 56Q20 47 40 54T102 51V60H-2z" fill="#3f7a52"/>
+    <rect y="58" width="100" height="42" fill="#3577b8"/>
+    <path d="M60 64H80M14 88H28M70 92H84" stroke="#9cc6ec" stroke-width="1.5" stroke-linecap="round"/>
+    <g fill="#245c38"><path d="M13 20 3 42H23zM13 32 1 58H25z"/><path d="M30 34 22 50H38zM30 42 20 62H40z"/></g>
+    <path d="M52 63 64 82" stroke="#5b4632" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="58" cy="69" r="2.8" fill="#2b2b2b"/><path d="M55.5 72h5.5v6h-5.5z" fill="#2b2b2b"/>
+    <path d="M36 76Q57 82 80 74L78 78Q57 87 38 80z" fill="#d4432f"/>`},
+  "Woodbridge":{label:"Woodbridge HQ",alt:"Quasar head office building, Woodbridge HQ",art:`
+    <rect width="100" height="100" fill="#dce9ff"/>
+    <rect y="80" width="100" height="20" fill="#6cb36f"/>
+    <rect x="24" y="30" width="52" height="52" rx="2" fill="#1d5bd8"/>
+    <rect x="22" y="27" width="56" height="5" rx="1.5" fill="#123f9e"/>
+    <g fill="#eaf2ff"><rect x="48" y="37" width="6" height="6"/><rect x="58" y="37" width="6" height="6"/><rect x="67" y="37" width="5" height="6"/>
+      <rect x="48" y="48" width="6" height="6"/><rect x="58" y="48" width="6" height="6"/><rect x="67" y="48" width="5" height="6"/>
+      <rect x="28" y="60" width="6" height="6"/><rect x="37" y="60" width="6" height="6"/><rect x="58" y="60" width="6" height="6"/><rect x="67" y="60" width="5" height="6"/>
+      <rect x="44" y="68" width="12" height="14"/></g>
+    <path d="M28 35h6l7 9.5h-6zM35 46.5h6l-7 9.5h-6z" fill="#ffc21a"/>
+    <path d="M70 27V10" stroke="#123f9e" stroke-width="1.6"/>
+    <path d="M70 10h16v10H70z" fill="#ffc21a"/>
+    <text x="78" y="17.6" text-anchor="middle" font-size="7" font-weight="800" fill="#10285c" font-family="Segoe UI,Arial,sans-serif">HQ</text>`},
+  "Toronto":{label:"Toronto (Pratus, Sterling Road)",alt:"CN Tower, Toronto office",art:`
+    <rect width="100" height="100" fill="#d4e6ff"/>
+    <g fill="#2a3f68"><rect x="6" y="58" width="12" height="27"/><rect x="18" y="50" width="10" height="35"/><rect x="28" y="63" width="10" height="22"/>
+      <rect x="61" y="55" width="10" height="30"/><rect x="71" y="45" width="10" height="40"/><rect x="81" y="61" width="13" height="24"/></g>
+    <g fill="#ffc21a"><rect x="21" y="55" width="2" height="2"/><rect x="24" y="61" width="2" height="2"/><rect x="9" y="64" width="2" height="2"/><rect x="74" y="50" width="2" height="2"/><rect x="77" y="58" width="2" height="2"/><rect x="64" y="62" width="2" height="2"/><rect x="85" y="67" width="2" height="2"/><rect x="31" y="69" width="2" height="2"/></g>
+    <g fill="#7d8aa0"><path d="M47.6 85 49 30h2l1.4 55z"/><path d="M43 85 48.6 64h2.8L57 85h-3.5L50 72l-3.5 13z"/>
+      <rect x="42" y="38" width="16" height="6" rx="3"/><path d="M44 44h12l-2 4h-8z"/><rect x="46.5" y="27" width="7" height="3" rx="1.5"/><rect x="49.4" y="7" width="1.2" height="21"/></g>
+    <rect y="85" width="100" height="15" fill="#4b93cf"/>`},
+  "Ottawa":{label:"Ottawa office",alt:"Peace Tower on Parliament Hill, Ottawa office",art:`
+    <rect width="100" height="100" fill="#d8ecff"/>
+    <rect y="82" width="100" height="18" fill="#6cb36f"/>
+    <g fill="#ddc9a0"><rect x="5" y="60" width="34" height="22"/><rect x="61" y="60" width="34" height="22"/></g>
+    <g fill="#4e9c86"><path d="M3 60l6-7h26l6 7z"/><path d="M59 60l6-7h26l6 7z"/></g>
+    <g fill="#8a7650"><rect x="9" y="65" width="3" height="5"/><rect x="16" y="65" width="3" height="5"/><rect x="23" y="65" width="3" height="5"/><rect x="30" y="65" width="3" height="5"/>
+      <rect x="67" y="65" width="3" height="5"/><rect x="74" y="65" width="3" height="5"/><rect x="81" y="65" width="3" height="5"/><rect x="88" y="65" width="3" height="5"/>
+      <rect x="9" y="74" width="3" height="5"/><rect x="16" y="74" width="3" height="5"/><rect x="23" y="74" width="3" height="5"/><rect x="30" y="74" width="3" height="5"/>
+      <rect x="67" y="74" width="3" height="5"/><rect x="74" y="74" width="3" height="5"/><rect x="81" y="74" width="3" height="5"/><rect x="88" y="74" width="3" height="5"/></g>
+    <rect x="41" y="36" width="18" height="46" fill="#e8d8b2"/>
+    <rect x="40" y="34" width="20" height="4" fill="#bfa978"/>
+    <path d="M40 35 50 14 60 35z" fill="#4e9c86"/>
+    <circle cx="50" cy="44" r="4.5" fill="#fff" stroke="#8a7650" stroke-width="1.2"/><path d="M50 44v-2.6M50 44h2" stroke="#3b2b20" stroke-width=".8"/>
+    <path d="M46 72V57a4 4 0 0 1 8 0v15z" fill="#8a7650"/>
+    <path d="M46.5 82v-5a3.5 3.5 0 0 1 7 0v5z" fill="#8a7650"/>
+    <path d="M50 15V7.5" stroke="#555" stroke-width=".8"/><path d="M50 7.5h7v4h-7z" fill="#d52b1e"/>`}
+};
+const stamp=p=>`<svg viewBox="0 0 100 100" role="img" aria-label="${p.alt}">${p.art}${RING}</svg>`;
+const CHECK='<svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+const num=v=>Number(v)||0, fmt=n=>"$"+Math.round(n).toLocaleString("en-CA"), pct=(a,b)=>b?a/b*100:0;
+const isLink=u=>/^https?:\/\//i.test(u||"");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const list=a=>a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1];
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $=id=>document.getElementById(id);
+
+const people=num(DRIVE.people), goal=num(DRIVE.goal);
+const raised=num(DRIVE.raised), gifts=num(DRIVE.gifts);
+const P=pct(raised,goal);
+// Meals: every number comes from mealsPerDollar and the totals
+const MPD=num(DRIVE.mealsPerDollar), nf=n=>Math.round(n).toLocaleString("en-CA");
+const mealsWord=n=>`${nf(n)} meal${Math.round(n)===1?"":"s"}`;
+const stops=DRIVE.milestones.map(m=>({...m,...(PLACES[m.stop]||{label:"",alt:m.stop,art:""}),target:m.at/100*goal,reached:raised*100>=m.at*goal}));
+const nextIdx=stops.findIndex(s=>!s.reached);
+
+// Links: a button when the link is set, a "coming soon" pill until then
+document.querySelectorAll("[data-link]").forEach(el=>{
+  const url=DRIVE[el.dataset.link];
+  el.outerHTML=isLink(url)
+    ?`<a class="btn ${el.dataset.cls}" href="${esc(url)}" target="_blank" rel="noopener">${el.dataset.text}</a>`
+    :`<span class="btn soon">${el.dataset.soon}</span>`;
+});
+
+["goalText","goalText2","statGoal"].forEach(id=>$(id).textContent=fmt(goal));
+$("perPerson").textContent=fmt(people?goal/people:0);
+const ly=num(DRIVE.lastYearRaised);
+if(ly>0)$("lastYear").textContent=` Last year we raised about ${fmt(ly)} together, so let’s go further this time.`; else $("lastYear").remove();
+$("updated").textContent=raised>0?"Updated "+DRIVE.lastUpdated:"First update Friday, December 4";
+$("truckTag").textContent=`${fmt(raised)} raised, ${mealsWord(raised*MPD)}`;
+$("mealsLine").textContent=`Every $1 = ${mealsWord(MPD)} through Food Banks Canada.`;
+$("statMealsNote").textContent=`Every $1 = ${mealsWord(MPD)}`;
+$("goalMeals").textContent=nf(goal*MPD);
+$("faqMeals").textContent=`It’s Food Banks Canada’s meal metric: every $1 donated helps provide ${mealsWord(MPD)}.`;
+const ns=$("nextStop");
+if(nextIdx<0){ns.classList.add("done");ns.innerHTML="🎉 <b>Goal reached!</b> We made it coast to coast to coast. Thank you!";}
+else{const n=stops[nextIdx];ns.innerHTML=`Next stop: <b>${esc(n.stop)}</b>, ${fmt(Math.max(n.target-raised,0))} to go`;}
+
+// Journey stops
+const stopsEl=$("stops");
+stopsEl.innerHTML=stops.map((s,i)=>`
+  <li class="stop${s.reached?" reached":""}">
+    <div class="badge">${stamp(s)}<span class="icon">${CHECK}</span></div>
+    <div class="stop-text">
+      <b>${esc(s.stop)}</b><small>${esc(s.label)}</small>
+      <span class="at">${s.at===0?"Start":`${fmt(s.target)} <span>· ${s.at}%</span>`}</span>
+      <span class="reward">${s.at>0&&s.reached?"<em>Unlocked!</em>":""}${num(s.prize)>0?`${fmt(s.prize)} ${esc(s.reward.toLowerCase())}`:esc(s.reward)}</span>
+    </div>
+  </li>`).join("");
+const stopEls=[...stopsEl.children], route=$("route"), road=$("road"), roadFill=$("roadFill"), truck=$("truck");
+const pins=stops.map(()=>{const p=document.createElement("span");p.className="pin";route.insertBefore(p,stopsEl);return p;});
+
+// Where the truck sits, in "stop units": 2.5 means halfway between the 3rd and 4th stop
+const goalU=(()=>{const n=stops.length;
+  if(P<=stops[0].at)return 0;
+  for(let i=0;i<n-1;i++)if(P<stops[i+1].at)return i+(P-stops[i].at)/(stops[i+1].at-stops[i].at);
+  return n-1;})();
+const vertical=()=>window.matchMedia("(max-width:760px)").matches;
+let cur=0;
+function place(u){
+  const v=vertical(), r=route.getBoundingClientRect();
+  const c=stopEls.map(li=>{const b=li.querySelector(".badge").getBoundingClientRect();return v?b.top+b.height/2-r.top:b.left+b.width/2-r.left;});
+  const i=Math.min(Math.floor(u),c.length-2), at=c[i]+(u-i)*(c[i+1]-c[i]), len=c[c.length-1]-c[0];
+  road.style.cssText=v?`top:${c[0]}px;height:${len}px`:`left:${c[0]}px;width:${len}px`;
+  roadFill.style.cssText=v?`height:${at-c[0]}px;background-size:100% ${len}px`:`width:${at-c[0]}px;background-size:${len}px 100%`;
+  truck.style.cssText=v?`top:${at}px`:`left:${at}px`;
+  pins.forEach((p,k)=>{p.style.cssText=v?`top:${c[k]}px`:`left:${c[k]}px`;p.classList.toggle("lit",stopEls[k].classList.contains("lit"));});
+}
+function light(u,popIt){
+  stopEls.forEach((li,k)=>{
+    if(k>u+1e-6||!stops[k].reached||li.classList.contains("lit"))return;
+    li.classList.add("lit");
+    if(popIt&&k>0)li.classList.add("pop");
+  });
+}
+function celebrate(){
+  if(nextIdx>=0||reduce)return;
+  const box=document.createElement("span");box.className="confetti";
+  const cols=["#ffc21a","#1d5bd8","#e0402f","#2f8a57","#7a5af8"];
+  box.innerHTML=Array.from({length:28},(_,k)=>`<i style="--c:${cols[k%5]};--dx:${Math.round(Math.random()*200-100)}px;--dy:${Math.round(Math.random()*150-110)}px;--rot:${Math.round(Math.random()*720-360)}deg;animation-delay:${Math.round(Math.random()*200)}ms"></i>`).join("");
+  truck.appendChild(box);
+  setTimeout(()=>box.remove(),2200);
+}
+function countUp(el,to,format,dur=1600){
+  if(reduce){el.textContent=format(to);return;}
+  const t0=performance.now();
+  (function tick(t){const k=Math.min((t-t0)/dur,1),e=1-Math.pow(1-k,3);el.textContent=format(to*e);if(k<1)requestAnimationFrame(tick);})(t0);
+}
+
+// One moment of motion: the truck drives to today's total, the road fills behind it and the numbers count up
+let started=false;
+function start(){
+  if(started)return; started=true;
+  countUp($("statRaised"),raised,fmt);
+  countUp($("statMeals"),raised*MPD,nf);
+  countUp($("statPct"),P,n=>Math.round(n)+"%");
+  countUp($("statGifts"),gifts,n=>Math.round(n).toLocaleString("en-CA"));
+  $("statBar").style.width=Math.min(P,100)+"%";
+  const finish=()=>{if(nextIdx>=0)stopEls[nextIdx].classList.add("next");celebrate();};
+  if(reduce){cur=goalU;light(cur,false);place(cur);finish();return;}
+  const dur=900+goalU*450, t0=performance.now();
+  truck.classList.add("driving");
+  (function frame(t){
+    const k=Math.min((t-t0)/dur,1), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    cur=goalU*e; light(cur,true); place(cur);
+    if(k<1)requestAnimationFrame(frame); else {truck.classList.remove("driving");finish();}
+  })(t0);
+}
+light(0,false); place(0);
+new ResizeObserver(()=>place(cur)).observe(route);
+if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();start();}},{threshold:.3});
+  io.observe(route);
+} else start();
+
+// Raffle draws come from the milestones that have a prize
+const draws=stops.filter(s=>num(s.prize)>0);
+const words=["No","One","Two","Three","Four","Five","Six","Seven","Eight"];
+const nextDraw=draws.find(d=>!d.reached);
+if(draws.length){
+  $("raffleHead").textContent=`Win up to ${fmt(Math.max(...draws.map(d=>num(d.prize))))}`;
+  $("prizePot").innerHTML=`<span><b>${fmt(draws.reduce((t,d)=>t+num(d.prize),0))}</b>in prizes</span>`;
+}
+$("raffleIntro").textContent=draws.length
+  ?`${words[draws.length]||draws.length} draws, one at every stop on our road trip. Each time our total reaches the next stop, we draw a winner, and the prizes get bigger the closer we get to Ottawa.`
+  :"Raffle details coming soon.";
+$("tickets").innerHTML=draws.map((d,i)=>{
+  const grand=i===draws.length-1&&draws.length>1, st=d.reached?"won":(d===nextDraw?"next":"");
+  const tag=d.reached?"Unlocked!":(d===nextDraw?"Next up":"Coming up");
+  return `<li class="ticket${grand?" grand":""}${st?" "+st:""}" style="--i:${i}">
+    <span class="t-top"><span class="t-no">${grand?"Grand prize":"Draw "+(i+1)}</span><span class="t-prize">${fmt(d.prize)}</span><span class="t-tag">${tag}</span></span>
+    <span class="t-bot">Drawn when we raise<b>${fmt(d.target)}</b><small>${esc(d.stop)} stop</small></span></li>`;
+}).join("");
+if(draws.length)$("faqDraw").textContent=`There are ${draws.length} draws, one at each stop on the road trip, and the prizes grow as we go (${list(draws.map(d=>fmt(d.prize)))}). Each draw picks one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
+
+// Food Banks Canada links: open in a new tab, with an external-link icon
+const EXT='<svg class="ext-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr"> (opens in a new tab)</span>';
+document.querySelectorAll("a.ext").forEach(a=>{a.target="_blank";a.rel="noopener";a.insertAdjacentHTML("beforeend",EXT);});
+
+// What your gift does: meals for each amount, calculated from mealsPerDollar
+const GIFT_ICONS=[
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 30h52a26 24 0 0 1-52 0z" fill="#1d5bd8"/><rect x="18" y="54" width="28" height="5" rx="2.5" fill="#123f9e"/><path d="M22 23q-3-5 0-10M32 23q-3-5 0-10M42 23q-3-5 0-10" stroke="#ffc21a" stroke-width="3.2" fill="none" stroke-linecap="round"/></svg>',
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="40" y="6" width="7" height="26" rx="3.5" fill="#e8c27a" transform="rotate(14 43 19)"/><circle cx="22" cy="18" r="7" fill="#3fa34d"/><circle cx="30" cy="15" r="6" fill="#4cb85a"/><path d="M10 24h44l-4 34H14z" fill="#dcab6e"/><path d="M24 24v-4a8 8 0 0 1 16 0v4" stroke="#c8955a" stroke-width="3" fill="none"/><rect x="10" y="24" width="44" height="6" fill="#c8955a"/></svg>',
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="18" cy="24" r="8" fill="#e0402f"/><path d="M18 16q2-5 6-6" stroke="#2f8a57" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M33 30 48 9l4 3-12 21z" fill="#ff9a2e"/><path d="M48 9l4-4M50 11l5-2" stroke="#2f8a57" stroke-width="2.5" stroke-linecap="round"/><rect x="6" y="30" width="52" height="28" rx="3" fill="#1d5bd8"/><rect x="6" y="30" width="52" height="7" fill="#123f9e"/><rect x="26" y="42" width="12" height="5" rx="2.5" fill="#ffc21a"/></svg>',
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M2 22h36v26H2z" fill="#1d5bd8"/><path d="M38 28h13q2 0 3 2l7 9q1 1 1 3v6H38z" fill="#1d5bd8"/><path d="M41 31h9l5 7H41z" fill="#eaf2ff"/><rect x="2" y="40" width="60" height="3" fill="#ffc21a"/><path d="M20 27c-3-4-9-1-6 4l6 6 6-6c3-5-3-8-6-4z" fill="#ffc21a"/><circle cx="14" cy="50" r="6" fill="#10285c"/><circle cx="50" cy="50" r="6" fill="#10285c"/></svg>'
+];
+const GIFT_AMOUNTS=[5,10,25,50];
+$("giftTiles").innerHTML=GIFT_AMOUNTS.map((a,i)=>{
+  const inner=`${GIFT_ICONS[i]}<span class="amt">${fmt(a)}</span><span class="meals">= ${mealsWord(a*MPD)}</span>`;
+  return isLink(DRIVE.donateUrl)
+    ?`<a class="gift" href="${esc(DRIVE.donateUrl)}" target="_blank" rel="noopener" aria-label="Give ${fmt(a)}, that’s ${mealsWord(a*MPD)}">${inner}<span class="go">Give ${fmt(a)} &rarr;</span></a>`
+    :`<div class="gift">${inner}<span class="go">Donation link coming soon</span></div>`;
+}).join("");
+
+// About Food Banks Canada: our six stops, then the rest of their network
+$("miniRoute").innerHTML=stops.map(s=>stamp(s)).join("")+'<span class="plus5"><span><b>5,500+</b>food banks</span></span>';
+
+// Why it matters: the big numbers count up when they scroll into view
+const bigNums=[...document.querySelectorAll("#bigStats b[data-count]")];
+const showBig=(el,k)=>{const d=+(el.dataset.dec||0),v=+el.dataset.count*k;el.textContent=(el.dataset.prefix||"")+(k<1?v.toFixed(d):(+el.dataset.count).toFixed(d))+(el.dataset.suffix||"");};
+if(!reduce&&"IntersectionObserver" in window){
+  bigNums.forEach(el=>showBig(el,0));
+  const bio=new IntersectionObserver(es=>{if(!es.some(e=>e.isIntersecting))return;bio.disconnect();
+    const t0=performance.now();
+    (function tick(t){const k=Math.min((t-t0)/1500,1),e=1-Math.pow(1-k,3);bigNums.forEach(el=>showBig(el,e));if(k<1)requestAnimationFrame(tick);})(t0);
+  },{threshold:.35});
+  bio.observe($("bigStats"));
+}
+
+// Sweater photo book
+const SWEATER='<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 8h20l14 8 6 20-10 3-3-9v28H15V30l-3 9-10-3 6-20z" fill="#e0402f"/><path d="M22 8q10 10 20 0" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M15 34h34M15 42h34" stroke="#fff" stroke-width="2.5" stroke-dasharray="3 3"/><path d="M32 18l2.5 4.5-2.5 4.5-2.5-4.5z" fill="#ffc21a"/></svg>';
+const photoCards=PHOTOS.length
+  ?PHOTOS.map((p,i)=>`<figure class="polaroid"><button type="button" class="ph-btn" data-i="${i}" aria-label="Open ${esc(p.name)}’s sweater photo"><img src="photos/${encodeURIComponent(p.file)}" alt="${esc(p.name)} from ${esc(p.office)} in a holiday sweater" loading="lazy" decoding="async" width="400" height="400"></button><figcaption>${esc(p.name)}, ${esc(p.office)}</figcaption></figure>`)
+  :[1,2,3].map(()=>`<figure class="polaroid"><div class="ph-empty">${SWEATER}<span>Your sweater here</span></div><figcaption>Could be you!</figcaption></figure>`);
+const addInner=`<div class="ph-empty"><span class="plus" aria-hidden="true">+</span><span>${isLink(DRIVE.photoFormUrl)?"Add yours!":"Add yours! (form coming soon)"}</span></div>`;
+photoCards.push(`<figure class="polaroid add">${isLink(DRIVE.photoFormUrl)?`<a href="${esc(DRIVE.photoFormUrl)}" target="_blank" rel="noopener">${addInner}</a>`:addInner}<figcaption>Send us your sweater</figcaption></figure>`);
+$("book").innerHTML=photoCards.join("");
+
+const lb=$("lightbox");
+$("book").addEventListener("click",e=>{
+  const b=e.target.closest(".ph-btn"); if(!b)return;
+  const p=PHOTOS[b.dataset.i];
+  $("lbImg").src="photos/"+encodeURIComponent(p.file);
+  $("lbImg").alt=b.querySelector("img").alt;
+  $("lbCap").textContent=`${p.name}, ${p.office}`;
+  lb.showModal();
+});
+$("lbClose").addEventListener("click",()=>lb.close());
+lb.addEventListener("click",e=>{if(e.target===lb)lb.close();});
+</script>
+</body>
+</html>
