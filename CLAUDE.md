@@ -164,7 +164,7 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 
 ## Still to confirm
 
-- The sweater photo Microsoft Form link (`photoFormUrl`). The draw form (`drawFormUrl`) is set.
+- All three links (`donateUrl`, `drawFormUrl`, `photoFormUrl`) are set as of November 2026.
 - What form the raffle prizes take (gift card or otherwise); the site just says "$100 prize" for now.
 
 ## Planned additions
