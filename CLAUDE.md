@@ -103,7 +103,7 @@ Page order: hero, journey and stats, What your gift does, How it works, Why mone
 ## How the site is built
 
 - The site is **one file: index.html** (HTML, CSS and JavaScript together), plus sweater photos in `photos/`. Keep it that way. No build tools or frameworks unless Nate asks.
-- Hosted free on **GitHub Pages** from the main branch, root folder. Live at https://nathanielmarketing.github.io/Quasar-2026-Food-Drive-Competition/
+- Hosted free on **GitHub Pages** from the main branch, root folder. Live at https://nathanielmarketing.github.io/holiday-food-drive-2026/ (the repo is named `holiday-food-drive-2026`; it was renamed from `Quasar-2026-Food-Drive-Competition` before launch, and the old address no longer works)
 - Pushing to main redeploys the site in about a minute.
 - The repo is **public**. Never add passwords, logins, personal contact details, surnames, donor names, dashboard screenshots, or anything sensitive. `.gitignore` blocks image files everywhere except `photos/*.jpg` as a safety net.
 
@@ -139,6 +139,7 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 - Colours: brand blue `#1d5bd8`, deep blue `#123f9e`, navy `#10285c`, gold `#ffc21a`, light sky `#eaf2ff`.
 - Section pattern from The Pulse: a gold eyebrow line above a large heading.
 - The Quasar chevron shapes appear as decoration in the hero and on the Woodbridge landmark.
+- The browser tab icon is the Quasar mark (blue and grey hexagon of parallelograms), traced as an inline SVG data link in the `<head>`. No separate icon file.
 - Rounded cards, pill buttons, gold for anything reached or unlocked.
 - Motion: the truck drives, the road fills and numbers count up when the journey scrolls into view; the Why it matters numbers count up too. Respect reduced-motion settings.
 - Must work well on phones, and in both light and dark mode.
