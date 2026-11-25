@@ -103,7 +103,7 @@ Page order: hero, journey and stats, What your gift does, How it works, Why mone
 ## How the site is built
 
 - The site is **one file: index.html** (HTML, CSS and JavaScript together), plus sweater photos in `photos/`. Keep it that way. No build tools or frameworks unless Nate asks.
-- Hosted free on **GitHub Pages** from the main branch, root folder. Live at https://nathanielmarketing.github.io/holiday-food-drive-2026/ (the repo is named `holiday-food-drive-2026`; it was renamed from `Quasar-2026-Food-Drive-Competition` before launch, and the old address no longer works)
+- Hosted free on **GitHub Pages** from the main branch, root folder. Live at https://coast-to-coast-to-coast.github.io/Quasar-2026-Food-Drive-Competition/. The repo lives in the GitHub organization `Coast-To-Coast-To-Coast` (display name Coast2Coast2Coast), owned by Nate's personal account NathanielMarketing. It was moved there before launch; older nathanielmarketing.github.io and quasar-food-drive-2026.github.io addresses no longer work.
 - Pushing to main redeploys the site in about a minute.
 - The repo is **public**. Never add passwords, logins, personal contact details, surnames, donor names, dashboard screenshots, or anything sensitive. `.gitignore` blocks image files everywhere except `photos/*.jpg` as a safety net.
 
