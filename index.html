@@ -31,7 +31,7 @@ const DRIVE = {
   mealsPerDollar: 2,
 
   // Links: paste each full link (starting with https://) between the quotes
-  donateUrl:    "PASTE-DONATION-LINK-HERE",   // the Food Banks Canada donation page
+  donateUrl:    "https://foodbankscanada.akaraisin.com/ui/FBCHolidayGiving2026/p/2c89029455b8478ea77fb97dae695a42",   // the Food Banks Canada donation page
   drawFormUrl:  "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DKlrQeWIQkecQLlaG8xfOvQGp3bLRi9GiAkp4vFEsktUMjRGQ0hBUlAyU1A3NlpRNjgyWllUNk42WS4u",
   photoFormUrl: "PASTE-PHOTO-FORM-LINK-HERE",
 
@@ -344,6 +344,119 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
   .fill,.badge,.badge svg,.pin,.polaroid,.gift{transition:none}
   .stop.next .badge,.stop.pop .badge,.truck.driving svg{animation:none}
 }
+
+/* ===== Page flow: waves, chapters and the prize ticket raffle ===== */
+section{padding:4rem 0;position:relative}
+.wave{position:absolute;left:0;width:100%;height:56px;display:block;pointer-events:none}
+.wave path{fill:var(--bg)}
+.wave.sky-fill path{fill:var(--sky)}
+.wave.top{top:-1px}
+.wave.bot{bottom:-1px}
+.hero .wrap{padding-bottom:6.5rem}
+.journey-glow{background:linear-gradient(var(--sky) 0, var(--sky) 35%, var(--bg) 100%);padding-top:2.5rem}
+.chapter{padding:4.5rem 0}
+h3.sub{font-size:1.35rem;margin:0 0 1rem;color:var(--num)}
+.give-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;margin-top:1.75rem;align-items:start}
+.give-grid .gifts{grid-template-columns:1fr 1fr;margin-top:0;gap:1rem}
+.give-grid .gift{padding:1.2rem .8rem 1rem}
+.give-grid .gift svg{width:60px;height:60px;margin-bottom:.4rem}
+.steps.v{grid-template-columns:1fr;gap:.8rem;margin:0}
+.steps.v li{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.2rem;border-radius:16px}
+.steps.v li::before{flex:none;width:2.4rem;height:2.4rem;font-size:1.15rem;margin:0}
+.steps.v h4{margin:.15rem 0 .2rem;font-size:1.1rem}
+.steps.v p{font-size:.95rem}
+.give-grid .rulebox{margin-top:1rem;font-size:1rem;padding:1.1rem 1.3rem}
+.money{margin-top:3rem;background:var(--sky);border-radius:28px;padding:clamp(1.5rem,3.5vw,2.5rem);display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:start}
+.money .more{margin-top:1rem}
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.points .why{border:0;background:var(--card);padding:1.2rem}
+.points .why .ic{width:46px;height:46px;border-radius:12px;margin-bottom:.7rem}
+.points .why .ic svg{width:26px;height:26px}
+.points .why h3{font-size:1.1rem}
+.points .why p{font-size:.93rem}
+
+/* Raffle: prize ticket ladder */
+.raffle.fancy{padding:6.5rem 0;overflow:hidden;background:repeating-conic-gradient(from -90deg at 50% -10%,rgba(255,255,255,.16) 0 5deg,transparent 5deg 10deg),radial-gradient(circle at 50% 0,#ffe27a,transparent 60%),var(--gold)}
+.raffle-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem}
+.raffle .raffle-intro{font-size:1.2rem;max-width:48ch;margin:0}
+.pot{flex:none;display:grid;place-items:center;text-align:center;width:150px;height:150px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:.95rem;line-height:1.15;transform:rotate(8deg);box-shadow:0 0 0 6px rgba(255,255,255,.5),0 12px 24px rgba(16,40,92,.25);margin:0}
+.pot b{display:block;font-size:2.3rem;color:var(--gold);font-weight:800}
+.tickets{list-style:none;padding:0;margin:2.25rem 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;align-items:end}
+.ticket{--notch:118px;position:relative;background:#fff;color:var(--navy);border-radius:16px;text-align:center;box-shadow:0 10px 22px rgba(120,80,0,.22);
+  -webkit-mask:radial-gradient(circle 11px at 0 var(--notch),transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% var(--notch),transparent 98%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 11px at 0 var(--notch),transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% var(--notch),transparent 98%,#000) right/51% 100% no-repeat;
+  transform:rotate(calc((var(--i) - 2) * 1.2deg));transition:transform .25s}
+.ticket:hover{transform:rotate(0) translateY(-6px)}
+.t-top{height:var(--notch);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;padding:.6rem .5rem 0}
+.t-no{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8a6a00}
+.t-prize{font-size:calc(2rem + var(--i) * .3rem);font-weight:800;line-height:1;letter-spacing:-.02em}
+.t-tag{font-size:.72rem;font-weight:800;padding:.15rem .6rem;border-radius:999px;background:#eef1f7;color:#4a5468;margin-top:.25rem}
+.t-bot{display:flex;flex-direction:column;align-items:center;gap:.1rem;border-top:2px dashed #e5ae00;padding:.8rem .6rem 1rem;font-size:.82rem;color:#4a5468;line-height:1.25}
+.t-bot b{font-size:1.25rem;color:var(--navy);font-weight:800}
+.t-bot small{font-size:.75rem}
+.ticket.next .t-tag{background:var(--blue);color:#fff}
+.ticket.won{background:var(--navy);color:#fff}
+.ticket.won .t-no{color:var(--gold)}
+.ticket.won .t-tag{background:var(--gold);color:var(--navy)}
+.ticket.won .t-bot{color:#cfdcf5;border-color:rgba(255,255,255,.35)}
+.ticket.won .t-bot b{color:#fff}
+.ticket.grand{--notch:150px;background:linear-gradient(160deg,#fff 40%,#fff3cc);box-shadow:0 0 0 4px #fff,0 0 0 7px var(--navy),0 14px 28px rgba(120,80,0,.3)}
+.ticket.grand .t-no{color:var(--blue)}
+.ticket.grand::after{content:"\2605";position:absolute;top:10px;right:12px;color:var(--gold);font-size:1.3rem}
+.enter-title{margin:3rem 0 0;font-size:1.4rem}
+.enter{margin-top:1rem}
+.enter>div{position:relative;padding-top:1.6rem}
+.e-ic{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#fff3cc;margin-bottom:.7rem}
+.e-ic svg{width:30px;height:30px}
+.raffle .note{display:block;margin-top:1rem}
+
+.festive.soft{background:var(--bg)}
+.festive.soft::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 18px 18px,var(--dot-a) 2.5px,transparent 3.5px),radial-gradient(circle at 58px 52px,var(--dot-b) 2.5px,transparent 3.5px);background-size:80px 72px;-webkit-mask:linear-gradient(transparent,#000 25%,#000 75%,transparent);mask:linear-gradient(transparent,#000 25%,#000 75%,transparent);pointer-events:none}
+.festive.soft .wrap{position:relative}
+
+.band{padding:6.5rem 0}
+.band .about{margin-top:3rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);grid-template-columns:1.3fr 1fr}
+.band .about h3{font-size:1.7rem;margin:0 0 .8rem;color:#fff}
+.band .about p{color:#e8eefb;font-size:1.05rem}
+.band .about p.tie{color:var(--gold)}
+.eyebrow.small{font-size:1.05rem}
+.band .links{margin-top:1.25rem}
+.band .btn.line{color:#fff;border-color:rgba(255,255,255,.55)}
+.band .btn.line:hover{background:#fff;color:var(--navy)}
+.band .mini-route svg{box-shadow:0 0 0 3px var(--navy),0 0 0 5px var(--gold)}
+
+.info-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;margin-top:1.75rem;align-items:start}
+.timeline.v{grid-template-columns:1fr;gap:1.1rem;margin:0}
+.timeline.v::before{left:10px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--blue),var(--gold))}
+.timeline.v li{padding:0 0 0 2.5rem}
+.timeline.v h3{margin:.05rem 0 .15rem}
+
+.closing{padding:6rem 0 4.5rem}
+
+@media (max-width:1000px){
+  .tickets{grid-template-columns:repeat(3,1fr)}
+  .money{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .give-grid,.info-grid{grid-template-columns:1fr}
+  .band .about{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .points{grid-template-columns:1fr}
+  .raffle-head{flex-direction:column}
+  .pot{width:120px;height:120px;font-size:.85rem;position:absolute;right:16px;top:3.5rem}
+  .pot b{font-size:1.8rem}
+  .raffle .raffle-intro{padding-right:0}
+  .raffle-head>div{padding-right:120px}
+  .tickets{grid-template-columns:1fr 1fr}
+  .ticket.grand{grid-column:1/-1}
+  .wave{height:34px}
+}
+@media (max-width:420px){
+  .raffle-head>div{padding-right:0}
+  .pot{position:static;transform:rotate(4deg)}
+}
+@media (prefers-reduced-motion:reduce){.ticket{transition:none}}
 </style>
 </head>
 <body>
@@ -364,9 +477,10 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
       <a class="btn outline" href="#journey">Follow the journey</a>
     </div>
   </div>
+  <svg class="wave bot sky-fill" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
 </header>
 
-<section class="sky" id="journey">
+<section class="journey-glow" id="journey">
   <div class="wrap">
     <div class="journey-head">
       <div>
@@ -407,76 +521,84 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
   </div>
 </section>
 
-<section id="impact">
+<section id="give" class="chapter">
   <div class="wrap">
-    <p class="eyebrow">Your impact</p>
-    <h2>What your gift does</h2>
-    <p class="lede">Every size of gift makes a real difference. Here’s what yours can provide.</p>
-    <div class="gifts" id="giftTiles"></div>
-    <p class="source-line"><a class="ext" href="https://foodbankscanada.ca/give/" target="_blank" rel="noopener">Meal values are based on Food Banks Canada’s meal metric.</a></p>
-  </div>
-</section>
-
-<section class="sky">
-  <div class="wrap">
-    <p class="eyebrow">How it works</p>
-    <h2>Three steps, about two minutes</h2>
-    <ol class="steps">
-      <li><h3>Donate online</h3><p>Give any amount through our company donation link. Your tax receipt comes straight from Food Banks Canada.</p></li>
-      <li><h3>Enter the draw</h3><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></li>
-      <li><h3>Watch the truck move</h3><p>Totals update every Friday. Each stop we reach unlocks something fun for everyone.</p></li>
-    </ol>
-    <p class="rulebox"><strong>The goal:</strong> <span id="goalText2">$5,000</span> together, that’s <span id="goalMeals">10,000</span> meals. That’s about <span id="perPerson">$15</span> for every person in the company.<span id="lastYear"> Last year we raised about $3,160 together, so let’s go further this time.</span> Every gift counts toward the same goal, whether it comes from you, your family or your friends.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Good to know</p>
-    <h2>Why money goes further</h2>
-    <p class="lede">Food banks are grateful for every kind of donation. Money gives them the most flexibility, especially over the busy holiday season.</p>
-    <div class="cards3">
+    <p class="eyebrow">Give</p>
+    <h2>Every gift goes further</h2>
+    <div class="give-grid">
+      <div id="impact">
+        <h3 class="sub">What your gift does</h3>
+        <div class="gifts" id="giftTiles"></div>
+        <p class="source-line"><a class="ext" target="_blank" rel="noopener" href="https://foodbankscanada.ca/give/">Meal values are based on Food Banks Canada’s meal metric.</a></p>
+      </div>
+      <div>
+        <h3 class="sub">Three steps, about two minutes</h3>
+        <ol class="steps v">
+          <li><div><h4>Donate online</h4><p>Give any amount through our company donation link. Your tax receipt comes straight from Food Banks Canada.</p></div></li>
+          <li><div><h4>Enter the draw</h4><p>Fill in a quick form to enter the raffle. No donation? Share your holiday sweater instead.</p></div></li>
+          <li><div><h4>Watch the truck move</h4><p>Totals update every Friday, and every stop we reach is a raffle draw.</p></div></li>
+        </ol>
+        <p class="rulebox"><strong>The goal:</strong> <span id="goalText2">$5,000</span> together, that’s <span id="goalMeals">10,000</span> meals. That’s about <span id="perPerson">$15</span> for every person in the company.<span id="lastYear"> Last year we raised about $3,160 together, so let’s go further this time.</span></p>
+      </div>
+    </div>
+    <div class="money">
+      <div class="money-head">
+        <h3 class="sub">Why money goes further</h3>
+        <p class="lede">Food banks are grateful for every kind of donation. Money gives them the most flexibility, especially over the busy holiday season.</p>
+        <p class="more"><a class="ext" target="_blank" rel="noopener" href="https://foodbankscanada.ca/give/">Learn more about how your gift helps</a></p>
+      </div>
+      <div class="points">
       <article class="why"><span class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16 16 4h12v12L16 28z" fill="#1d5bd8"/><circle cx="22" cy="10" r="2.6" fill="#ffc21a"/></svg></span><h3>Better prices</h3><p>Food Banks Canada uses donations to source more healthy food at the best possible price.</p></article>
       <article class="why"><span class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2a9 9 0 0 0-9 9c0 7 9 17 9 17s9-10 9-17a9 9 0 0 0-9-9z" fill="#1d5bd8"/><circle cx="16" cy="11" r="3.6" fill="#ffc21a"/></svg></span><h3>Where it’s needed most</h3><p>Money gets fresh, nutritious food quickly to food banks across the country as demand rises.</p></article>
       <article class="why"><span class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="3" width="18" height="26" rx="3" fill="#1d5bd8"/><path d="M7 13h18" stroke="#fff3cc" stroke-width="2"/><path d="M11 7v3M11 17v5" stroke="#ffc21a" stroke-width="2.4" stroke-linecap="round"/></svg></span><h3>Behind the scenes</h3><p>Donations also fund the tools food banks need, like freezers, refrigerated trucks and warehouse space.</p></article>
+      </div>
     </div>
-    <p class="more"><a class="ext" href="https://foodbankscanada.ca/give/" target="_blank" rel="noopener">Learn more about how your gift helps</a></p>
   </div>
 </section>
 
-
-<section class="raffle" id="raffle">
+<section class="raffle fancy" id="raffle">
+  <svg class="wave top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V22C1150 74 840 6 560 34S150 60 0 22Z"/></svg>
   <div class="wrap">
-    <p class="eyebrow">Holiday raffle</p>
-    <h2 id="raffleHead">Win a raffle prize</h2>
-    <p id="raffleIntro"></p>
-    <ul class="draws" id="draws"></ul>
+    <div class="raffle-head">
+      <div>
+        <p class="eyebrow">Holiday raffle</p>
+        <h2 id="raffleHead">Win a raffle prize</h2>
+        <p id="raffleIntro" class="raffle-intro"></p>
+      </div>
+      <p class="pot" id="prizePot" aria-hidden="true"></p>
+    </div>
+    <ol class="tickets" id="tickets"></ol>
+    <h3 class="enter-title">Two ways to get your ticket</h3>
     <div class="enter">
       <div>
+        <span class="e-ic" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 28 4.5 16.6A7 7 0 0 1 16 7.4a7 7 0 0 1 11.5 9.2Z" fill="#e0402f"/></svg></span>
         <h3>Already donated?</h3>
         <p>Let us know with a quick form and you’re in the draw.</p>
         <span data-link="drawFormUrl" data-text="Donated? Enter the draw" data-cls="navy" data-soon="Draw form coming soon"></span>
       </div>
       <div>
+        <span class="e-ic" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M22 8h20l14 8 6 20-10 3-3-9v28H15V30l-3 9-10-3 6-20z" fill="#1d5bd8"/><path d="M15 34h34M15 42h34" stroke="#fff" stroke-width="3" stroke-dasharray="3 3"/></svg></span>
         <h3>Love a holiday sweater?</h3>
         <p>Send a photo of your favourite holiday sweater for one entry. No donation needed.</p>
         <span data-link="photoFormUrl" data-text="Share your holiday sweater" data-cls="navy" data-soon="Photo form coming soon"></span>
       </div>
     </div>
-    <span class="note">One entry per person for each way to enter.</span>
+    <p class="note">One entry per person for each way to enter. Entries carry over to every draw.</p>
   </div>
+  <svg class="wave bot" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
 </section>
 
-<section class="festive" id="sweaters">
+<section class="festive soft" id="sweaters">
   <div class="wrap">
     <p class="eyebrow">The sweater photo book</p>
     <h2>Show us your holiday sweater</h2>
-    <p class="lede">Festive, sparkly, gloriously ugly: we want to see it. Every photo you send lands here and gets you a raffle entry.</p>
+    <p class="lede">Festive, sparkly, gloriously ugly: every photo you send lands here and gets you a raffle entry.</p>
     <div class="book" id="book"></div>
   </div>
 </section>
 
 <section class="band" id="matters">
+  <svg class="wave top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V22C1150 74 840 6 560 34S150 60 0 22Z"/></svg>
   <div class="wrap">
     <p class="eyebrow">The need is real</p>
     <h2>Why it matters this year</h2>
@@ -489,49 +611,45 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     </div>
     <p class="hope">Together, we can help make sure no one goes hungry this holiday season.</p>
     <a class="btn gold ext" href="https://foodbankscanada.ca/hungercount-report-2026/" target="_blank" rel="noopener">Read the HungerCount 2026 report</a>
-  </div>
-</section>
 
-<section class="sky" id="about-fbc">
-  <div class="wrap">
-    <p class="eyebrow">Our partner</p>
-    <h2>About Food Banks Canada</h2>
-    <div class="about">
+    <div class="about" id="about-fbc">
       <div>
+        <p class="eyebrow small">Our partner</p>
+        <h3>About Food Banks Canada</h3>
         <p>Food Banks Canada is a national charity supporting a network of more than 5,500 food banks and community organizations from coast to coast to coast, working to relieve hunger today and prevent hunger tomorrow.</p>
         <p class="tie">Just like our road trip, their work stretches from Vancouver to Ottawa and beyond.</p>
+        <div class="links">
+          <a class="btn line ext" href="https://foodbankscanada.ca/about-us/" target="_blank" rel="noopener">About Food Banks Canada</a>
+          <a class="btn line ext" href="https://foodbankscanada.ca/our-impact/" target="_blank" rel="noopener">Their impact</a>
+          <a class="btn line ext" href="https://foodbankscanada.ca/find-a-food-bank/" target="_blank" rel="noopener">Find a food bank near you</a>
+          <a class="btn line ext" href="https://foodbankscanada.ca/how-to-help/ways-to-support/" target="_blank" rel="noopener">Other ways to help</a>
+        </div>
       </div>
       <div class="mini-route" id="miniRoute" aria-hidden="true"></div>
     </div>
-    <div class="links">
-      <a class="btn line ext" href="https://foodbankscanada.ca/about-us/" target="_blank" rel="noopener">About Food Banks Canada</a>
-      <a class="btn line ext" href="https://foodbankscanada.ca/our-impact/" target="_blank" rel="noopener">Their impact</a>
-      <a class="btn line ext" href="https://foodbankscanada.ca/find-a-food-bank/" target="_blank" rel="noopener">Find a food bank near you</a>
-      <a class="btn line ext" href="https://foodbankscanada.ca/how-to-help/ways-to-support/" target="_blank" rel="noopener">Other ways to help</a>
-    </div>
   </div>
+  <svg class="wave bot" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
 </section>
 
-<section>
+<section class="chapter" id="faq">
   <div class="wrap">
-    <p class="eyebrow">Mark your calendar</p>
-    <h2>Six weeks, start to finish</h2>
-    <ol class="timeline">
-      <li class="big"><span class="date">Fri, Nov 27</span><h3>Kickoff</h3><p>The donation link goes live and the truck leaves Vancouver.</p></li>
-      <li><span class="date">Fri, Dec 4</span><h3>First update</h3><p>Week one totals posted here and in Teams.</p></li>
-      <li><span class="date">Fri, Dec 11</span><h3>Weekly update</h3><p>Fresh totals Friday afternoon.</p></li>
-      <li><span class="date">Fri, Dec 18</span><h3>Last update of 2026</h3><p>Final totals before the holiday closure.</p></li>
-      <li><span class="date">Fri, Jan 1</span><h3>Donations close</h3><p>Last chance to give and move the truck.</p></li>
-      <li class="big"><span class="date">Early January</span><h3>Wrap-up</h3><p>Final total and a big thank you in our first week back.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section class="sky">
-  <div class="wrap" style="max-width:900px">
     <p class="eyebrow">Good to know</p>
-    <h2>Questions</h2>
-    <details><summary>Where does my donation go?</summary><p>Your donation goes to Food Banks Canada, which supports food banks in every community where we live and work, from coast to coast to coast.</p></details>
+    <h2>Dates and questions</h2>
+    <div class="info-grid">
+      <div>
+        <h3 class="sub">Six weeks, start to finish</h3>
+        <ol class="timeline v">
+          <li class="big"><span class="date">Fri, Nov 27</span><h3>Kickoff</h3><p>The donation link goes live and the truck leaves Vancouver.</p></li>
+          <li><span class="date">Fri, Dec 4</span><h3>First update</h3><p>Week one totals posted here and in Teams.</p></li>
+          <li><span class="date">Fri, Dec 11</span><h3>Weekly update</h3><p>Fresh totals Friday afternoon.</p></li>
+          <li><span class="date">Fri, Dec 18</span><h3>Last update of 2026</h3><p>Final totals before the holiday closure.</p></li>
+          <li><span class="date">Fri, Jan 1</span><h3>Donations close</h3><p>Last chance to give and move the truck.</p></li>
+          <li class="big"><span class="date">Early January</span><h3>Wrap-up</h3><p>Final total and a big thank you in our first week back.</p></li>
+        </ol>
+      </div>
+      <div>
+        <h3 class="sub">Questions</h3>
+        <details><summary>Where does my donation go?</summary><p>Your donation goes to Food Banks Canada, which supports food banks in every community where we live and work, from coast to coast to coast.</p></details>
     <details><summary>Do I get a tax receipt?</summary><p>Yes. Receipts come straight from Food Banks Canada, usually by email right after you give.</p></details>
     <details><summary>How often do the totals update?</summary><p>Every Friday afternoon: December 4, December 11 and December 18. We’ll share the final total in early January.</p></details>
     <details><summary>How does the draw work?</summary><p id="faqDraw">Each time we reach a raffle stop on the journey, we draw one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.</p></details>
@@ -540,10 +658,13 @@ details p{margin:.6rem 0 0;color:var(--ink-soft)}
     <details><summary>Who can see the sweater photos?</summary><p>The photo book is part of this page, so anyone with the link can see it. Only send a photo you’re happy to share, and we’ll only show your first name and office.</p></details>
     <details><summary>What does “$1 = 2 meals” mean?</summary><p><span id="faqMeals">It’s Food Banks Canada’s meal metric: every $1 donated helps provide 2 meals.</span> <a class="ext" href="https://foodbankscanada.ca/give/" target="_blank" rel="noopener">See how your gift helps</a></p></details>
     <details><summary>Can I donate food instead of money?</summary><p>This drive is online only because it lets Food Banks Canada stretch every dollar, and it keeps our total simple. Food donations to <a class="ext" href="https://foodbankscanada.ca/find-a-food-bank/" target="_blank" rel="noopener">your local food bank</a> are always welcome too.</p></details>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="closing">
+  <svg class="wave top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V22C1150 74 840 6 560 34S150 60 0 22Z"/></svg>
   <div class="wrap">
     <h2>Every dollar moves the truck</h2>
     <p>Give what you can, share your sweater, and let’s get to Ottawa together.</p>
@@ -684,7 +805,7 @@ stopsEl.innerHTML=stops.map((s,i)=>`
     <div class="stop-text">
       <b>${esc(s.stop)}</b><small>${esc(s.label)}</small>
       <span class="at">${s.at===0?"Start":`${fmt(s.target)} <span>· ${s.at}%</span>`}</span>
-      <span class="reward">${s.at>0&&s.reached?"<em>Unlocked!</em>":""}${esc(s.reward)}${num(s.prize)>0?`: ${fmt(s.prize)}`:""}</span>
+      <span class="reward">${s.at>0&&s.reached?"<em>Unlocked!</em>":""}${num(s.prize)>0?`${fmt(s.prize)} ${esc(s.reward.toLowerCase())}`:esc(s.reward)}</span>
     </div>
   </li>`).join("");
 const stopEls=[...stopsEl.children], route=$("route"), road=$("road"), roadFill=$("roadFill"), truck=$("truck");
@@ -755,13 +876,23 @@ if("IntersectionObserver" in window){
 
 // Raffle draws come from the milestones that have a prize
 const draws=stops.filter(s=>num(s.prize)>0);
-const drawList=draws.map(d=>`${fmt(d.prize)} at ${fmt(d.target)}`);
-if(draws.length)$("raffleHead").textContent=`Win up to ${fmt(Math.max(...draws.map(d=>num(d.prize))))}`;
+const words=["No","One","Two","Three","Four","Five","Six","Seven","Eight"];
+const nextDraw=draws.find(d=>!d.reached);
+if(draws.length){
+  $("raffleHead").textContent=`Win up to ${fmt(Math.max(...draws.map(d=>num(d.prize))))}`;
+  $("prizePot").innerHTML=`<span><b>${fmt(draws.reduce((t,d)=>t+num(d.prize),0))}</b>in prizes</span>`;
+}
 $("raffleIntro").textContent=draws.length
-  ?`Every time we reach a raffle stop, we draw a winner. The prizes grow as we go: ${list(drawList)} raised.`
+  ?`${words[draws.length]||draws.length} draws, one at every stop on our road trip. Each time our total reaches the next stop, we draw a winner, and the prizes get bigger the closer we get to Ottawa.`
   :"Raffle details coming soon.";
-$("draws").innerHTML=draws.map((d,i)=>`<li${d.reached?' class="open"':""}>Draw ${i+1}: ${fmt(d.prize)} prize at ${fmt(d.target)} (${esc(d.stop)}) ${d.reached?"✓ Unlocked":"Coming up"}</li>`).join("");
-if(draws.length)$("faqDraw").textContent=`There are ${draws.length} draws, and the prizes grow as we go: ${list(drawList)} raised. Each draw picks one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
+$("tickets").innerHTML=draws.map((d,i)=>{
+  const grand=i===draws.length-1&&draws.length>1, st=d.reached?"won":(d===nextDraw?"next":"");
+  const tag=d.reached?"Unlocked!":(d===nextDraw?"Next up":"Coming up");
+  return `<li class="ticket${grand?" grand":""}${st?" "+st:""}" style="--i:${i}">
+    <span class="t-top"><span class="t-no">${grand?"Grand prize":"Draw "+(i+1)}</span><span class="t-prize">${fmt(d.prize)}</span><span class="t-tag">${tag}</span></span>
+    <span class="t-bot">Drawn when we raise<b>${fmt(d.target)}</b><small>${esc(d.stop)} stop</small></span></li>`;
+}).join("");
+if(draws.length)$("faqDraw").textContent=`There are ${draws.length} draws, one at each stop on the road trip, and the prizes grow as we go (${list(draws.map(d=>fmt(d.prize)))}). Each draw picks one winner from everyone who has entered so far. You can enter by telling us you donated, by sharing a sweater photo, or both: one entry per person for each way to enter.`;
 
 // Food Banks Canada links: open in a new tab, with an external-link icon
 const EXT='<svg class="ext-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr"> (opens in a new tab)</span>';

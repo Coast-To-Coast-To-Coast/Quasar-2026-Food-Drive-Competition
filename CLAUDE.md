@@ -44,7 +44,7 @@ The offices are only places on the route; they don't have their own totals.
 
 - Landmarks are inline SVG in index.html (the `PLACES` object): flat, 2 to 3 colours each, same style, respectful hometown pride, never caricatures. Each has alt text naming the landmark and office.
 - Each stop's pill shows its dollar target first, then the %: "$1,000 · 20%" (calculated from the goal).
-- **No lock icons and no "Locked" labels** (Nate didn't like them). Stops ahead are softly faded but still in colour. Reached stops are full colour with a gold ring, a gold check and "Unlocked!". The next stop gets a gentle blue highlight, and a "Next stop: X, $Y to go" line sits above the route. Raffle chips say "Coming up" until reached.
+- **No lock icons and no "Locked" labels** (Nate didn't like them). Stops ahead are softly faded but still in colour. Reached stops are full colour with a gold ring, a gold check and "Unlocked!". The next stop gets a gentle blue highlight, and a "Next stop: X, $Y to go" line sits above the route. Stop labels read "$50 raffle draw".
 - Stops unlock **automatically** when the company total reaches their %. Rewards are editable in the numbers block.
 - A delivery truck loaded with grocery bags sits on the road at the company's % of goal with a "$X raised, Y%" tag. On load it drives from Vancouver, the road fills in gold behind it and badges pop as it passes them. Past 100% it parks at Ottawa with confetti and a "Goal reached!" banner. Reduced motion: no animation, final state only.
 - Desktop: the route runs left to right. Phones (760px and narrower): top to bottom like a trip itinerary.
@@ -52,7 +52,7 @@ The offices are only places on the route; they don't have their own totals.
 
 ## Raffle
 
-- A draw happens at each stop that has a `prize` in the milestones (every stop after Vancouver: 20%, 40%, 60%, 80% and 100%). Prizes grow as the drive goes: $50, $100, $150, $175, then a $200 grand prize at the goal ($675 in all if we reach the goal). The leadership dare and the ugly sweater day were dropped (the sweater photo book and sweater raffle entry stay). The site builds the draw list, the "Win up to $200" heading and the FAQ from the milestones.
+- A draw happens at each stop that has a `prize` in the milestones (every stop after Vancouver: 20%, 40%, 60%, 80% and 100%). Prizes grow as the drive goes: $50, $100, $150, $175, then a $200 grand prize at the goal ($675 in all if we reach the goal). The leadership dare and the ugly sweater day were dropped (the sweater photo book and sweater raffle entry stay). The site builds everything from the milestones: the "Win up to $200" heading, a round "$675 in prizes" sticker, the FAQ, and a **prize ticket ladder**: one raffle ticket per draw that grows in size, each saying "Drawn when we raise $X" plus its stop, tagged Unlocked! / Next up / Coming up. Keep the wording simple: never write prize lists like "$50 at $1,000, $100 at $2,000" (Nate found it confusing).
 - Two equal ways to enter: "Donated? Enter the draw" (`drawFormUrl`, a Microsoft Form) and "Share your holiday sweater" (`photoFormUrl`, a Microsoft Form; one entry, no donation needed).
 - One entry per person per way to enter. The FAQ says each draw picks from everyone who has entered so far (entries carry over). Confirm with Nate if that changes.
 
@@ -75,7 +75,17 @@ The offices are only places on the route; they don't have their own totals.
 
 ### Food Banks Canada sections and sources
 
-Page order: hero, journey and stats, What your gift does, How it works, Why money goes further, raffle, sweater photo book, Why it matters, About Food Banks Canada, timeline, FAQ, closing. Section backgrounds alternate (white, sky, gold, festive, navy).
+Page layout (redesigned late November 2026 because the old version felt too "stripey", one colour block after another):
+1. Blue hero, ending in a soft wave.
+2. Journey and stats on a sky-to-white fade.
+3. **Give** chapter: gift tiles and How it works side by side, then a "Why money goes further" panel.
+4. Gold raffle with wave edges and sunburst (the prize ticket ladder and two entry cards).
+5. Sweater photo book on dots that fade in and out.
+6. Navy Food Banks Canada chapter with wave edges: Why it matters stats, then About Food Banks Canada inside the same band.
+7. **Good to know**: timeline and FAQ side by side.
+8. Blue closing with a wave top.
+
+Only four full-width colour moments (blue hero, gold raffle, navy stats, blue closing); everything else sits on the light background. Keep it that way, and avoid adding new hard-edged colour bands.
 
 - **What your gift does:** four tiles ($5, $10, $25, $50) with meals from `mealsPerDollar`; each tile links to `donateUrl`. Source line links to https://foodbankscanada.ca/give/
 - **Why money goes further:** three cards (better prices, where it's needed most, behind the scenes). Link to https://foodbankscanada.ca/give/
@@ -111,6 +121,7 @@ Page order: hero, journey and stats, What your gift does, How it works, Why mone
 
 At the top of index.html is a block marked "FOOD DRIVE NUMBERS: EDIT THIS BLOCK EACH FRIDAY." It holds:
 - `lastUpdated` (date text).
+- `donateUrl` is the Food Banks Canada Holiday Giving 2026 page (set November 2026). Its dashboard is where weekly totals come from.
 - `raised` (company total in dollars) and `gifts` (number of donations). These are the only two numbers that change each week.
 - `goal` (5000, the company goal in dollars) and `people` (334, only used for the "about $15 a person" line).
 - `lastYearRaised` (3160, last year's company total, shown in the goal box; set to 0 to hide the line).
@@ -123,11 +134,6 @@ Rules:
 - Nate sometimes edits this block directly on github.com with the pencil icon. Keep it simple and clearly labelled: plain numbers, no dollar signs or commas.
 - Before editing, pull the latest version from GitHub so web edits aren't overwritten.
 - Before kickoff, `raised` and `gifts` are 0, and the page shows "First update Friday, December 4".
-
-### Design preview (preview.html)
-
-- `preview.html` is a redesign mock Nate is reviewing (November 2026): softer flow with wave transitions, sections merged into chapters (Give, raffle and sweaters, Food Banks Canada, Good to know), side-by-side layouts, and the raffle as a "prize ticket ladder". It has `noindex` and a "Design preview" pill. It's not linked from the live page.
-- `index.html` stays the live site and the backup until Nate approves swapping. The preview's numbers block is a copy and is **not** updated by `/weekly-update`; if the preview is approved, move the design into index.html (keeping index.html's current numbers) and delete preview.html.
 
 ## Project commands
 
@@ -158,7 +164,6 @@ The site should feel like part of **The Pulse**, Quasar's internal SharePoint hu
 
 ## Still to confirm
 
-- The real `donateUrl` (the Food Banks Canada donation page).
 - The sweater photo Microsoft Form link (`photoFormUrl`). The draw form (`drawFormUrl`) is set.
 - What form the raffle prizes take (gift card or otherwise); the site just says "$100 prize" for now.
 
