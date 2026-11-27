@@ -487,7 +487,7 @@ h3.sub{font-size:1.35rem;margin:0 0 1rem;color:var(--num)}
       <span data-link="donateUrl" data-text="Donate here" data-cls="gold" data-soon="Donation link coming soon"></span>
       <a class="btn outline" href="#journey">Follow the journey</a>
     </div>
-    <button type="button" class="share-link" id="shareLink"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 14a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.2 1.2M14 10a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.2-1.2"/></svg><span id="shareText">Copy link to share with family and friends</span></button>
+    <button type="button" class="share-link" id="shareLink"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 14a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.2 1.2M14 10a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.2-1.2"/></svg><span id="shareText">Copy the donation link to share with family and friends</span></button>
     <span class="sr" role="status" id="shareStatus"></span>
   </div>
   <svg class="wave bot sky-fill" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
@@ -808,10 +808,11 @@ if(isLink(DRIVE.donateUrl)){
   }else fd.classList.add("show");
 }
 
-// Copy the site link so people can share it with family and friends
+// Copy the donation page link so people can share it with family and friends
 (()=>{
   const btn=$("shareLink"),txt=$("shareText"),status=$("shareStatus");
-  const url=location.origin+location.pathname;
+  const url=DRIVE.donateUrl;
+  if(!isLink(url)){btn.remove();return;}
   const label=txt.textContent;let t;
   btn.addEventListener("click",async()=>{
     let ok=false;
@@ -819,7 +820,7 @@ if(isLink(DRIVE.donateUrl)){
       const ta=document.createElement("textarea");ta.value=url;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";
       document.body.append(ta);ta.select();try{ok=document.execCommand("copy");}catch(_){}ta.remove();
     }
-    txt.textContent=ok?"Link copied! Paste it in a text or email":"Copy this link: "+url;
+    txt.textContent=ok?"Donation link copied! Paste it in a text or email":"Copy this link: "+url;
     status.textContent=ok?"Link copied":"";
     btn.classList.toggle("done",ok);
     clearTimeout(t);t=setTimeout(()=>{txt.textContent=label;btn.classList.remove("done");status.textContent="";},4000);
