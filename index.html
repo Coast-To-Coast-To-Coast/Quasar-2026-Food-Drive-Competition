@@ -106,6 +106,12 @@ a{color:var(--link)}
 .btn.outline{background:transparent;border-color:#fff;color:#fff}
 .btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
 .btn.soon{background:transparent;border:2px dashed currentColor;color:inherit;opacity:.75;cursor:default}
+.float-donate{position:fixed;top:1rem;right:1rem;z-index:60;border-color:var(--navy);font-size:1.05rem;padding:.85rem 1.5rem;box-shadow:0 8px 24px rgba(8,22,58,.3);opacity:0;transform:translateY(-14px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.float-donate.show{opacity:1;transform:none;pointer-events:auto}
+.float-donate:hover{transform:translateY(-2px)}
+.float-donate svg{width:1.1em;height:1.1em;flex:none}
+@media (max-width:640px){.float-donate{top:.75rem;right:.75rem;font-size:.95rem;padding:.65rem 1.1rem}}
+@media (prefers-reduced-motion:reduce){.float-donate,.float-donate:hover{transition:none;transform:none}}
 section{padding:4.5rem 0}
 .sky{background:var(--sky)}
 .lede{color:var(--ink-soft);margin:0}
@@ -122,6 +128,10 @@ section{padding:4.5rem 0}
 .hero p{font-size:1.25rem;color:#e3ecff;margin:0 0 1.75rem;max-width:44ch}
 .hero p strong{color:#fff}
 .hero .actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.share-link{display:inline-flex;align-items:center;gap:.45rem;margin-top:1rem;padding:.35rem 0;background:none;border:0;color:#fff;font:inherit;font-weight:600;font-size:.95rem;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.5);cursor:pointer}
+.share-link:hover{text-decoration-color:#fff}
+.share-link svg{width:1.1em;height:1.1em;flex:none}
+.share-link.done{color:#ffd451;text-decoration:none}
 .hero p.meals-line{display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.35rem 1rem;margin:-.5rem 0 1.75rem;max-width:none}
 .meals-line svg{width:1.3em;height:1.3em;flex:none}
 
@@ -477,6 +487,8 @@ h3.sub{font-size:1.35rem;margin:0 0 1rem;color:var(--num)}
       <span data-link="donateUrl" data-text="Donate here" data-cls="gold" data-soon="Donation link coming soon"></span>
       <a class="btn outline" href="#journey">Follow the journey</a>
     </div>
+    <button type="button" class="share-link" id="shareLink"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 14a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.2 1.2M14 10a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.2-1.2"/></svg><span id="shareText">Copy link to share with family and friends</span></button>
+    <span class="sr" role="status" id="shareStatus"></span>
   </div>
   <svg class="wave bot sky-fill" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70H1440V40C1180 4 900 60 620 36S180 6 0 46Z"/></svg>
 </header>
@@ -783,6 +795,36 @@ document.querySelectorAll("[data-link]").forEach(el=>{
     ?`<a class="btn ${el.dataset.cls}" href="${esc(url)}" target="_blank" rel="noopener">${el.dataset.text}</a>`
     :`<span class="btn soon">${el.dataset.soon}</span>`;
 });
+
+// Floating "Donate here" button: appears once the hero buttons scroll away
+if(isLink(DRIVE.donateUrl)){
+  const fd=document.createElement("a");
+  fd.className="btn gold float-donate";fd.href=DRIVE.donateUrl;fd.target="_blank";fd.rel="noopener";
+  fd.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>Donate here<span class="sr"> (opens in a new tab)</span>';
+  document.body.append(fd);
+  const heroBtns=document.querySelector(".hero .btn");
+  if(heroBtns&&"IntersectionObserver" in window){
+    new IntersectionObserver(([e])=>fd.classList.toggle("show",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(heroBtns);
+  }else fd.classList.add("show");
+}
+
+// Copy the site link so people can share it with family and friends
+(()=>{
+  const btn=$("shareLink"),txt=$("shareText"),status=$("shareStatus");
+  const url=location.origin+location.pathname;
+  const label=txt.textContent;let t;
+  btn.addEventListener("click",async()=>{
+    let ok=false;
+    try{await navigator.clipboard.writeText(url);ok=true;}catch(e){
+      const ta=document.createElement("textarea");ta.value=url;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";
+      document.body.append(ta);ta.select();try{ok=document.execCommand("copy");}catch(_){}ta.remove();
+    }
+    txt.textContent=ok?"Link copied! Paste it in a text or email":"Copy this link: "+url;
+    status.textContent=ok?"Link copied":"";
+    btn.classList.toggle("done",ok);
+    clearTimeout(t);t=setTimeout(()=>{txt.textContent=label;btn.classList.remove("done");status.textContent="";},4000);
+  });
+})();
 
 ["goalText","goalText2","statGoal"].forEach(id=>$(id).textContent=fmt(goal));
 $("perPerson").textContent=fmt(people?goal/people:0);
